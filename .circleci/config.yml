@@ -10,7 +10,10 @@ jobs:
       - run: sudo npm install hexo-cli -g
       - run: yarn install
       - run: hexo g
+      - run: git config --global user.name "zhiqiang du"
+      - run: git config --global user.email "haxck.x@gmail.com"
       - run: hexo d
+      
       
     filters:
       branches:
