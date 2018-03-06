@@ -7,7 +7,7 @@ jobs:
 
     steps:
       - checkout
-      - run: yarn global add hexo-cli
+      - run: npm install hexo-cli -g
       - run: yarn install
       - run: hexo g
       - run: hexo d
