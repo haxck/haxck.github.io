@@ -7,7 +7,9 @@ tags:
 去年将博客搬到了 Github ，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。
 
 懒啊！！！
+
 ![hexo-flowchart](http://oerfykrpf.bkt.clouddn.com/hexo-github-flowchart.png)
+
 不过，懒，可能是进步的唯一动力。查资料。
 
 CI（持续集成）可以自动地处理测试、编译、部署。😜原来这种事大家都想的一样。
