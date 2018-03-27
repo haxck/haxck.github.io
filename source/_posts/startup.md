@@ -1,5 +1,5 @@
 ---
-title: Windows 自启动
+title: 快速打开 Windows 开机启动目录
 date: 2018-03-27 11:26:38
 tags:
 ---
