@@ -75,4 +75,4 @@ markdown:
 deploy: 
   type: git
   repo: https://github.com/haxck/blog.git
-  branch: gh-pages
+  branch: master
