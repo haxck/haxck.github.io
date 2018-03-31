@@ -1,7 +1,8 @@
 menu:
   Home: /
   Archives: /archives
-  Portfolio: http://haxck.com/portfolio/
+  About: https://haxck.com/about
+  Portfolio: https://haxck.com/portfolio/
 
 # duoshuo comment
 duoshuo: false
