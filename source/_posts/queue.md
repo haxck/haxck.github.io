@@ -43,3 +43,51 @@ function Queue(){
 
 ```
 
+
+有时候呢，我们还需要有一个特殊的通道，用来处理更紧急的任务。这个该怎么用队列实现呢？
+
+```javascript
+function PriorityQueue() {
+    let items = [];
+
+    function QueueElement(el, priority) {
+        this.el = el;
+        this.priority = priority;
+    }
+
+    this.enqueue = function (el, priority) {
+        let queueElement = new QueueElement(el, priority);
+
+        if (items.length == 0) {
+            items.push(queueElement)
+        } else {
+            for (let i = 0; i < items.length; i++) {
+                if (queueElement.priority < items[i].priority) {
+                    items.splice(i, 0, queueElement);
+                    break;
+                }
+            }
+        }
+
+        this.print = function () {
+            for (let i = 0; i < items.length; i++) {
+                console.log(`${items[i].el} - ${items[i].priority}`);
+            }
+        }
+        this.dequeue = function () {
+            return items.shift()
+        }
+        this.front = function () {
+            return items[0];
+        }
+        this.isEmpty = function () {
+            return items.length == 0;
+        }
+        this.size = function () {
+            return items.length;
+        }
+
+    }
+}
+
+```
