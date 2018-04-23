@@ -57,7 +57,7 @@ tags: 教程
 编辑代码时我们会需要参照另外一个文件，比如写 MarkDown 时在一侧显示预览，这时使用 `Ctrl + \` 可将一个窗口分为多个编辑区域， `Ctrl + Num` 在窗口间切换。在编辑 MarkDown 时使用 `Ctrl + Shift + m` 显示实时预览。
 
 ### 代码片段（Snippets）
-代码片段可以
+代码片段可以将一大段代码起一个名字。使用时，直接输入代码片段的名字，即可替换成预先设置的内容。
 
 在 VSC 中我们可以自己创建自己的代码片段，具体可参考 [创建自己的代码片段](https://code.visualstudio.com/docs/editor/userdefinedsnippets)
 
