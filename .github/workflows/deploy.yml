@@ -26,5 +26,9 @@ jobs:
         run: npm install
       - name: install Hexo
         run: npm install -g hexo
+      - name: setting github user
+        run: git config --global user.name "zhiqiang du"
+      - name: setting github email
+        run: git config --global user.email "haxck.x@gmail.com"
       - name: Deploy
         run: hexo d
