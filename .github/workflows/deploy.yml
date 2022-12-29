@@ -25,4 +25,4 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Deploy
-        uses: hexo d
+        run: hexo d
