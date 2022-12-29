@@ -24,11 +24,8 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: npm install
-      - name: install Hexo
-        run: npm install -g hexo
-      - name: setting github user
-        run: git config --global user.name "zhiqiang du"
-      - name: setting github email
-        run: git config --global user.email "haxck.x@gmail.com"
       - name: Deploy
-        run: hexo d
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
