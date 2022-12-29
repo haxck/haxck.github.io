@@ -94,4 +94,4 @@ markdown:
 deploy: 
   type: git
   repo: https://github.com/haxck/haxck.github.io.git
-  branch: master
+  branch: gh-pages
