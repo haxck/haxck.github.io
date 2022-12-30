@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用JS学数据结构和算法之队列 | Haxck&#39;s Blog</title>
+
+  
+  <meta name="author" content="Haxck">
+  
+
+  
+  <meta name="description" content="队列（queue）跟栈是一种相似的结构，只是采取的策略不同。队列是一组有序的，遵循FIFO（First In First Out，先进先出）的原则。新元素在队列的尾部，最先进来的会被最先移除。
+
+队列一般的有的方法：
+
+enqueue：向队列尾部添加元素
+dequeue：移除队列第一个元素，并返回被">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="用JS学数据结构和算法之队列"/>
+
+  <meta property="og:site_name" content="Haxck&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Haxck&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Haxck&#39;s Blog</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/portfolio">Portfolio</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>用JS学数据结构和算法之队列</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/07/queue/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-07T11:27:56.000Z">
+          2018-04-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>队列（queue）跟栈是一种相似的结构，只是采取的策略不同。队列是一组有序的，遵循FIFO（First In First Out，先进先出）的原则。新元素在队列的尾部，最先进来的会被最先移除。</p>
+<p><img src="http://oerfykrpf.bkt.clouddn.com/queue.png" alt="queue"></p>
+<p>队列一般的有的方法：</p>
+<ul>
+<li>enqueue：向队列尾部添加元素</li>
+<li>dequeue：移除队列第一个元素，并返回被移除的元素。</li>
+<li>front：返回第一个元素</li>
+<li>isEmpty：队列是否为空</li>
+<li>size：返回队列的元素个数</li>
+</ul>
+<p>用Js来实现：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Queue</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> items = [];</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">enqueue</span> = <span class="keyword">function</span>(<span class="params">el</span>)&#123;</span><br><span class="line">        items.<span class="title function_">push</span>(el);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dequeue</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> items.<span class="title function_">shift</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">front</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> items[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isEmpty</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span> == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> items.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>有时候呢，我们还需要有一个特殊的通道，用来处理更紧急的任务。这个该怎么用队列实现呢？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">PriorityQueue</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> items = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">QueueElement</span>(<span class="params">el, priority</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">el</span> = el;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">priority</span> = priority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">enqueue</span> = <span class="keyword">function</span> (<span class="params">el, priority</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> queueElement = <span class="keyword">new</span> <span class="title class_">QueueElement</span>(el, priority);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (items.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(queueElement)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (queueElement.<span class="property">priority</span> &lt; items[i].<span class="property">priority</span>) &#123;</span><br><span class="line">                    items.<span class="title function_">splice</span>(i, <span class="number">0</span>, queueElement);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">print</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; items.<span class="property">length</span>; i++) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;items[i].el&#125;</span> - <span class="subst">$&#123;items[i].priority&#125;</span>`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">dequeue</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> items.<span class="title function_">shift</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">front</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> items[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">isEmpty</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> items.<span class="property">length</span> == <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">size</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> items.<span class="property">length</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+<!-- LiveRe City install code -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzUwMC8xMDA1Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+<!-- completed City install code -->
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 Haxck
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93076840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>

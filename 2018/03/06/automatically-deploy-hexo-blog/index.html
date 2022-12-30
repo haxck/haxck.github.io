@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>自动部署 hexo 博客 | Haxck&#39;s Blog</title>
+
+  
+  <meta name="author" content="Haxck">
+  
+
+  
+  <meta name="description" content="去年将博客搬到了 Github ，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。
+懒啊！！！
+
+不过，懒，可能是进步的唯一动力。查资料。
+CI（持续集成）可以自动地处理测试、编译、部署。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="自动部署 hexo 博客"/>
+
+  <meta property="og:site_name" content="Haxck&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Haxck&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Haxck&#39;s Blog</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/portfolio">Portfolio</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>自动部署 hexo 博客</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/03/06/automatically-deploy-hexo-blog/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-03-06T15:10:16.000Z">
+          2018-03-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>去年将博客搬到了 Github ，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。</p>
+<p>懒啊！！！</p>
+<p><img src="http://oerfykrpf.bkt.clouddn.com/hexo-github-flowchart.png" alt="hexo-flowchart"></p>
+<p>不过，懒，可能是进步的唯一动力。查资料。</p>
+<p>CI（持续集成）可以自动地处理测试、编译、部署。😜原来这种事大家都想的一样。</p>
+<p>我用的 CI 是 CircleCI。每月有 1500 的免费构建时间，对于一个博客，够用了。使用 GitHub 账号登录，选择需要自动化的项目，根据提示创建相应的文件，一气呵成。</p>
+<p>配置也相对简单，只需把平时的操作列举即可。唯一需要注意的是要有仓库的写权限。</p>
+<p><img src="http://oerfykrpf.bkt.clouddn.com/hexo-ci-flowchart.png" alt="ci-flowchart"></p>
+<p>至此，只需要将源码推到 GitHub ，CI 会自动地生成静态网页。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+<!-- LiveRe City install code -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzUwMC8xMDA1Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+<!-- completed City install code -->
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 Haxck
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93076840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>代码编辑利器 VScode | Haxck&#39;s Blog</title>
+
+  
+  <meta name="author" content="Haxck">
+  
+
+  
+  <meta name="description" content="前言
+前几年在被问到“该用那款编辑器？”时还会有大量的候选，如今，如果还有人问，我想只能是 VScode 了。
+即使你是喜欢“开箱即用”的人，不用配置不用折腾，也会发现其中的乐趣。
+本文旨在说明一些 VScode 常用功能，帮助你了解这款编辑器以及提高你的编辑效率。
+编辑
+基本编辑（Basic Ed">
+  
+
+  
+  
+  <meta name="keywords" content="教程">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="代码编辑利器 VScode"/>
+
+  <meta property="og:site_name" content="Haxck&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Haxck&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Haxck&#39;s Blog</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/portfolio">Portfolio</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>代码编辑利器 VScode</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/01/28/using-vscode/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-01-28T18:02:09.000Z">
+          2018-01-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="前言">前言</h2>
+<p>前几年在被问到“该用那款编辑器？”时还会有大量的候选，如今，如果还有人问，我想只能是 VScode 了。</p>
+<p>即使你是喜欢“开箱即用”的人，不用配置不用折腾，也会发现其中的乐趣。</p>
+<p>本文旨在说明一些 VScode 常用功能，帮助你了解这款编辑器以及提高你的编辑效率。</p>
+<h2 id="编辑">编辑</h2>
+<h3 id="基本编辑（Basic-Editing">基本编辑（Basic Editing)</h3>
+<ul>
+<li><code>Ctrl + Enter</code> : 在下面新增一行并跳至该行</li>
+<li><code>Ctrl + Shift + Enter</code> : 在上面增加一行并跳至该行</li>
+<li><code>Ctrl + ←/→</code> : 逐词移动</li>
+<li><code>Ctrl + Shift + ←/→</code> 逐词选择</li>
+<li><code>Ctrl + ↑/↓</code> 移动显示区域</li>
+<li><code>Alt + ↑/↓</code>  移动该行</li>
+<li><code>Shift + Alt + ↑/↓</code>  在上面或下面复制该行</li>
+<li><code>Ctrl + Alt + ↑/↓</code> 多行编辑</li>
+</ul>
+<h3 id="查找-替换（Finding-Replacing）">查找 &amp; 替换（Finding &amp; Replacing）</h3>
+<p>查找 <code>Ctrl + f</code> 和替换 <code>Ctrl + h</code> 想必都很熟悉。在必要的时候，还可以 <code>Alt + c</code> 切换大小写敏感（Case-sensitive）或者使用正则表达式 <code>Alt + r</code></p>
+<h3 id="跳转（Jumping）">跳转（Jumping）</h3>
+<ul>
+<li>
+<p>跳转到文件</p>
+<p><code>Ctrl + P</code> 会列出当前打开的文件和最近打开过的文件，输入文件名可搜索当前目录文件，Enter跳转至该文件。→可连续打开文件</p>
+</li>
+<li>
+<p>跳转到某行</p>
+<p><code>Ctrl + g</code> 能在当前文件中跳到指定行中，也可以在 <code>Ctrl + p</code> 匹配到文件后，继续输入 <code>:Num</code> 以跳转到更精确的位置</p>
+</li>
+<li>
+<p>跳转到符号（Symbol）</p>
+<p>VSC 还支持符号间跳转，<code>Ctrl + Shift + o</code> 会显示出当前文件中的符号（函数名、变量名）。也可以在 <code>Ctrl + p</code> 中直接输入 <code>@</code>。</p>
+</li>
+</ul>
+<h3 id="窗口-并排编辑（Window-Side-by-side-editing）">窗口 &amp; 并排编辑（Window &amp; Side by side editing）</h3>
+<p>使用 <code>Ctrl + Shift + n</code> 创建一个新窗口，当窗口内没有标签时，使用Ctrl + W关闭该窗口。</p>
+<p>使用 <code>Ctrl + N</code> 在当前窗口创建一个新标签，Ctrl + W关闭当前标签，Ctrl + Shift + T恢复刚刚关闭的标签。Ctrl + tab 标签间切换</p>
+<p>编辑代码时我们会需要参照另外一个文件，比如写 MarkDown 时在一侧显示预览，这时使用 <code>Ctrl + \</code> 可将一个窗口分为多个编辑区域， <code>Ctrl + Num</code> 在窗口间切换。在编辑 MarkDown 时使用 <code>Ctrl + Shift + m</code> 显示实时预览。</p>
+<h3 id="代码片段（Snippets）">代码片段（Snippets）</h3>
+<p>代码片段可以将一大段代码起一个名字。使用时，直接输入代码片段的名字，即可替换成预先设置的内容。</p>
+<p>在 VSC 中我们可以自己创建自己的代码片段，具体可参考 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/userdefinedsnippets">创建自己的代码片段</a></p>
+<h2 id="插件">插件</h2>
+<p>我个人比较喜欢 VScode 的插件功能。除了众多的插件外，还有一个很贴心的功能。它在你需要的时候提示你可能需要某个插件。比如说你打开了 vue 文件，它会提示你安装一些代码高亮的插件，十分省心。</p>
+<p>我安装的插件有：</p>
+<ul>
+<li>One Dark Pro （主题）</li>
+<li>Vetur （Vue代码高亮、格式化工具）</li>
+<li>indent-rainbow （缩进）</li>
+<li>Live Server (快速启动一个本地服务器)</li>
+</ul>
+<h2 id="结尾">结尾</h2>
+<p>好了，VScode 的功能远不只如此，如果你感兴趣可以去官网了解。最后，了解完别忘了实践！</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/教程/">教程</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+<!-- LiveRe City install code -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzUwMC8xMDA1Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+<!-- completed City install code -->
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 Haxck
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93076840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>

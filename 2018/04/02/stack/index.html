@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用JS学数据结构和算法之栈 | Haxck&#39;s Blog</title>
+
+  
+  <meta name="author" content="Haxck">
+  
+
+  
+  <meta name="description" content="栈（stack）是一种有序集合，遵循后进先出（LIFO）的原则。在栈里，新进来的数据在栈顶，旧数据被压在栈底。
+
+栈一般有这么几个方法：
+
+Push ：进栈。添加栈顶元素。
+pop：出栈。移除栈顶元素。
+top：返回栈顶元素。
+empty：堆栈是否为空。
+size：栈中元素个数。
+clear：清除所">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="用JS学数据结构和算法之栈"/>
+
+  <meta property="og:site_name" content="Haxck&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Haxck&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Haxck&#39;s Blog</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/portfolio">Portfolio</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>用JS学数据结构和算法之栈</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/02/stack/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-02T11:27:56.000Z">
+          2018-04-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>栈（stack）是一种有序集合，遵循后进先出（LIFO）的原则。在栈里，新进来的数据在栈顶，旧数据被压在栈底。</p>
+<p><img src="http://oerfykrpf.bkt.clouddn.com/stack.png" alt="stack"></p>
+<p>栈一般有这么几个方法：</p>
+<ul>
+<li>Push ：进栈。添加栈顶元素。</li>
+<li>pop：出栈。移除栈顶元素。</li>
+<li>top：返回栈顶元素。</li>
+<li>empty：堆栈是否为空。</li>
+<li>size：栈中元素个数。</li>
+<li>clear：清除所有元素。</li>
+</ul>
+<p>用Js来实现：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">stack</span>(<span class="params"></span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> item = [];</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">push</span> = <span class="keyword">function</span>(<span class="params">el</span>)&#123;</span><br><span class="line">        item.<span class="title function_">push</span>(el);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 移除栈顶的元素，同时返回被移除的元素</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pop</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> item.<span class="title function_">pop</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">top</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> item[item.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断栈内是否为空</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">empty</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> item.<span class="property">length</span>  == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> item.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">clear</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        item = [];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+<!-- LiveRe City install code -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzUwMC8xMDA1Ng==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+<!-- completed City install code -->
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 Haxck
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-93076840-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>
