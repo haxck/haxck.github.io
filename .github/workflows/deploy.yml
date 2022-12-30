@@ -16,6 +16,10 @@ jobs:
         # uses: sma11black/hexo-action@08f5143fa402cdaccf9fc016d6bc91329f082eb0
         uses: sma11black/hexo-action@v1.0.4
         with:
+          # Github user name
+          user_name: github-actions[bot]
+          # Github email
+          user_email: github-actions[bot]@users.noreply.github.com
           # The deploy key for Github Pages repo
           deploy_key: ${{secrets.GITHUB_TOKEN}}
           # Git commit messages to your GitHub Pages repository.
