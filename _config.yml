@@ -89,9 +89,3 @@ markdown:
     lazyload: false
     prepend_root: false
     post_asset: false
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy: 
-  type: git
-  repo: https://github.com/haxck/haxck.github.io.git
-  branch: gh-pages
