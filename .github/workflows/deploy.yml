@@ -17,6 +17,6 @@ jobs:
         uses: sma11black/hexo-action@v1.0.4
         with:
           # The deploy key for Github Pages repo
-          deploy_key: ${{secret.GithubToken}}
+          deploy_key: ${{secrets.GITHUB_TOKEN}}
           # Git commit messages to your GitHub Pages repository.
           commit_msg: "更新博客"
