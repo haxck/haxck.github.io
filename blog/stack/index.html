@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="astro-BVZIHDZO">
+	<head>
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="generator" content="Astro v2.1.2">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://example.com/blog/stack/">
+	
+<!-- RSS Feed Discovery -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml">
+
+<!-- Primary Meta Tags -->
+<title>用JS学数据结构和算法之栈</title>
+<meta name="title" content="用JS学数据结构和算法之栈">
+<meta name="description" content="none">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.com/blog/stack/">
+<meta property="og:title" content="用JS学数据结构和算法之栈">
+<meta property="og:description" content="none">
+<meta property="og:image" content="https://example.com/placeholder-social.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://example.com/blog/stack/">
+<meta property="twitter:title" content="用JS学数据结构和算法之栈">
+<meta property="twitter:description" content="none">
+<meta property="twitter:image" content="https://example.com/placeholder-social.jpg">
+		
+	<link rel="stylesheet" href="/_astro/about.9324d0e8.css" />
+<link rel="stylesheet" href="/_astro/about.3f4867e1.css" /></head>
+
+	<body class="astro-BVZIHDZO">
+		<header class="astro-3EF6KSR2">
+	<h2 class="astro-3EF6KSR2">
+		Haxck&#39;s blog
+	</h2>
+	<nav class="astro-3EF6KSR2">
+		<a href="/" class="astro-3EF6KSR2 astro-EIMMU3LG">
+	Home
+</a>
+		<a href="/blog" class="astro-3EF6KSR2 astro-EIMMU3LG">
+	Blog
+</a>
+		<a href="/about" class="astro-3EF6KSR2 astro-EIMMU3LG">
+	About
+</a>
+	</nav>
+</header>
+		<main class="astro-BVZIHDZO">
+			<article class="astro-BVZIHDZO">
+				
+				<h1 class="title astro-BVZIHDZO">用JS学数据结构和算法之栈</h1>
+				<time datetime="2018-04-02T11:27:56.000Z">
+	Apr 2, 2018
+</time>
+				
+				<hr class="astro-BVZIHDZO">
+				
+
+				<h1>用JS学数据结构和算法之栈</h1><p>栈（stack）是一种有序集合，遵循后进先出（LIFO）的原则。在栈里，新进来的数据在栈顶，旧数据被压在栈底。</p>
+<p><img src="http://oerfykrpf.bkt.clouddn.com/stack.png" alt="stack"></p>
+<p>栈一般有这么几个方法：</p>
+<ul>
+<li>Push ：进栈。添加栈顶元素。</li>
+<li>pop：出栈。移除栈顶元素。</li>
+<li>top：返回栈顶元素。</li>
+<li>empty：堆栈是否为空。</li>
+<li>size：栈中元素个数。</li>
+<li>clear：清除所有元素。</li>
+</ul>
+<p>用Js来实现：</p>
+<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"></span>
+<span class="line"><span style="color: #FF7B72">function</span><span style="color: #C9D1D9"> </span><span style="color: #D2A8FF">stack</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #FF7B72">let</span><span style="color: #C9D1D9"> item </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">push</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(</span><span style="color: #FFA657">el</span><span style="color: #C9D1D9">){</span></span>
+<span class="line"><span style="color: #C9D1D9">        item.</span><span style="color: #D2A8FF">push</span><span style="color: #C9D1D9">(el);</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">// 移除栈顶的元素，同时返回被移除的元素</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">pop</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> item.</span><span style="color: #D2A8FF">pop</span><span style="color: #C9D1D9">()</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">top</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> item[item.</span><span style="color: #79C0FF">length</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">-</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">1</span><span style="color: #C9D1D9">];</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #8B949E">//判断栈内是否为空</span></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">empty</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> item.</span><span style="color: #79C0FF">length</span><span style="color: #C9D1D9">  </span><span style="color: #FF7B72">==</span><span style="color: #C9D1D9"> </span><span style="color: #79C0FF">0</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">size</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        </span><span style="color: #FF7B72">return</span><span style="color: #C9D1D9"> item.</span><span style="color: #79C0FF">length</span><span style="color: #C9D1D9">;</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">    </span><span style="color: #79C0FF">this</span><span style="color: #C9D1D9">.</span><span style="color: #D2A8FF">clear</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> </span><span style="color: #FF7B72">function</span><span style="color: #C9D1D9">(){</span></span>
+<span class="line"><span style="color: #C9D1D9">        item </span><span style="color: #FF7B72">=</span><span style="color: #C9D1D9"> [];</span></span>
+<span class="line"><span style="color: #C9D1D9">    }</span></span>
+<span class="line"><span style="color: #C9D1D9">}</span></span>
+<span class="line"></span></code></pre>
+			</article>
+		</main>
+		<footer class="astro-SZ7XMLTE">
+	&copy; 2023 haxck.com All rights reserved.
+</footer>
+	</body></html>
