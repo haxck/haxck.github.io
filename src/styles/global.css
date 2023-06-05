@@ -4,7 +4,10 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 body {
-	font-family: Verdana, sans-serif;
+	font-family: "LXGW WenKai", sans-serif;
+	font-family: "LXGW WenKai Lite", sans-serif;
+	font-family: "LXGW WenKai TC", sans-serif;
+	font-family: "LXGW WenKai Screen", sans-serif;
 	margin: auto;
 	padding: 20px;
 	max-width: 65ch;
