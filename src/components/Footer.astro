@@ -1,9 +1,11 @@
 ---
 const today = new Date();
+import HeaderLink from "./HeaderLink.astro";
 ---
 
 <footer>
 	&copy; {today.getFullYear()} haxck.com All rights reserved.
+	<HeaderLink href="/changelog">changelog</HeaderLink>
 </footer>
 <style>
 	footer {
@@ -11,4 +13,3 @@ const today = new Date();
 		text-align: center;
 	}
 </style>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
