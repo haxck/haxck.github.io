@@ -25,6 +25,9 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 			.last-updated-on {
 				font-style: italic;
 			}
+			.content{
+				line-height: 2rem;
+			}
 		</style>
 	</head>
 
@@ -49,15 +52,16 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 					<hr />
 					)
 				}
-
-				<slot />
+				<div class="content">
+					<slot />
+				</div>
 			</article>
 			<div id="cusdis_thread"
 			  data-host="https://cusdis.com"
 			  data-app-id="7e4fd83f-871e-4174-a9ea-a03ee02673bc"
 			  data-page-id="{{ PAGE_ID }}"
 			  data-page-url="{{ PAGE_URL }}"
-			  data-page-title="{{ PAGE_TITLE }}"
+			  data-page-title={title}
 			></div>
 		</main>
 		<Footer />
