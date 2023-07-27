@@ -4,7 +4,7 @@
 		<!-- Global Metadata --><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="generator" content="Astro v2.1.2">
+<meta name="generator" content="Astro v2.9.3">
 
 <!-- Canonical URL -->
 <link rel="canonical" href="https://example.com/blog/lite-program/">
@@ -31,9 +31,11 @@
 <meta property="twitter:description" content="none">
 <meta property="twitter:image" content="https://example.com/placeholder-social.jpg">
 <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1/style.css">
+
 		
-	<link rel="stylesheet" href="/_astro/about.1f8cf58b.css" />
-<link rel="stylesheet" href="/_astro/about.3f4867e1.css" /></head>
+	<link rel="stylesheet" href="/_astro/about.3222567c.css" />
+<link rel="stylesheet" href="/_astro/about.18339f8f.css" /><script type="module">(function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f63c137963aa76c31b31b1e46b8aa1be";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script></head>
 
 	<body class="astro-BVZIHDZO">
 		<header class="astro-3EF6KSR2">
@@ -63,8 +65,10 @@
 				
 				<hr class="astro-BVZIHDZO">
 				<span class="astro-BVZIHDZO">产品</span><hr class="astro-BVZIHDZO">
-
-				<h3 id="一个想法">一个想法</h3>
+				<div class="content astro-BVZIHDZO">
+					
+	
+	<h3 id="一个想法">一个想法</h3>
 <p>凌晨2点钟，给所有 APP 都点了一遍后，还是一点睡意也没有，如无意外，我再一次失眠了。对于失眠，大多数是因为白天太闲造成的精力过剩，只要精力被消耗殆尽，就会乖乖入睡，百试百灵。然而也有一少部分人是因为胡思乱想造成的失眠，在脑海中数了一万只羊后，可能会因为数量太大而再数一遍。如果你正好是后一种，白噪音可能能救你一夜。</p>
 <p>你说失眠也不是天天的事儿，不能为了一年才用一次的功能下载一 APP 吧？这不，小龙哥的微信小程序就是来解决这一类问题的。我在微信搜索中搜到了几个白噪音的小程序，还不错，只是这么多选项让本来只想快点入睡的我更加清醒，就不能简单点儿吗？</p>
 <p>简单到只有一个开关，然后闭眼就好。</p>
@@ -73,20 +77,20 @@
 <ul>
 <li>播放音乐</li>
 </ul>
-<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">&#x3C;audio poster = "{{poster}}" name = "{{name}}" author = "{{author}}" src = "{{src}}" id = "myAudio" loop>&#x3C;/audio></span></span></code></pre>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #e1e4e8">&#x3C;audio poster = "{{poster}}" name = "{{name}}" author = "{{author}}" src = "{{src}}" id = "myAudio" loop>&#x3C;/audio></span></span></code></pre>
 <ul>
 <li>控制</li>
 </ul>
-<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">audioPlay: function () {</span></span>
-<span class="line"><span style="color: #c9d1d9">    this.audioCtx.play()</span></span>
-<span class="line"><span style="color: #c9d1d9">},</span></span>
-<span class="line"><span style="color: #c9d1d9">audioPause: function () {</span></span>
-<span class="line"><span style="color: #c9d1d9">    this.audioCtx.pause()</span></span>
-<span class="line"><span style="color: #c9d1d9">}</span></span></code></pre>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #e1e4e8">audioPlay: function () {</span></span>
+<span class="line"><span style="color: #e1e4e8">    this.audioCtx.play()</span></span>
+<span class="line"><span style="color: #e1e4e8">},</span></span>
+<span class="line"><span style="color: #e1e4e8">audioPause: function () {</span></span>
+<span class="line"><span style="color: #e1e4e8">    this.audioCtx.pause()</span></span>
+<span class="line"><span style="color: #e1e4e8">}</span></span></code></pre>
 <ul>
 <li>随机时间</li>
 </ul>
-<pre is:raw="" class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">var timer = parseInt(Math.random()* 2400000 + 1200000,10)</span></span></code></pre>
+<pre is:raw="" class="astro-code github-dark" style="background-color: #24292e; overflow-x: auto;" tabindex="0"><code><span class="line"><span style="color: #e1e4e8">var timer = parseInt(Math.random()* 2400000 + 1200000,10)</span></span></code></pre>
 <h3 id="bug">Bug</h3>
 <p>按照上面的思路一番尝试，功能大致是好了，就是会遇到一点小问题，播放的时候会等着整个音频加载完毕后才可以播放。尤其我使用的音频又有20多兆，这个问题必须解决，才能上线。</p>
 <p>说来也简单，只需将上面播放音频的API 换成 背景音频 API 就能解决这个问题</p>
@@ -94,8 +98,10 @@
 <p>至此，小程序就如想法一样，打开开关，睡觉吧。
 原本想的名字也遵循简单的原则，可惜被使用了，最后又想了一个洋气点儿的，叫 NightMate 。
 图标、名字等相关内容都填写好后，提交代码审核，等待通过后就算是大功告成了。</p>
+
+				</div>
 			</article>
-			<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="7e4fd83f-871e-4174-a9ea-a03ee02673bc" data-page-id="{{ PAGE_ID }}" data-page-url="{{ PAGE_URL }}" data-page-title="{{ PAGE_TITLE }}" class="astro-BVZIHDZO"></div>
+			<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="7e4fd83f-871e-4174-a9ea-a03ee02673bc" data-page-id="{{ PAGE_ID }}" data-page-url="{{ PAGE_URL }}" data-page-title="一个小程序的诞生" class="astro-BVZIHDZO"></div>
 		</main>
 		<footer class="astro-SZ7XMLTE">
 	&copy; 2023 haxck.com All rights reserved.
