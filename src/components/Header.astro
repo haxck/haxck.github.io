@@ -1,24 +1,91 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
-		<HeaderLink href="/">关于我</HeaderLink>
-		<HeaderLink href="/posts">博客</HeaderLink>
-		<HeaderLink href="/list">梦想清单</HeaderLink>
-
-	</nav>
+	<div class="container">
+		<div class="title">
+			<HeaderLink href="/">{SITE_TITLE}</HeaderLink>
+		</div>
+		<div class="content">
+			<button class="hamburger">三</button>
+			<nav class="NavMenu">
+				<HeaderLink href="/posts">博客</HeaderLink>
+				<HeaderLink href="/list">梦想清单</HeaderLink>
+				<HeaderLink href="/">关于我</HeaderLink>
+			</nav>
+		</div>
+	</div>
+	<div class="NavScreen unactive">
+		<nav class="NavScreenMenu">
+			<HeaderLink href="/posts">博客</HeaderLink>
+			<HeaderLink href="/list">梦想清单</HeaderLink>
+			<HeaderLink href="/">关于我</HeaderLink>
+		</nav>
+	</div>
 </header>
 <style>
-	header {
-		margin: 0em 0 2em;
+	.container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 64px;
+		padding: 8px 0 0 0;
 	}
-	h2 {
-		margin: 0.5em 0;
+	.hamburger {
+		display: none;
+	}
+	.NavScreenMenu{
+		display: none;
+	}
+	@media (max-width: 768px) {
+		.container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 64px;
+			padding: 8px 0 0 0;
+		}
+		.hamburger{
+			display: flex;
+		}
+		.NavMenu{
+			display: none;
+		}
+		.NavScreen{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: brown;
+			opacity: 0.9;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.NavScreenMenu{
+			font-size: 2rem;
+			line-height: 4rem;
+			display: flex;
+			text-align: center;
+			flex-direction: column;
+		}
+		.NavScreenMenu a {
+			color: #EEE;
+		}
+		.unactive{
+			display: none;
+		}
 	}
 </style>
+<script is:inline>
+document.querySelector(".NavScreen")?.addEventListener('click',()=>{
+	document.querySelector(".NavScreen")?.classList.add("unactive")
+})
+document.querySelector(".hamburger")?.addEventListener('click',()=>{
+	document.querySelector(".NavScreen")?.classList.remove("unactive")
+})
+
+</script>
