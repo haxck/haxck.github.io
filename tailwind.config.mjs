@@ -14,7 +14,11 @@ module.exports = {
     // Remove the following screen breakpoint or add other breakpoints
     // if one breakpoint is not enough for you
     screens: {
-      sm: "640px",
+      'sm': '576px',
+      // => @media (min-width: 576px) { ... }
+
+      'lg': '768px',
+      // => @media (min-width: 1440px) { ... }
     },
 
     // Uncomment the following extend
