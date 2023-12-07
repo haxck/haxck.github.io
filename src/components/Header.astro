@@ -1,92 +1,151 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header>
-	<div class="container">
-		<div class="title">
-			<HeaderLink href="/">{SITE_TITLE}</HeaderLink>
-		</div>
-		<div class="content">
-			<button class="hamburger">菜单</button>
-			<nav class="NavMenu">
-				<HeaderLink href="/posts">博客</HeaderLink>
-				<HeaderLink href="/list">梦想清单</HeaderLink>
-				<HeaderLink href="/">关于我</HeaderLink>
-			</nav>
-		</div>
-	</div>
-	<div class="NavScreen unactive">
-		<nav class="NavScreenMenu">
-			<HeaderLink href="/posts">博客</HeaderLink>
-			<HeaderLink href="/list">梦想清单</HeaderLink>
-			<HeaderLink href="/">关于我</HeaderLink>
-		</nav>
-	</div>
+  <a id="skip-to-content" href="#main-content">Skip to content</a>
+  <div class="nav-container">
+    <div class="top-nav-wrap">
+      <a href="/" class="logo whitespace-nowrap">
+        {SITE_TITLE}
+      </a>
+      <nav id="nav-menu">
+        <button
+          class="hamburger-menu focus-outline"
+          aria-label="Open Menu"
+          aria-expanded="false"
+          aria-controls="menu-items"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="menu-icon"
+          >
+            <line x1="7" y1="12" x2="21" y2="12" class="line"></line>
+            <line x1="3" y1="6" x2="21" y2="6" class="line"></line>
+            <line x1="12" y1="18" x2="21" y2="18" class="line"></line>
+            <line x1="18" y1="6" x2="6" y2="18" class="close"></line>
+            <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
+          </svg>
+        </button>
+        <ul id="menu-items" class="hidden sm:flex">
+          <li>
+            <HeaderLink href="/posts">博客</HeaderLink>
+          </li>
+          <li>
+            <HeaderLink href="/list">梦想清单</HeaderLink>
+          </li>
+          <li>
+            <HeaderLink href="/">关于我</HeaderLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </header>
+
 <style>
-	.container {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 64px;
-		padding: 8px 0 0 0;
-	}
-	.hamburger {
-		display: none;
-	}
-	.NavScreenMenu{
-		display: none;
-	}
-	@media (max-width: 768px) {
-		.container {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			height: 64px;
-			padding: 8px 0 0 0;
-		}
-		.hamburger{
-			display: flex;
-		}
+  #skip-to-content {
+    @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
+  }
+  .nav-container {
+    @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
+  }
+  .top-nav-wrap {
+    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
+  }
+  .logo {
+    @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
+  }
+  .hamburger-menu {
+    @apply self-end p-2 sm:hidden;
+  }
+  .hamburger-menu svg {
+    @apply h-6 w-6 scale-125 fill-skin-base;
+  }
 
-		.NavMenu{
-			display: none;
-		}
-		.NavScreen{
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100vw;
-			height: 100vh;
-			background-color: brown;
-			opacity: 0.9;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.NavScreenMenu{
-			font-size: 2rem;
-			line-height: 4rem;
-			display: flex;
-			text-align: center;
-			flex-direction: column;
-		}
-		.NavScreenMenu a {
-			color: white;
-		}
-		.unactive{
-			display: none;
-		}
-	}
+  nav {
+    @apply flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
+  }
+  nav ul {
+    @apply mt-4 w-44  sm:ml-0 sm:mt-0 sm:w-auto;
+  }
+  nav ul li {
+    @apply col-span-2 flex items-center justify-center;
+  }
+  nav ul li a {
+    @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
+  }
+  nav ul li:nth-last-child(2) a {
+    @apply w-auto;
+  }
+  nav ul li:nth-last-child(1),
+  nav ul li:nth-last-child(2) {
+    @apply col-span-1;
+  }
+  nav a.active {
+    @apply underline decoration-wavy decoration-2 underline-offset-4;
+  }
+  nav a.active svg {
+    @apply fill-skin-accent;
+  }
+
+  nav button {
+    @apply p-1;
+  }
+  nav button svg {
+    @apply h-6 w-6 fill-skin-base hover:fill-skin-accent;
+  }
+  #theme-btn {
+    @apply p-3 sm:p-1;
+  }
+  #theme-btn svg {
+    @apply scale-125 hover:rotate-12 sm:scale-100;
+  }
+
+  .menu-icon line {
+    @apply transition-opacity duration-75 ease-in-out;
+  }
+  .menu-icon .close {
+    opacity: 0;
+  }
+  .menu-icon.is-active .line {
+    @apply opacity-0;
+  }
+  .menu-icon.is-active .close {
+    @apply opacity-100;
+  }
 </style>
-<script is:inline>
-document.querySelector(".NavScreen")?.addEventListener('click',()=>{
-	document.querySelector(".NavScreen")?.classList.add("unactive")
-})
-document.querySelector(".hamburger")?.addEventListener('click',()=>{
-	document.querySelector(".NavScreen")?.classList.remove("unactive")
-})
 
+<script>
+  function toggleNav() {
+    // Toggle menu
+    const menuBtn = document.querySelector(".hamburger-menu");
+    const menuIcon = document.querySelector(".menu-icon");
+    const menuItems = document.querySelector("#menu-items");
+
+    menuBtn?.addEventListener("click", () => {
+      const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
+      menuIcon?.classList.toggle("is-active");
+      menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
+      menuBtn.setAttribute(
+        "aria-label",
+        menuExpanded ? "Open Menu" : "Close Menu",
+      );
+      menuItems?.classList.toggle("hidden");
+    });
+  }
+
+  toggleNav();
+
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", toggleNav);
 </script>

@@ -1,21 +1,24 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-cn">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1/style.css">
+		<link
+			rel="stylesheet"
+			href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1/style.css"
+		/>
 		<style>
 			ul {
 				list-style-type: none;
@@ -23,9 +26,14 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li {
 				display: flex;
+				flex-wrap: nowrap;
+				justify-content: space-between;
+				gap: 1rem;
+				align-items: center;
 			}
+
 			ul li :global(time) {
-				flex: 0 0 130px;
+				font-size: smaller;
 				font-style: italic;
 				color: #595959;
 			}
@@ -37,13 +45,15 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
-			<section>
+			<section class="container m-auto px-6">
 				<ul>
 					{
 						posts.map((post) => (
-							<li style="height: 2rem;">
+							<li class="py-2">
 								<a href={`/posts/${post.slug}/`}>{post.data.title}</a>
-								<span style="font-family: 'Courier New', Courier, monospace;margin-left: 2rem;"><FormattedDate date={post.data.pubDate} /></span>
+								<span class="shrink-0">
+									<FormattedDate date={post.data.pubDate} />
+								</span>
 							</li>
 						))
 					}
