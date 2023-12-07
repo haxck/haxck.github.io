@@ -9,11 +9,11 @@ layout: ../layouts/Page.astro
 
 ### Echo [link](http://echo.haxck.com)
 
-以书信的方式，投递文字的温度。
+书信风格长文本生成器。以书信的方式，投递文字的温度。
 
 ### NightMete
 
-轻量级白噪音小程序，没有多余选项，陪你度过漫漫黑夜。
+轻量级白噪音小程序。困意来袭，无需选择，一键开始入睡。辗转反侧，夜读陪你漫漫长夜。
 
 ### 2lover [link](https://2l.haxck.com)
 
