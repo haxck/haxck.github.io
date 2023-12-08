@@ -6,7 +6,7 @@ pubDate: 2018-04-07 11:27:56
 
 队列（queue）跟栈是一种相似的结构，只是采取的策略不同。队列是一组有序的，遵循FIFO（First In First Out，先进先出）的原则。新元素在队列的尾部，最先进来的会被最先移除。
 
-![queue](http://oerfykrpf.bkt.clouddn.com/queue.png)
+![queue](http://cdn.haxck.com/queue.png)
 
 队列一般的有的方法：
 

@@ -7,7 +7,7 @@ pubDate: 2018-04-02 11:27:56
 栈（stack）是一种有序集合，遵循后进先出（LIFO）的原则。在栈里，新进来的数据在栈顶，旧数据被压在栈底。
 
 
-![stack](http://oerfykrpf.bkt.clouddn.com/stack.png)
+![stack](http://cdn.haxck.com/stack.png)
 
 栈一般有这么几个方法：
 
