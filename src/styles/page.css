@@ -1,0 +1,11 @@
+.prose ul {
+  padding-left: 0px;
+
+  li {
+    list-style: none;
+
+    input[type="checkbox"] {
+      margin-right: 6px;
+    }
+  }
+}
