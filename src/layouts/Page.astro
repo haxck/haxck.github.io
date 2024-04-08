@@ -1,25 +1,10 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/page.css';
-// 1. `frontmatter` prop 提供了访问 frontmatter 和其他数据的能力
+import type { CollectionEntry } from "astro:content";
+import BasePage from "./BasePage.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<html>
-  <BaseHead title={frontmatter.title} description={frontmatter.description} />
-  <Header />
-  <body>
-    <!-- 添加其他 UI 组件，例如通用的头部和页脚。 -->
-    <!-- 2. 渲染的 HTML 将被传入默认插槽。 -->
-    <div class="container m-auto px-6">
-      <article class="prose">
-        <h1>{frontmatter.title}</h1>
-        <slot />
-      </article>
-    </div>
-    <Footer />
-  </body>
-</html>
+<BasePage title={frontmatter.title}>
+  <slot />
+</BasePage>
+

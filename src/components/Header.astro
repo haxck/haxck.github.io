@@ -4,7 +4,6 @@ import HeaderLink from "./HeaderLink.astro";
 ---
 
 <header>
-  <a id="skip-to-content" href="#main-content">Skip to content</a>
   <div class="nav-container">
     <div class="top-nav-wrap">
       <a href="/" class="logo whitespace-nowrap">
@@ -53,9 +52,6 @@ import HeaderLink from "./HeaderLink.astro";
 </header>
 
 <style>
-  #skip-to-content {
-    @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
-  }
   .nav-container {
     @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
   }
@@ -69,9 +65,8 @@ import HeaderLink from "./HeaderLink.astro";
     @apply self-end p-2 sm:hidden;
   }
   .hamburger-menu svg {
-    @apply h-6 w-6 scale-125 fill-skin-base;
+    @apply h-6 w-6 scale-125 bg-slate-400;
   }
-
   nav {
     @apply flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
   }
@@ -82,7 +77,7 @@ import HeaderLink from "./HeaderLink.astro";
     @apply col-span-2 flex items-center justify-center;
   }
   nav ul li a {
-    @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
+    @apply w-full px-4 py-3 text-center font-medium sm:my-0 sm:px-2 sm:py-1;
   }
   nav ul li:nth-last-child(2) a {
     @apply w-auto;
@@ -95,14 +90,14 @@ import HeaderLink from "./HeaderLink.astro";
     @apply underline decoration-wavy decoration-2 underline-offset-4;
   }
   nav a.active svg {
-    @apply fill-skin-accent;
+    @apply bg-gray-400;
   }
 
   nav button {
     @apply p-1;
   }
   nav button svg {
-    @apply h-6 w-6 fill-skin-base hover:fill-skin-accent;
+    @apply h-6 w-6 bg-gray-400 hover:bg-gray-400;
   }
   #theme-btn {
     @apply p-3 sm:p-1;

@@ -1,0 +1,22 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, description } = Astro.props;
+---
+
+<html lang="zh-cn">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body class="bg-[url(/grid.svg)] inset-0">
+    <Header />
+    <main class="container m-auto">
+        <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

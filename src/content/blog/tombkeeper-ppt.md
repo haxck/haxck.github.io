@@ -2,7 +2,7 @@
 title: TombKeeper 内部分享
 description: none
 pubDate: 2024-02-28 14:46:16
-tags: 方法论 
+tags: ["方法论","good","art"]
 ---
 
 tk 老师的教诲常看常新，过年回家给老弟分享完，又有了些新收获，在此记录。PPT 是为安全实验室的同学们分享的，但没有局限性，对于所有人都适用。
