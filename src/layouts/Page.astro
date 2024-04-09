@@ -5,6 +5,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BasePage title={frontmatter.title}>
-  <slot />
+  <section class="prose prose-xl px-2 min-w-full">
+    <slot />
+  </section>
 </BasePage>
-

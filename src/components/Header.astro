@@ -53,10 +53,10 @@ import HeaderLink from "./HeaderLink.astro";
 
 <style>
   .nav-container {
-    @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
+    @apply mx-auto flex max-w-screen-lg  flex-col items-center justify-between sm:flex-row;
   }
   .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
+    @apply relative flex w-full items-start justify-between sm:items-center p-2 py-4 ;
   }
   .logo {
     @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
@@ -65,10 +65,10 @@ import HeaderLink from "./HeaderLink.astro";
     @apply self-end p-2 sm:hidden;
   }
   .hamburger-menu svg {
-    @apply h-6 w-6 scale-125 bg-slate-400;
+    @apply h-6 w-6 scale-125 ;
   }
   nav {
-    @apply flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
+    @apply flex w-full flex-col items-center  sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
   }
   nav ul {
     @apply mt-4 w-44  sm:ml-0 sm:mt-0 sm:w-auto;
@@ -97,7 +97,7 @@ import HeaderLink from "./HeaderLink.astro";
     @apply p-1;
   }
   nav button svg {
-    @apply h-6 w-6 bg-gray-400 hover:bg-gray-400;
+    @apply h-6 w-6 ;
   }
   #theme-btn {
     @apply p-3 sm:p-1;
@@ -111,6 +111,7 @@ import HeaderLink from "./HeaderLink.astro";
   }
   .menu-icon .close {
     opacity: 0;
+    @apply transition ease-in-out;
   }
   .menu-icon.is-active .line {
     @apply opacity-0;
