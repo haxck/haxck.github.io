@@ -7,7 +7,7 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 <BasePage>
-	<section class="container m-auto px-6">
+	<section class="px-6">
 		<ul>
 			{
 				posts.map((post) => (
