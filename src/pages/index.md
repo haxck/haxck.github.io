@@ -5,7 +5,7 @@ layout: ../layouts/Page.astro
 ---
 
 
-# Projects
+## Projects
 
 ### [Echo](http://echo.haxck.com)
 
@@ -19,11 +19,11 @@ layout: ../layouts/Page.astro
 
 土味情话，纪念日，猜丁壳，吃什么。
 
-## social media
+## Social media
 
-weibo：[@haxck](https://weibo.com/haxck)
+Weibo：[@haxck](https://weibo.com/haxck)
 
-github：[haxck](https://github.com/haxck)
+Github：[haxck](https://github.com/haxck)
 
 
 
