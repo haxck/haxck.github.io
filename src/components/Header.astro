@@ -1,6 +1,7 @@
 ---
 import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <header>
@@ -44,6 +45,9 @@ import HeaderLink from "./HeaderLink.astro";
           </li>
           <li>
             <HeaderLink href="/">关于我</HeaderLink>
+          </li>
+          <li>
+            <ThemeToggle />
           </li>
         </ul>
       </nav>

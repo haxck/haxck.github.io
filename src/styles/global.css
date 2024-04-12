@@ -21,7 +21,9 @@ b {
 a {
   color: #3273dc;
 }
-
+.dark a {
+  color: #EEE;
+}
 nav a {
   margin-right: 10px;
 }

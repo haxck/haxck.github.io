@@ -1,11 +1,13 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BasePage from "./BasePage.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 const { frontmatter } = Astro.props;
 ---
 
 <BasePage title={frontmatter.title}>
-  <section class="prose prose-xl px-2 min-w-full">
+  <section class="prose prose-xl px-2 min-w-full dark:prose-invert">
     <slot />
   </section>
+
 </BasePage>

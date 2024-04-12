@@ -12,8 +12,8 @@ const posts = (await getCollection("blog")).sort(
 			{
 				posts.map((post) => (
 					<li class="py-2">
-						<a href={`/posts/${post.slug}/`}>{post.data.title}</a>
-						<span class="shrink-0">
+						<a class="dark:text-slate-100" href={`/posts/${post.slug}/`}>{post.data.title}</a>
+						<span class="shrink-0 dark:text-slate-400">
 							<FormattedDate date={post.data.pubDate} />
 						</span>
 					</li>
