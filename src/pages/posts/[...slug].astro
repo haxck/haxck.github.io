@@ -1,6 +1,9 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import type { MarkdownHeading } from "astro";
+import { generateToC } from "../../utils/generateToc";
+
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -12,10 +15,13 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content,headings } = await post.render();
+const toc = generateToC(headings,{minHeadingLevel:1,maxHeadingLevel:4,title:""})
+const props = {...post.data,toc};
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...props}>
 	<!-- <h1>{post.data.title}</h1> -->
+	
 	<Content />
 </BlogPost>
