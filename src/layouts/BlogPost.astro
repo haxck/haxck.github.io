@@ -2,18 +2,9 @@
 import type { CollectionEntry } from "astro:content";
 import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-// import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
-import MpCard from '../components/MpCard.astro'
+import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
-import type { MarkdownHeading } from "astro";
-export interface TocItem extends MarkdownHeading {
-	children: TocItem[];
-}
-interface toc {
-	toc:
-		| { minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] }
-		| undefined;
-}
+
 // type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
@@ -21,48 +12,51 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 ---
 
 <BasePage title={title}>
-	<div class="flex flex-row ">
-		<article
-		class="lg:basis-3/4 p-8 m-2 bg-white dark:bg-slate-800 shadow-xl"
-	>
-		{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-		<p class="text-slate-600 dark:text-slate-400">
-			{
-				tags &&
-					tags.map((items) => <span class="mr-1 p-1">#{items}</span>)
-			}
-		</p>
-		<h1 class="text-5xl font-bold tracking-tight dark:text-slate-100">
-			{title}
-		</h1>
-		<div class="text-slate-400 mb-4">
-			<p>
-				文章发表于 <FormattedDate date={pubDate} />
-				{
-					updatedDate && (
-						<span class="ml-2">
-							最后更新于
-							<FormattedDate date={updatedDate} />
-						</span>
-					)
-				}
+	<div class="flex flex-row">
+		<article class="lg:basis-3/4 p-8 m-2 bg-white dark:bg-slate-800 shadow-xl">
+			{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+			<p class="text-slate-600 dark:text-slate-400 title">
+				{tags && tags.map((items) => <span class="mr-1 p-1">#{items}</span>)}
 			</p>
-		</div>
+			<h1 class="text-5xl font-bold dark:text-slate-100 title">
+				{title}
+			</h1>
+			<div class="text-slate-400 my-2 text-sm title">
+				<p>
+					文章发表于 <FormattedDate date={pubDate} />
+					{
+						updatedDate && (
+							<span class="ml-2">
+								最后更新于
+								<FormattedDate date={updatedDate} />
+							</span>
+						)
+					}
+				</p>
+			</div>
 
-		<div
-			class="prose dark:prose-invert min-w-full text-xl font-normal leading-8 tracking-wide"
-		>
-			<slot />
-		</div>
-	</article>
-	<aside class="basis-1/4 p-4 relative max-sm:hidden">
-		<div class="sticky top-1">
-			<TableOfContents {...Astro.props} />
-			<MpCard />
-		</div>
-	</aside>
+			<div
+				class="mt-8 min-w-full text-lg leading-8 tracking-wide heti"
+			>
+				<slot />
+			</div>
+		</article>
+		<aside class="basis-1/4 p-4 relative max-sm:hidden">
+			<div class="sticky top-1">
+				<TableOfContents {...Astro.props} />
+				<MpCard />
+			</div>
+		</aside>
 	</div>
-
-
-
 </BasePage>
+<style>
+	@font-face {
+		font-family: "得意黑";
+		font-weight: 400;
+		src: url("/SmileySans-Oblique.otf.woff2") format("woff2");
+		font-display: swap;
+	}
+	.title {
+		font-family: "得意黑";
+	}
+</style>
