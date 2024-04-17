@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 // import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
+import MpCard from '../components/MpCard.astro'
 import TableOfContents from "../components/TOC.astro";
 import type { MarkdownHeading } from "astro";
 export interface TocItem extends MarkdownHeading {
@@ -54,10 +55,10 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 			<slot />
 		</div>
 	</article>
-	<aside class="basis-1/4 p-8 relative max-sm:hidden">
+	<aside class="basis-1/4 p-4 relative max-sm:hidden">
 		<div class="sticky top-1">
-
 			<TableOfContents {...Astro.props} />
+			<MpCard />
 		</div>
 	</aside>
 	</div>
