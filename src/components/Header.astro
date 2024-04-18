@@ -66,10 +66,10 @@ import ThemeToggle from "./ThemeToggle.astro";
     @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
   }
   .hamburger-menu {
-    @apply self-end p-2 sm:hidden;
+    @apply self-end p-2 sm:hidden dark:text-slate-100;
   }
   .hamburger-menu svg {
-    @apply h-6 w-6 scale-125 ;
+    @apply h-6 w-6 scale-125;
   }
   nav {
     @apply flex w-full flex-col items-center  sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
@@ -94,7 +94,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     @apply underline decoration-wavy decoration-2 underline-offset-4;
   }
   nav a.active svg {
-    @apply bg-gray-400;
+    @apply bg-gray-500;
   }
 
   nav button {
