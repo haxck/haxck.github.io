@@ -4,7 +4,7 @@ description: none
 pubDate: 2018-03-06 15:10:16
 ---
 
-去年将博客搬到了 Github ，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。
+去年将博客搬到了 Github，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。
 
 懒啊！！！
 
@@ -20,7 +20,7 @@ CI（持续集成）可以自动地处理测试、编译、部署。😜原来�
 
 ![ci-flowchart](http://oerfykrpf.bkt.clouddn.com/hexo-ci-flowchart.png)
 
-至此，只需要将源码推到 GitHub ，CI 会自动地生成静态网页。
+至此，只需要将源码推到 GitHub，CI 会自动地生成静态网页。
 
 
 
