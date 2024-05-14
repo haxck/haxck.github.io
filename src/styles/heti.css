@@ -233,8 +233,6 @@
 .heti blockquote {
   margin-block-start: 12px;
   margin-block-end: 24px;
-  margin-inline-start: 32px;
-  margin-inline-end: 32px;
   padding-block-start: 12px;
   padding-block-end: 12px;
   padding-inline-start: 16px;
@@ -286,7 +284,7 @@
 
 .heti p {
   margin-block-start: 12px;
-  margin-block-end: 24px;
+  margin-block-end: 12px;
   text-align: justify;
 }
 

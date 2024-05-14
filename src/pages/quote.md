@@ -6,3 +6,9 @@ layout: ../layouts/Quote.astro
 ---
 
 收集值得细细品味的话
+
+> hello world
+
+> hello world
+
+> hello world
