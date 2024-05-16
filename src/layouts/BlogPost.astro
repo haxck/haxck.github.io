@@ -4,6 +4,7 @@ import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
+import Divider from "../components/Divider.astro";
 
 // type Props = CollectionEntry<"blog">["data"];
 
@@ -13,7 +14,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 
 <BasePage title={title}>
 	<div class="flex flex-row">
-		<article class="lg:basis-3/4 p-4 m-2 bg-white dark:bg-gray-800 shadow-xl rounded-xl">
+		<article class="lg:basis-3/4 py-8 px-4 m-2 bg-white dark:bg-gray-800 shadow-xl rounded-xl">
 			{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 			<p class="text-slate-600 dark:text-slate-300 title">
 				{tags && tags.map((items) => <span class="mr-1 p-1">#{items}</span>)}
@@ -34,11 +35,16 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 					}
 				</p>
 			</div>
-
 			<div
 				class="mt-8 min-w-full text-lg leading-8 tracking-wide heti"
 			>
 				<slot />
+			</div>
+			<Divider />
+			<div class="px-4">
+				<div class="tracking-wide text-base text-gray-600">
+					本站内容可随意转载，不需要注明作者，就说是你写的！
+				</div>
 			</div>
 		</article>
 		<aside class="basis-1/4 p-4 relative max-sm:hidden">
@@ -49,6 +55,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 		</aside>
 	</div>
 </BasePage>
+
 <style>
 	@font-face {
 		font-family: "得意黑";
