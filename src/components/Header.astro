@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE } from "../consts";
+import { SITE_TITLE, NAVS } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
@@ -37,18 +37,9 @@ import ThemeToggle from "./ThemeToggle.astro";
           </svg>
         </button>
         <ul id="menu-items" class="hidden sm:flex">
-          <li>
-            <HeaderLink href="/posts">博客</HeaderLink>
-          </li>
-          <li>
-            <HeaderLink href="/quote">收集</HeaderLink>
-          </li>
-          <li>
-            <HeaderLink href="/list">梦想清单</HeaderLink>
-          </li>
-          <li>
-            <HeaderLink href="/">关于我</HeaderLink>
-          </li>
+          {NAVS.map((el) => <li>
+            <HeaderLink href={el.link}>{el.name}</HeaderLink>
+          </li>)}
           <li>
             <ThemeToggle />
           </li>
@@ -63,7 +54,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     @apply mx-auto flex max-w-screen-lg  flex-col items-center justify-between sm:flex-row;
   }
   .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between sm:items-center p-2 py-4 ;
+    @apply relative flex w-full items-start justify-between sm:items-center p-2 py-4;
   }
   .logo {
     @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
@@ -104,7 +95,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     @apply p-1;
   }
   nav button svg {
-    @apply h-6 w-6 ;
+    @apply h-6 w-6;
   }
   #theme-btn {
     @apply p-3 sm:p-1;
