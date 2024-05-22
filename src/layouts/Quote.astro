@@ -6,7 +6,12 @@ const { frontmatter } = Astro.props;
 ---
 
 <BasePage title={frontmatter.title}>
-  <section class="heti text-lg px-2 min-w-full">
+  <section class="">
     <slot />
   </section>
 </BasePage>
+<style is:global>
+  blockquote{
+    @apply my-4 border-l-8 border-orange-200 pl-2;
+  }
+</style>
