@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import BasePage from "../layouts/BasePage.astro";
+import { Image } from "astro:assets";
+import nmQR from "../assets/images/nmQR.png";
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .filter((_, index) => index < 5);
+---
+
+<BasePage title="Haxck">
+  <div class="grid grid-cols-3">
+    <div
+      class="mt-5 p-3 items-center lg:items-end profilo flex flex-col pr-8 col-span-3 lg:col-span-1"
+    >
+      <h1 class="font-bold text-3xl title tracking-[12px]">Haxck</h1>
+      <p class="text-gray-500">Creater & Developer</p>
+    </div>
+    <div class="mx-3 col-span-3 lg:col-span-2">
+      <div class="border-2 rounded-md p-3 mb-6">
+        <h1 class="font-bold mb-2 title">Posts</h1>
+        <ul>
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="border-2 rounded-md p-3">
+        <h1 class="font-bold mb-2 title">Projects</h1>
+        <div class="grid grid-cols-4 gap-2">
+          <div class="col-span-4 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg">
+            <div class="flex gap-6 mix-blend-multiply">
+              <Image
+                src={nmQR}
+                width={120}
+                height={120}
+                alt={"nothin"}
+              />
+              <div class="flex flex-col justify-end p-3">
+                <h3 class="font-bold text-2xl">NightMete</h3>
+                <p class="text-base text-gray-500">
+                  轻量级白噪音小程序。困意来袭，无需选择，一键开始入睡。辗转反侧，夜读陪你漫漫长夜。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 col-span-2 bg-slate-50 hover:bg-slate-100 rounded-lg">
+            <div class="flex flex-col justify-end p-3">
+              <h3 class="font-bold text-2xl">Echo</h3>
+              <p class="text-base text-gray-500">
+                书信风格长文本生成器。以书信的方式，投递文字的温度。
+              </p>
+            </div>
+          </div>
+          <div class="p-3 col-span-2 bg-slate-50 hover:bg-slate-100 rounded-lg">
+            <a href="https://2l.haxck.com" target="_blank" rel="noopener noreferrer">
+            <div class="flex flex-col justify-end p-3">
+              <h3 class="font-bold text-2xl">2lover</h3>
+              <p class="text-base text-gray-500">土味情话，纪念日，猜丁壳，吃什么。</p>
+            </div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</BasePage>
+
+<style>
+	@font-face {
+		font-family: "得意黑";
+		font-weight: 400;
+		src: url("/SmileySans-Oblique.otf.woff2") format("woff2");
+		font-display: swap;
+	}
+	.title {
+		font-family: "得意黑";
+	}
+</style>
