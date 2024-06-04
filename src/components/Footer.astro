@@ -3,10 +3,9 @@ const today = new Date();
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<footer class="p-8 text-center dark:text-slate-400 text-sm">
-	&copy; {today.getFullYear()} haxck.com All rights reserved.
-	<HeaderLink href="/changelog">changelog</HeaderLink>
+<footer class="mt-8 p-8 text-base text-center text-md dark:text-slate-400 ">
+	<div>
+		<HeaderLink href="/changelog">更新日志</HeaderLink>
+	</div>
+	&copy;2018 - {today.getFullYear()} haxck.com 
 </footer>
-<style>
-
-</style>
