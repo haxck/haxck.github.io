@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-cn"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.9.2"><!-- Canonical URL --><link rel="canonical" href="https://blog.haxck.com/posts/using-certbot-automatic-ssl/"><!-- RSS Feed Discovery --><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"><!-- Primary Meta Tags --><title>使用 Certbot 自动更新 SSL 证书 | Haxck&#39;s blog</title><meta name="title" content="使用 Certbot 自动更新 SSL 证书"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.haxck.com/posts/using-certbot-automatic-ssl/"><meta property="og:title" content="使用 Certbot 自动更新 SSL 证书"><meta property="og:description"><meta property="og:image" content="https://blog.haxck.com/placeholder-social.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.haxck.com/posts/using-certbot-automatic-ssl/"><meta property="twitter:title" content="使用 Certbot 自动更新 SSL 证书"><meta property="twitter:description"><meta property="twitter:image" content="https://blog.haxck.com/placeholder-social.jpg"><!-- <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css"></link> --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/changelog.CZE5SSBg.css">
+<link rel="stylesheet" href="/_astro/_slug_.CfiAMozK.css">
+<style>ul[data-astro-cid-obewoz47]{font-size:1rem;padding:0;list-style:none}a[data-astro-cid-obewoz47]{--pad-inline: .5rem;display:block;border-radius:.25rem;padding-block:.25rem;padding-inline:calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);line-height:1.25}a[data-astro-cid-obewoz47][aria-current=true]{color:var(--sl-color-text-accent)}@font-face{font-family:得意黑;font-weight:400;src:url(/SmileySans-Oblique.otf.woff2) format("woff2");font-display:swap}.title[data-astro-cid-bvzihdzo]{font-family:得意黑}
+</style><script type="module" src="/_astro/hoisted.CfBefDcG.js"></script></head> <body class="bg-[url(/grid.svg)] inset-0 dark:bg-gray-600"> <header data-astro-cid-3ef6ksr2> <div class="nav-container" data-astro-cid-3ef6ksr2> <div class="top-nav-wrap" data-astro-cid-3ef6ksr2> <a href="/" class="logo whitespace-nowrap" data-astro-cid-3ef6ksr2> Haxck&#39;s blog </a> <nav id="nav-menu" data-astro-cid-3ef6ksr2> <button class="hamburger-menu focus-outline" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items" data-astro-cid-3ef6ksr2> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="menu-icon" data-astro-cid-3ef6ksr2> <line x1="7" y1="12" x2="21" y2="12" class="line" data-astro-cid-3ef6ksr2></line> <line x1="3" y1="6" x2="21" y2="6" class="line" data-astro-cid-3ef6ksr2></line> <line x1="12" y1="18" x2="21" y2="18" class="line" data-astro-cid-3ef6ksr2></line> <line x1="18" y1="6" x2="6" y2="18" class="close" data-astro-cid-3ef6ksr2></line> <line x1="6" y1="6" x2="18" y2="18" class="close" data-astro-cid-3ef6ksr2></line> </svg> </button> <ul id="menu-items" class="hidden sm:flex" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 首页 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/posts" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 博客 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/quote" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 收集 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/list" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 清单 </a>  </li> <li data-astro-cid-3ef6ksr2> <div class="theme-switch-wrapper mt-1 sm:ml-0 lg:ml-2" data-astro-transition-persist="astro-7dcwydj3-1"> <label class="theme-switch" for="checkbox"> <input type="checkbox" id="checkbox"> <div class="slider"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </div> </label> </div> <script>
+  // Get the theme toggle input
+  const themeToggle = document.querySelector(
+    '.theme-switch input[type="checkbox"]',
+  );
+
+  // Get the current theme from local storage
+  const currentTheme = localStorage.getItem("theme");
+
+  // If the current local storage item can be found
+  if (currentTheme) {
+    // Set the body data-theme attribute to match the local storage item
+    document.documentElement.setAttribute("class", currentTheme);
+
+    // If the current theme is dark, check the theme toggle
+    if (currentTheme === "dark") {
+      themeToggle.checked = true;
+    }
+  }
+
+  function switchTheme() {
+    if (themeToggle.checked) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  // Add an event listener to the theme toggle, which will switch the theme
+  themeToggle.addEventListener("change", switchTheme, false);
+  document.addEventListener("astro:after-swap", switchTheme);
+</script>  </li> </ul> </nav> </div> </div> </header>   <main class="lg:max-w-screen-lg m-auto">  <div class="flex flex-row" data-astro-cid-bvzihdzo> <article class="lg:basis-3/4 py-8 px-4 m-2 bg-white dark:bg-gray-800 shadow-xl rounded-xl" data-astro-cid-bvzihdzo>  <p class="text-slate-600 dark:text-slate-300 title" data-astro-cid-bvzihdzo>  </p> <h1 class="text-5xl font-bold dark:text-slate-300 title" data-astro-cid-bvzihdzo> 使用 Certbot 自动更新 SSL 证书 </h1> <div class="text-slate-500 dark:text-slate-400 my-2 text-sm title" data-astro-cid-bvzihdzo> <p data-astro-cid-bvzihdzo>
+文章发表于 <time datetime="2024-06-06T16:25:00.000Z"> 2024年6月6日 </time>  </p> </div> <div class="mt-8 min-w-full text-lg leading-8 tracking-wide heti" data-astro-cid-bvzihdzo>   <p>网站 SSL 证书快过期了，就想着这次换成自动更新，省的心里惦记。这不换不知道，一换都是事儿，就整理成博客，记录一下。</p>
+<p>自动更新 SSL 证书原理很简单，就是自动向证书颁发机构申请免费证书，然后替换。Certbot 就是干这事儿的工具，它能自动帮我们申请证书，替换，而且定时检查证书。简单来说一旦配置好就不需要再关心证书了。</p>
+<p>在安装第一步就遇到了问题，Cartbot 需要使用 snapd 工具才能安装。在安装 snapd 时，提示  selinux 版本不对，一顿折腾，遂放弃。就这么了嘛？前段时间看到 CentOS 即将停止维护，干脆把系统换了？琢磨了下，把该备份的文件备份，说干就干。</p>
+<h2 id="换系统">换系统</h2>
+<p>对于操作系统，没有太多研究，也就是停留在使用层面。选什么系统还真难到我了，最后选了最流行得 Ubuntu。腾讯云安装系统超级简单，直接选择就行。不知道为何 Ubuntu 版本是 22，现在都 24 了，为了安全，更新到最新版本。</p>
+<p>搜了一下，没想到现在一条命令就可以更新了。只要安装了装了 <code>sudo apt install update-manager-core</code> <code>sudo do-release-upgrade -d</code> 需要注意得是：在更新之前，需要先把当前软件包更新到最新，更新完软件包再开始使用这条命令。</p>
+<p>至此，系统就算安装完了。不知道大家安装完会安装什么？对于我来说就是安装一下运行环境，把网站跑起来就够了。</p>
+<h2 id="nginx">Nginx</h2>
+<p>照着<a href="https://nginx.org/en/linux_packages.html#Ubuntu">官网</a> 把 nginx 的源添加进来，直接 <code>apt install nginx</code>，没想到居然报错，err。一番排查居然是系统太新了，导致刚刚生成的 nginx 源路径对不上。手动修改成上一个版本<code>noble</code>，安装成功。</p>
+<p>简单配置一下，测试 Certbot。</p>
+<h2 id="certbot">Certbot</h2>
+<p>snapd 安装上 Certbot，直接 <code>sudo certbot --nginx</code>，输入域名基本上就没别的了。重启 Nginx，搞定。</p>  </div> <div class="py-8"> <hr> </div> <div class="px-4" data-astro-cid-bvzihdzo> <div class="tracking-wide text-base text-gray-600" data-astro-cid-bvzihdzo>
+本站内容可随意转载，不需要注明作者，就说是你写的！
+</div> </div> </article> <aside class="basis-1/4 p-4 relative max-sm:hidden" data-astro-cid-bvzihdzo> <div class="sticky top-1" data-astro-cid-bvzihdzo> <ul data-astro-cid-obewoz47 style="--depth: 0;"> <li data-astro-cid-obewoz47 style="--depth: 0;"> <a href="#slug" data-astro-cid-obewoz47 style="--depth: 0;"> <span data-astro-cid-obewoz47 style="--depth: 0;"></span> </a>  </li><li data-astro-cid-obewoz47 style="--depth: 0;"> <a href="#换系统" data-astro-cid-obewoz47 style="--depth: 0;"> <span data-astro-cid-obewoz47 style="--depth: 0;">换系统</span> </a>  </li><li data-astro-cid-obewoz47 style="--depth: 0;"> <a href="#nginx" data-astro-cid-obewoz47 style="--depth: 0;"> <span data-astro-cid-obewoz47 style="--depth: 0;">Nginx</span> </a>  </li><li data-astro-cid-obewoz47 style="--depth: 0;"> <a href="#certbot" data-astro-cid-obewoz47 style="--depth: 0;"> <span data-astro-cid-obewoz47 style="--depth: 0;">Certbot</span> </a>  </li> </ul>  <div class="rounded-md p-2 bg-slate-50 mt-4"> <img src="/qrcode_for_gh_8508d0791e2d_258.jpg" alt="X工厂公众号二维码"> <p class=" text-sm text-slate-600 text-center my-4">扫描二维码关注公众号</p> <div class="rounded-md bg-slate-200 text-center text-sm py-2"> <p class="text-lg font-bold">X 工厂</p> <p>创造一个新世界</p> </div> </div> </div> </aside> </div>  </main> <footer class="mt-8 p-8 text-base text-center text-md dark:text-slate-400 "> <div> <a href="/changelog" data-astro-cid-eimmu3lg> 更新日志 </a>  </div>
+&copy;2018 - 2024 haxck.com
+</footer> </body></html> 
