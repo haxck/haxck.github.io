@@ -1,18 +1,15 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
 
-// type Props = CollectionEntry<"blog">["data"];
-
-const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
+const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	Astro.props;
 ---
-
 <BasePage title={title}>
+	{ai && ai.map((items) => <span class="mr-1 p-1">{items.ai}</span>)}
 	<div class="flex flex-row">
 		<article class="lg:basis-3/4 py-8 px-4 m-2 bg-white dark:bg-gray-800 shadow-xl rounded-xl">
 			{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
@@ -41,7 +38,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 				<slot />
 			</div>
 			<Divider />
-			<div class="px-4">
+			<div>
 				<div class="tracking-wide text-base text-gray-600">
 					本站内容可随意转载，不需要注明作者，就说是你写的！
 				</div>
@@ -67,3 +64,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc } =
 		font-family: "得意黑";
 	}
 </style>
+<script>
+
+	console.log(Astro.locals)
+</script>
