@@ -7,7 +7,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 <header>
   <div class="nav-container">
     <div class="top-nav-wrap">
-      <a href="/" class="logo whitespace-nowrap">
+      <a href="/" class="logo whitespace-nowrap text-gray-800">
         {SITE_TITLE}
       </a>
       <nav id="nav-menu">
@@ -37,9 +37,18 @@ import ThemeToggle from "./ThemeToggle.astro";
           </svg>
         </button>
         <ul id="menu-items" class="hidden sm:flex">
-          {NAVS.map((el) => <li>
-            <HeaderLink href={el.link}>{el.name}</HeaderLink>
-          </li>)}
+          {
+            NAVS.map((el) => (
+              <li>
+                <HeaderLink
+                  href={el.link}
+                  class:list="dark:text-gray-300 text-gray-800"
+                >
+                  {el.name}
+                </HeaderLink>
+              </li>
+            ))
+          }
           <li>
             <ThemeToggle />
           </li>
