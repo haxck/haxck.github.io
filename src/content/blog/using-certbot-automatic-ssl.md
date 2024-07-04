@@ -1,6 +1,7 @@
 ---
 title: 使用 Certbot 自动更新 SSL 证书
 description: none
+tags: ["技术","Nginx","SSL"]
 pubDate: 2024-06-06 16:25:00
 ---
 网站 SSL 证书快过期了，就想着这次换成自动更新，省的心里惦记。这不换不知道，一换都是事儿，就整理成博客，记录一下。

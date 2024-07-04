@@ -2,24 +2,44 @@
 import { getCollection } from "astro:content";
 import BasePage from "../../layouts/BasePage.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
-const posts = (await getCollection("blog")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const blogsByYear = {};
+const posts = (await getCollection("blog"))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.map((blog) => {
+		let year = new Date(blog.data.pubDate).getFullYear();
+		if (!blogsByYear[year]) {
+			blogsByYear[year] = [];
+		}
+		blogsByYear[year].push(blog);
+		console.log(Object.keys(blogsByYear).sort((a,b)=> -1))
+	});
 ---
+
 <BasePage>
 	<section class="px-2">
-		<ul>
+		<div>
 			{
-				posts.map((post) => (
-					<li class="py-2">
-						<a class="dark:text-slate-100" href={`/posts/${post.slug}/`}>{post.data.title}</a>
-						<span class="shrink-0 dark:text-slate-400">
-							<FormattedDate date={post.data.pubDate} />
-						</span>
-					</li>
+				Object.keys(blogsByYear).sort((a,b)=> -1).map((year) => (
+					<>
+						<h2 class="py-4 text-2xl font-bold dark:text-slate-200">{year}</h2>
+						<ul class="grid grid-cols-2 gap-4">
+							{blogsByYear[year].map((post) => (
+								<a
+									class="text-gray-900  dark:text-slate-100"
+									href={`/posts/${post.slug}/`}
+								>
+									<li class="p-4 dark:bg-slate-800 bg-white shadow-lg rounded-lg hover:shadow-xl hover:scale-105 transition ease-in-out ">
+										{post.data.title}
+										<p class="pt-2 shrink-0 dark:text-slate-400">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</li>
+								</a>
+							))}
+						</ul>
+					</>
 				))
 			}
-		</ul>
+		</div>
 	</section>
 </BasePage>
-
