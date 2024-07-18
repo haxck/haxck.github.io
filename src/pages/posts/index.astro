@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import BasePage from "../../layouts/BasePage.astro";
+import IndexPage from "../../layouts/IndexPage.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 const blogsByYear = {};
 const posts = (await getCollection("blog"))
@@ -15,7 +15,7 @@ const posts = (await getCollection("blog"))
 	});
 ---
 
-<BasePage>
+<IndexPage>
 	<section class="px-2">
 		<div>
 			{
@@ -42,4 +42,4 @@ const posts = (await getCollection("blog"))
 			}
 		</div>
 	</section>
-</BasePage>
+</IndexPage>
