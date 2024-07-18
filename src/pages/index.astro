@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import BasePage from "../layouts/BasePage.astro";
+import IndexPage from "../layouts/IndexPage.astro";
 import { Image } from "astro:assets";
 import nmQR from "../assets/images/nmQR.png";
 const posts = (await getCollection("blog"))
@@ -8,98 +8,85 @@ const posts = (await getCollection("blog"))
   .filter((_, index) => index < 5);
 ---
 
-<BasePage title="Haxck">
-  <div class="grid grid-cols-3">
-    <div
-      class="p-3 items-center lg:items-end profilo flex flex-col md:pr-8 col-span-3 lg:col-span-1"
-    >
-      <h1 class="font-bold text-3xl title tracking-[3px] dark:text-gray-200">
-        Haxck
-      </h1>
-      <p class="text-gray-500 dark:text-gray-400">Creater & Developer</p>
-    </div>
-    <div class="mx-3 col-span-3 lg:col-span-2">
-      <div class="rounded-md p-3 dark:border-gray-500">
-        <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">Posts</h1>
-        <ul>
-          {
-            posts.map((post) => (
-              <li class="inline-block">
-                <a
-                  class="my-2 mr-4 px-4 py-1 rounded-3xl
-                  text-lg dark:text-gray-300 text-gray-600 inline-block
-                  bg-slate-50 hover:bg-slate-100
-                  dark:bg-gray-500"
-                  href={`/posts/${post.slug}/`}
-                >
-                  {post.data.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="rounded-md p-3 dark:border-gray-500">
-        <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">
-          Projects
-        </h1>
-        <div class="grid grid-cols-4 gap-2">
-          <div
-            class="col-span-4 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
-          >
-            <div class="flex md:gap-6 h-32">
-              <Image
-                src={nmQR}
-                width={130}
-                height={120}
-                alt={"nothin"}
-                class="mix-blend-multiply"
-              />
-              <div class="flex flex-col justify-end p-3">
-                <h3 class="font-bold text-xl dark:text-gray-600">NightMete</h3>
-                <p
-                  class="md:text-base text-gray-900 dark:text-gray-600 text-sm"
-                >
-                  轻量级白噪音小程序。困意来袭，无需选择，一键开始入睡。辗转反侧，夜读陪你漫漫长夜。
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="p-3 col-span-2 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
-          >
-            <div class="flex flex-col justify-end p-3">
-              <h3 class="font-bold text-xl dark:text-gray-600">Echo</h3>
-              <p class="md:text-base text-gray-900 dark:text-gray-600 text-sm">
-                书信风格长文本生成器。以书信的方式，投递文字的温度。
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://2l.haxck.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="col-span-2"
-          >
-            <div
-              class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
+<IndexPage>
+  <div class="rounded-md p-3 dark:border-gray-500">
+    <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">Posts</h1>
+    <ul>
+      {
+        posts.map((post) => (
+          <li class="inline-block">
+            <a
+              class="my-2 mr-4 px-4 py-1 rounded-3xl
+              text-lg dark:text-gray-300 text-gray-600 inline-block
+              bg-slate-50 hover:bg-slate-100
+              dark:bg-gray-500"
+              href={`/posts/${post.slug}/`}
             >
-              <div class="flex flex-col justify-end p-3">
-                <h3 class="font-bold text-xl dark:text-gray-600">2lover</h3>
-                <p
-                  class="md:text-base text-gray-900 dark:text-gray-600 text-sm"
-                >
-                  土味情话，纪念日，猜丁壳，吃什么。
-                </p>
-              </div>
-            </div></a
-          >
+              {post.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="rounded-md p-3 dark:border-gray-500">
+    <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">
+      Projects
+    </h1>
+    <div class="grid grid-cols-4 gap-2">
+      <div
+        class="col-span-4 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
+      >
+        <div class="flex md:gap-6 h-32">
+          <Image
+            src={nmQR}
+            width={130}
+            height={120}
+            alt={"nothin"}
+            class="mix-blend-multiply"
+          />
+          <div class="flex flex-col justify-end p-3">
+            <h3 class="font-bold text-xl dark:text-gray-600">NightMete</h3>
+            <p
+              class="md:text-base text-gray-900 dark:text-gray-600 text-sm"
+            >
+              轻量级白噪音小程序。困意来袭，无需选择，一键开始入睡。辗转反侧，夜读陪你漫漫长夜。
+            </p>
+          </div>
         </div>
       </div>
+      <div
+        class="p-3 col-span-2 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
+      >
+        <div class="flex flex-col justify-end p-3">
+          <h3 class="font-bold text-xl dark:text-gray-600">Echo</h3>
+          <p class="md:text-base text-gray-900 dark:text-gray-600 text-sm">
+            书信风格长文本生成器。以书信的方式，投递文字的温度。
+          </p>
+        </div>
+      </div>
+      <a
+        href="https://2l.haxck.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="col-span-2"
+      >
+        <div
+          class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
+        >
+          <div class="flex flex-col justify-end p-3">
+            <h3 class="font-bold text-xl dark:text-gray-600">2lover</h3>
+            <p
+              class="md:text-base text-gray-900 dark:text-gray-600 text-sm"
+            >
+              土味情话，纪念日，猜丁壳，吃什么。
+            </p>
+          </div>
+        </div></a
+      >
     </div>
   </div>
-</BasePage>
-
+</IndexPage>
 <style>
   @font-face {
     font-family: "得意黑";
@@ -111,3 +98,4 @@ const posts = (await getCollection("blog"))
     font-family: "得意黑";
   }
 </style>
+
