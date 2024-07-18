@@ -2,10 +2,9 @@
 title: 友链
 date: 2024-07-18 14:27:00
 update: 2024-07-18 14:27:00
-layout: ../layouts/IndexPage.astro
+layout: ../layouts/MdPage.astro
 ---
-很高兴 TA 们在写博客分享所思所想：
- 
+很高兴 TA 们在写博客分享所思所想： 
 
 - https://www.owenyoung.com/ 
 	- 沉浸式翻译作者的博客

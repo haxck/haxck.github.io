@@ -2,23 +2,36 @@
 title: 收集
 date: 2024-05-10 16:33:00
 update: 2024-05-10 16:33:00
-layout: ../layouts/Quote.astro
+layout: ../layouts/MdPage.astro
 ---
 
 收集值得细细品味的话
 
 > 当你停止创造，你的才能就不再重要，你所拥有的只剩下你的品位。而品位会裹挟你，让你排斥他人，变得狭隘。所以，要创造。
-><br> [《我说的不一定对》· 梁欢](https://book.douban.com/subject/26662051/)
+
+[《我说的不一定对》· 梁欢](https://book.douban.com/subject/26662051/)
+
+---
+
 
 > 如果电影有所谓“戏剧张力”，那也并不是来自于“讲什么”，而是“怎么讲”。
-><br> [Martin](https://daily.zhihu.com/story/3877358)
+
+[Martin](https://daily.zhihu.com/story/3877358)
+
+---
 
 > 高明的决策者追求的不是每一次都赌赢，而是一个让赢的概率大于输的概率的科学决策系统。
-><br> 万维钢
+
+万维钢
+
+---
 
 > 勇敢不是冲动，理智不足的人，容易混淆两者。勇敢的成功概率高，冲动的成功概率底。我很赞成在改变之前做足功课。 ​​​
-><br> [勇敢者必然更幸运 · 连岳](https://mp.weixin.qq.com/s/Zsy5cUSRO-nBG62joykj6w)
+
+[勇敢者必然更幸运 · 连岳](https://mp.weixin.qq.com/s/Zsy5cUSRO-nBG62joykj6w)
+
+---
 
 > 能否在占据绝对优势的时候仍像逆境中一样坚持努力，是职业选手与普通玩家的根本区别。 ​​​ ​​​
-><br> 
+ 
 
