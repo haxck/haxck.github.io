@@ -3,7 +3,8 @@ import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 const blogsByYear = {};
-const posts = (await getCollection("blog"))
+
+(await getCollection("blog"))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.map((blog) => {
 		let year = new Date(blog.data.pubDate).getFullYear();
@@ -11,7 +12,6 @@ const posts = (await getCollection("blog"))
 			blogsByYear[year] = [];
 		}
 		blogsByYear[year].push(blog);
-		console.log(Object.keys(blogsByYear).sort((a,b)=> -1))
 	});
 ---
 
