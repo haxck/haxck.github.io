@@ -16,3 +16,7 @@ layout: ../layouts/MdPage.astro
 	- Airing 前端、哲学
 - https://imququ.com/
 	- Web 开发，HTTP2 相关文章，也是打开网页最快的网站
+- https://shuiba.co/
+	- 水八口
+- https://sanlun.bike/
+	- 三轮车
