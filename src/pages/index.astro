@@ -9,7 +9,7 @@ const posts = (await getCollection("blog"))
   .filter((_, index) => index < 5);
 ---
 
-<IndexPage title="首页">
+<IndexPage>
   <About slot="left"></About>
   <div slot="right">
     <div class="rounded-md p-3 dark:border-gray-500">

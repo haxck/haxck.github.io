@@ -1,10 +1,8 @@
 ---
 import About from "../components/About.astro";
 import IndexPage from "../layouts/IndexPage.astro";
-const {title} = Astro.props.frontmatter;
-console.log(Astro.props)
 ---
-<IndexPage title={title}>
+<IndexPage>
   <About slot="left"></About>
   <div class="prose p-4 max-w-full bg-gray-50 rounded-lg" slot="right">
     <slot></slot>
