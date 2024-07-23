@@ -1,8 +1,9 @@
 ---
 import BasePage from "../layouts/BasePage.astro";
+const {title} = Astro.props;
 ---
 
-<BasePage title="Haxck">
+<BasePage title={title}>
   <div class="grid grid-cols-4">
     <div
       class="p-3 col-span-4 lg:col-span-1"
