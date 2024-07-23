@@ -3,13 +3,13 @@ import BasePage from "../layouts/BasePage.astro";
 ---
 
 <BasePage title="Haxck">
-  <div class="grid grid-cols-3">
+  <div class="grid grid-cols-4">
     <div
-      class="p-3 col-span-3 lg:col-span-1"
+      class="p-3 col-span-4 lg:col-span-1"
     >
     <slot name="left"></slot>
     </div>
-    <div class="mx-3 col-span-3 lg:col-span-2">
+    <div class="mx-3 col-span-4 lg:col-span-3">
       <slot name="right"></slot>
     </div>
   </div>
