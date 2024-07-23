@@ -5,15 +5,12 @@ import BasePage from "../layouts/BasePage.astro";
 <BasePage title="Haxck">
   <div class="grid grid-cols-3">
     <div
-      class="p-3 items-center lg:items-end profilo flex flex-col md:pr-8 col-span-3 lg:col-span-1"
+      class="p-3 col-span-3 lg:col-span-1"
     >
-      <h1 class="font-bold text-3xl title tracking-[3px] dark:text-gray-200">
-        Haxck
-      </h1>
-      <p class="text-gray-500 dark:text-gray-400">Creater & Developer</p>
+    <slot name="left"></slot>
     </div>
     <div class="mx-3 col-span-3 lg:col-span-2">
-      <slot></slot>
+      <slot name="right"></slot>
     </div>
   </div>
 </BasePage>

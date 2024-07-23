@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
+import About from "../../components/About.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 const blogsByYear = {};
 
@@ -16,7 +17,9 @@ const blogsByYear = {};
 ---
 
 <IndexPage>
-	<section class="px-2">
+	<About slot="left"></About>
+
+	<section class="px-2" slot="right">
 		<div>
 			{
 				Object.keys(blogsByYear).sort((a,b)=> -1).map((year) => (
