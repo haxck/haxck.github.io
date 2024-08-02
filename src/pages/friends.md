@@ -20,3 +20,5 @@ layout: ../layouts/MdPage.astro
 	- 水八口
 - https://sanlun.bike/
 	- 三轮车
+- https://blog.lucida.me/
+	- Lucida《程序员必读书单》作者，文字简洁干练，直击核心
