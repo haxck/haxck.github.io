@@ -9,7 +9,7 @@ layout: ../layouts/MdPage.astro
 - https://www.owenyoung.com/ 
 	- 沉浸式翻译作者的博客
 - https://plantegg.github.io/ 
-	- TCP、Linux、MySQL技术博客
+	- TCP、Linux、MySQL 技术博客
 - https://blog.zgsec.cn/ 
 	- 曾哥 安全相关
 - https://blog.ursb.me/
