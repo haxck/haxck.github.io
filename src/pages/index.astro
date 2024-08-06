@@ -10,34 +10,33 @@ const posts = (await getCollection("blog"))
 ---
 
 <IndexPage title="首页">
-  <About slot="left"></About>
+  <About slot="left" />
   <div slot="right">
-    <div class="rounded-md p-3 dark:border-gray-500">
+    <div class="rounded-md dark:border-gray-500">
       <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">Posts</h1>
       <ul>
         {
           posts.map((post) => (
-            <li class="inline-block">
+            <li class="text-lg my-2 px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg">
               <a
-                class="my-2 mr-4 px-4 py-1 rounded-3xl
-              text-lg dark:text-gray-300 text-gray-600 inline-block
-              bg-slate-50 hover:bg-slate-100
-              dark:bg-gray-500"
+                class="
+               dark:text-gray-300 text-gray-600 flex
+              "
                 href={`/posts/${post.slug}/`}
               >
                 {post.data.title}
+                <span class="border-t-2 border-dashed flex-1 m-3" />
+                <span>{post.data.pubDate.toLocaleDateString()}</span>
               </a>
             </li>
           ))
         }
       </ul>
     </div>
-    <div class="rounded-md p-3 dark:border-gray-500">
+    <div class="rounded-md  dark:border-gray-500">
       <h1 class="font-bold mb-3 title text-2xl dark:text-gray-200">Projects</h1>
       <div class="grid grid-cols-4 gap-2">
-        <div
-          class="col-span-4 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
-        >
+        <div class="col-span-4 p-3 bg-gray-100 rounded-lg dark:bg-gray-600">
           <div class="flex md:gap-6 h-32">
             <Image
               src={nmQR}
@@ -47,19 +46,17 @@ const posts = (await getCollection("blog"))
               class="mix-blend-multiply"
             />
             <div class="flex flex-col justify-end p-3">
-              <h3 class="font-bold text-xl dark:text-gray-600">NightMete</h3>
-              <p class="md:text-base text-gray-900 dark:text-gray-600 text-sm">
+              <h3 class="font-bold text-xl dark:text-gray-300">NightMete</h3>
+              <p class="md:text-base text-gray-900 dark:text-gray-400 text-sm">
                 轻量级白噪音小程序。困意来袭，无需选择，一键开始入睡。辗转反侧，夜读陪你漫漫长夜。
               </p>
             </div>
           </div>
         </div>
-        <div
-          class="p-3 col-span-2 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
-        >
+        <div class="p-3 col-span-2 bg-gray-100 rounded-lg dark:bg-gray-600">
           <div class="flex flex-col justify-end p-3">
-            <h3 class="font-bold text-xl dark:text-gray-600">Echo</h3>
-            <p class="md:text-base text-gray-900 dark:text-gray-600 text-sm">
+            <h3 class="font-bold text-xl dark:text-gray-300">Echo</h3>
+            <p class="md:text-base text-gray-900 dark:text-gray-400 text-sm">
               书信风格长文本生成器。以书信的方式，投递文字的温度。
             </p>
           </div>
@@ -70,12 +67,10 @@ const posts = (await getCollection("blog"))
           rel="noopener noreferrer"
           class="col-span-2"
         >
-          <div
-            class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg dark:bg-gray-300"
-          >
+          <div class="p-3 bg-gray-100 rounded-lg dark:bg-gray-600">
             <div class="flex flex-col justify-end p-3">
-              <h3 class="font-bold text-xl dark:text-gray-600">2lover</h3>
-              <p class="md:text-base text-gray-900 dark:text-gray-600 text-sm">
+              <h3 class="font-bold text-xl dark:text-gray-300">2lover</h3>
+              <p class="md:text-base text-gray-900 dark:text-gray-400 text-sm">
                 土味情话，纪念日，猜丁壳，吃什么。
               </p>
             </div>

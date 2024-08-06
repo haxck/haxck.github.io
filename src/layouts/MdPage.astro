@@ -5,7 +5,7 @@ const {title} = Astro.props.frontmatter;
 ---
 <IndexPage title={title}>
   <About slot="left"></About>
-  <div class="prose p-4 max-w-full bg-gray-50 rounded-lg" slot="right">
+  <div class="prose max-w-full" slot="right">
     <slot></slot>
   </div>
 </IndexPage>
