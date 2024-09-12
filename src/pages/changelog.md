@@ -12,7 +12,7 @@ layout: ../layouts/MdPage.astro
 ### <time>2024-05-12</time>
 - 暗色模式 
 ### <time>2024-03-04</time>
-- 支持 RSS
+- 支持 RSS，订阅地址：https://blog.haxck.com/feed
 ### <time>2023-06-13</time>
 - 添加更新日志
 
