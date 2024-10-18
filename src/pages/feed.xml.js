@@ -6,7 +6,7 @@ export async function GET(context) {
 	const posts = await getCollection('blog');
 	return rss({
 		title: SITE_TITLE,
-		description: SITE_DESCRIPTION + "feedId:57618470631123968+userId:41669588208292864",
+		description: SITE_DESCRIPTION,
 		site: context.site,
 
 		"follow_challenge": {
