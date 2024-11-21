@@ -13,3 +13,4 @@ tags: ["IPhone"]
 3. 飞行模式（第一次打开应用即可，后面浏览就不需要了） + 全局代理
 
 极容易提示地区问题，也就是体验一下。
+![Apple News](../../assets/images/applenews.png)
