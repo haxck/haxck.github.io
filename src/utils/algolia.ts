@@ -2,7 +2,7 @@ import { searchClient } from '@algolia/client-search';
 import { readFile } from "node:fs/promises"
 import type { AstroIntegration } from "astro";
 import { loadEnv } from "vite";
-const { ALGOLIA_APPID, ALGOLIA_ADMIN_KEY } = loadEnv(process.env.APPID, process.cwd(), "");
+const { ALGOLIA_APPID, ALGOLIA_ADMIN_KEY } = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), "");
 
 const client = searchClient(ALGOLIA_APPID, ALGOLIA_ADMIN_KEY);
 
