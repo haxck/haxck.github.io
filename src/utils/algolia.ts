@@ -1,10 +1,8 @@
 import { searchClient } from '@algolia/client-search';
 import { readFile } from "node:fs/promises"
 import type { AstroIntegration } from "astro";
-
-const ALGOLIA_APPID  = import.meta.env.ALGOLIA_APPID;
-const  ALGOLIA_ADMIN_KEY  = import.meta.env.ALGOLIA_ADMIN_KEY;
-
+const ALGOLIA_APPID= import.meta.env.VITE_ALGOLIA_APPID;
+const ALGOLIA_ADMIN_KEY = import.meta.env.VITE_ALGOLIA_ADMIN_KEY;
 const client = searchClient(ALGOLIA_APPID, ALGOLIA_ADMIN_KEY);
 
 const processRecords = async (data) => {
