@@ -5,6 +5,9 @@ on:
 
 jobs:
   pages:
+    env: 
+      ALGOLIA_APPID: ${{secrets.ALGOLIA_APPID}}
+      ALGOLIA_ADMIN_KEY: ${{secrets.ALGOLIA_ADMIN_KEY}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,9 +28,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Build
-        env: 
-          appId: ${{secrets.ALGOLIA_APPID}}
-          ALGOLIA_ADMIN_KEY: ${{secrets.ALGOLIA_ADMIN_KEY}}
+
         run: npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
