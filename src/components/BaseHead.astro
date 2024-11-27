@@ -48,6 +48,7 @@ const { title, description, image = '/og-bg.png' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
 <script>
 	var _hmt = _hmt || [];
 	(function() {
@@ -57,5 +58,4 @@ const { title, description, image = '/og-bg.png' } = Astro.props;
 		s.parentNode.insertBefore(hm, s);
 	})();
 </script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
 <ViewTransitions />
