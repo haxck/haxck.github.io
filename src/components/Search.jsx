@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { searchClient } from '@algolia/client-search';
 import { InstantSearch, SearchBox, Hits, Highlight } from 'react-instantsearch';
-// Include only the reset
-import 'instantsearch.css/themes/reset.css';
-// or include the full Satellite theme
-import 'instantsearch.css/themes/satellite.css';
-const Client = searchClient('DNP8PAXCUO', 'f1b23dfb34a221977b044cd9146d10ca');
 
+import 'instantsearch.css/themes/reset.css';
+import 'instantsearch.css/themes/satellite.css';
+
+const Client = searchClient('DNP8PAXCUO', 'f1b23dfb34a221977b044cd9146d10ca');
 
 function Hit({ hit }) {
   return (

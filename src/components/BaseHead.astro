@@ -26,7 +26,7 @@ const { title, description, image = '/og-bg.png' } = Astro.props;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
-	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
 <!-- RSS Feed Discovery -->
 <link rel="alternate" type="application/rss+xml" title="haxck's blog" href={new URL("feed.xml", Astro.site)} />
 
@@ -57,4 +57,5 @@ const { title, description, image = '/og-bg.png' } = Astro.props;
 		s.parentNode.insertBefore(hm, s);
 	})();
 </script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
 <ViewTransitions />

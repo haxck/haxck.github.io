@@ -2,14 +2,13 @@
 import { SITE_TITLE, NAVS } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import DocSearch from "./DocSearch.astro";
 ---
 
 <header>
   <div class="nav-container">
     <div class="top-nav-wrap">
-      <a href="/" class="logo whitespace-nowrap text-gray-800">
-        {SITE_TITLE}
-      </a>
+      <DocSearch />
       <nav id="nav-menu">
         <button
           class="hamburger-menu focus-outline"
