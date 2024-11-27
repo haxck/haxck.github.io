@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh-cn"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" sizes="180x180" href="icon180.png"><meta name="generator" content="Astro v4.16.14"><!-- Canonical URL --><link rel="canonical" href="https://blog.haxck.com/posts/adding-algolia-search-to-an-astro-blog/"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"><!-- RSS Feed Discovery --><link rel="alternate" type="application/rss+xml" title="haxck's blog" href="https://blog.haxck.com/feed.xml"><!-- Primary Meta Tags --><title>给 Astro 博客添加 Algolia 搜索服务 | Haxck&#39;s blog</title><meta name="title" content="给 Astro 博客添加 Algolia 搜索服务"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.haxck.com/posts/adding-algolia-search-to-an-astro-blog/"><meta property="og:title" content="给 Astro 博客添加 Algolia 搜索服务"><meta property="og:description"><meta property="og:image" content="https://blog.haxck.com/og-bg.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.haxck.com/posts/adding-algolia-search-to-an-astro-blog/"><meta property="twitter:title" content="给 Astro 博客添加 Algolia 搜索服务"><meta property="twitter:description"><meta property="twitter:image" content="https://blog.haxck.com/og-bg.png"><script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><link rel="stylesheet" href="/_astro/changelog.ComksVcS.css">
+<link rel="stylesheet" href="/_astro/_slug_.UMUsSsqZ.css">
+<style>ul[data-astro-cid-obewoz47]{font-size:1rem;padding:0;list-style:none}a[data-astro-cid-obewoz47]{--pad-inline: .5rem;display:block;border-radius:.25rem;padding-block:.25rem;padding-inline:calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);line-height:1.25}a[data-astro-cid-obewoz47][aria-current=true]{color:var(--sl-color-text-accent)}@font-face{font-family:得意黑;font-weight:400;src:url(/SmileySans-Oblique.otf.woff2) format("woff2");font-display:swap}.title[data-astro-cid-bvzihdzo]{font-family:得意黑}
+</style><script type="module" src="/_astro/hoisted.B2iL9vn7.js"></script></head> <body class="bg-[url(/grid.svg)] inset-0 dark:bg-gray-600"> <header data-astro-cid-3ef6ksr2> <div class="nav-container" data-astro-cid-3ef6ksr2> <div class="top-nav-wrap" data-astro-cid-3ef6ksr2> <div id="docsearch"></div>  <script type="text/javascript">
+	docsearch({
+		appId: "HCTYF3QOV4",
+		apiKey: "99ed6486b902aa8a5473c672f84de39f",
+		indexName: "haxck",
+		container: "#docsearch",
+		placeholder: "搜索",
+		debug: false,
+	});
+	document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
+</script> <nav id="nav-menu" data-astro-cid-3ef6ksr2> <button class="hamburger-menu focus-outline" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items" data-astro-cid-3ef6ksr2> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="menu-icon" data-astro-cid-3ef6ksr2> <line x1="7" y1="12" x2="21" y2="12" class="line" data-astro-cid-3ef6ksr2></line> <line x1="3" y1="6" x2="21" y2="6" class="line" data-astro-cid-3ef6ksr2></line> <line x1="12" y1="18" x2="21" y2="18" class="line" data-astro-cid-3ef6ksr2></line> <line x1="18" y1="6" x2="6" y2="18" class="close" data-astro-cid-3ef6ksr2></line> <line x1="6" y1="6" x2="18" y2="18" class="close" data-astro-cid-3ef6ksr2></line> </svg> </button> <ul id="menu-items" class="hidden sm:flex" data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/" class="dark:text-gray-300 text-gray-800" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 首页 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/posts" class="dark:text-gray-300 text-gray-800" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 博客 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/quote" class="dark:text-gray-300 text-gray-800" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 收集 </a>  </li><li data-astro-cid-3ef6ksr2> <a href="/list" class="dark:text-gray-300 text-gray-800" data-astro-cid-3ef6ksr2 data-astro-cid-eimmu3lg> 清单 </a>  </li> <li data-astro-cid-3ef6ksr2> <div class="theme-switch-wrapper mt-1 sm:ml-0 lg:ml-2" data-astro-transition-persist="astro-7dcwydj3-1"> <label class="theme-switch" for="checkbox"> <input type="checkbox" id="checkbox"> <div class="slider"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </div> </label> </div> <script>
+  // Get the theme toggle input
+  const themeToggle = document.querySelector(
+    '.theme-switch input[type="checkbox"]',
+  );
+
+  // Get the current theme from local storage
+  const currentTheme = localStorage.getItem("theme");
+
+  // If the current local storage item can be found
+  if (currentTheme) {
+    // Set the body data-theme attribute to match the local storage item
+    document.documentElement.setAttribute("class", currentTheme);
+
+    // If the current theme is dark, check the theme toggle
+    if (currentTheme === "dark") {
+      themeToggle.checked = true;
+    }
+  }
+
+  function switchTheme() {
+    if (themeToggle.checked) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  // Add an event listener to the theme toggle, which will switch the theme
+  themeToggle.addEventListener("change", switchTheme, false);
+  document.addEventListener("astro:after-swap", switchTheme);
+</script>  </li> </ul> </nav> </div> </div> </header>   <main class="lg:max-w-screen-lg m-auto">  <div class="grid grid-cols-4" data-astro-cid-rhfzindj> <div class="p-3 col-span-4 lg:col-span-1" data-astro-cid-rhfzindj> <div data-astro-cid-v2cbyr3p> <div class="text-center lg:text-right" data-astro-cid-v2cbyr3p> <h1 class="font-bold text-3xl title tracking-[3px] dark:text-gray-200" data-astro-cid-v2cbyr3p>
+Haxck
+</h1> <p class="text-gray-500 dark:text-gray-400" data-astro-cid-v2cbyr3p>Creater & Developer</p> </div> <div class="py-4" data-astro-cid-v2cbyr3p></div>  <aside class="relative max-lg:hidden text-right min-h-[100vh]" data-astro-cid-bvzihdzo> <div class="sticky top-6" data-astro-cid-bvzihdzo> <ul data-astro-cid-obewoz47 style="--depth: 0;"><li data-astro-cid-obewoz47 style="--depth: 0;"><p class="font-bold" data-astro-cid-obewoz47 style="--depth: 0;">文章目录</p></li><li data-astro-cid-obewoz47 style="--depth: 0;"><a href="#slug" class="text-slate-500 hover:text-slate-800" data-astro-cid-obewoz47 style="--depth: 0;"></a></li><li data-astro-cid-obewoz47 style="--depth: 0;"><a href="#手工搓代码" class="text-slate-500 hover:text-slate-800" data-astro-cid-obewoz47 style="--depth: 0;">手工搓代码</a></li><li data-astro-cid-obewoz47 style="--depth: 0;"><a href="#docsearch" class="text-slate-500 hover:text-slate-800" data-astro-cid-obewoz47 style="--depth: 0;">DocSearch</a></li></ul> <div class="mt-4 rounded-md bg-slate-50 w-2/3 float-right"> <img class="p-4" src="/qrcode_for_gh_8508d0791e2d_258.jpg" width="100%" alt="X工厂 公众号二维码"> <p class=" text-sm text-slate-600 text-center mb-4">扫描二维码关注公众号</p> </div> </div> </aside>  </div>  </div> <div class="mx-3 col-span-4 lg:col-span-3" data-astro-cid-rhfzindj> <div class="max-sm:p-4 p-8 bg-white dark:bg-gray-800 shadow-xl" data-astro-cid-rhfzindj> <div data-astro-cid-bvzihdzo> <article class="prose min-w-full" data-astro-cid-bvzihdzo>  <h1 class="mb-0 dark:text-slate-300 title" data-astro-cid-bvzihdzo> 给 Astro 博客添加 Algolia 搜索服务 </h1> <div class="text-slate-500 dark:text-slate-400 text-sm title" data-astro-cid-bvzihdzo> <p class="text-slate-600 dark:text-slate-300 title" data-astro-cid-bvzihdzo> <span id="busuanzi_container_page_pv" style="display: none;" data-astro-cid-bvzihdzo> <span id="busuanzi_value_page_pv" data-astro-cid-bvzihdzo></span>次阅读 &nbsp;
+</span> <span class="mr-1 p-1" data-astro-cid-bvzihdzo>#随笔</span> <span data-astro-cid-bvzihdzo>
+· &nbsp; 文章发表于 <time datetime="2024-11-27T15:44:42.000Z"> 2024年11月27日 </time>  </span> </p> </div> <div class="mt-8 min-w-full leading-7" data-astro-cid-bvzihdzo>   <p>翻看文档，其中大部分搜索都由 Algolia 提供，就想着使用它来为我的博客提供搜索。折腾了一番，才发现有更简单的方式。</p>
+<h2 id="手工搓代码">手工搓代码</h2>
+<h3 id="整理思路">整理思路</h3>
+<p>根据 Algolia 文档的指引，安装依赖，发送索引数据，试用 API，看起来很简单。
+- 第一步把博客的文章生成一份 JSON 索引数据
+- Astro 每次构建完成后，将数据发送给 Algolia 重新索引
+- 创建搜索框及搜索结果页面
+将博客文章生成一份 JSON，在 Astro 的 page 目录中创建 data.json.js。跟生成 RSS 差不多，我直接用 RSS 的文件改了一下。具体可参考<a href="https://docs.astro.build/zh-cn/guides/endpoints/">文档</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">  import</span><span style="color:#E1E4E8"> { getCollection } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'astro:content'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  export</span><span style="color:#F97583"> async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> GET</span><span style="color:#E1E4E8">({ </span><span style="color:#FFAB70">params</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">request</span><span style="color:#E1E4E8"> }) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> posts</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> getCollection</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'blog'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> Response.</span><span style="color:#B392F0">json</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      posts.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">post</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> ({</span></span>
+<span class="line"><span style="color:#F97583">        ...</span><span style="color:#E1E4E8">post.data,</span></span>
+<span class="line"><span style="color:#E1E4E8">        content: post.body,</span></span>
+<span class="line"><span style="color:#E1E4E8">        link: </span><span style="color:#9ECBFF">`/posts/${</span><span style="color:#E1E4E8">post</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">slug</span><span style="color:#9ECBFF">}/`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      })),</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }	  </span></span>
+<span class="line"></span></code></pre>
+<p>最后就会在 build 时，在根目录下生成一个 <code>data.json</code> 文件，有了这个文件，我们就可以生成搜索索引了。直接复制 Algolia 提示安装依赖即可。</p>
+<p>以后写了新文章，自动往 Algolia 上传一下，不就更省事了，那怎么自动化呢？翻看 Astro 文档，在集成 API 中有生命周期的方法。按照集成的写法就能在 build 之后，把 JSON 上传到 Algolia 一份。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { searchClient } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@algolia/client-search'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { readFile } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "node:fs/promises"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> client</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> searchClient</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">ALGOLIA_APPID</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">ALGOLIA_ADMIN_KEY</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> processRecords</span><span style="color:#F97583"> =</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> client.</span><span style="color:#B392F0">saveObjects</span><span style="color:#E1E4E8">({ indexName: </span><span style="color:#9ECBFF">'blog'</span><span style="color:#E1E4E8">, objects: data });</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> algolia</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#B392F0"> AstroIntegration</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    name: </span><span style="color:#9ECBFF">'algolia'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    hooks: {</span></span>
+<span class="line"><span style="color:#9ECBFF">      'astro:build:done'</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">logger</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">dir</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> path</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> URL</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'./algolia.json'</span><span style="color:#E1E4E8">, dir);</span></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> readFile</span><span style="color:#E1E4E8">(path);</span></span>
+<span class="line"><span style="color:#F97583">          if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">data) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'No data found in algolia.json'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">          }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> res</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">parse</span><span style="color:#E1E4E8">(data.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">          if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">Array.</span><span style="color:#B392F0">isArray</span><span style="color:#E1E4E8">(res)) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Invalid data format: expected an array'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">          }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">          await</span><span style="color:#B392F0"> processRecords</span><span style="color:#E1E4E8">(res)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">              logger.</span><span style="color:#B392F0">info</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Records successfully processed'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            })</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">catch</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">err</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> logger.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Error processing records:${err}'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#E1E4E8">          logger.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'An error occurred: ${error}'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>另外还需要在 <code>astro.config.mjs</code> 中引入这个集成文件</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> algolia </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "./src/utils/algolia.ts"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  integrations: [</span><span style="color:#F97583">...</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">algolia</span><span style="color:#E1E4E8">()],</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<p>至此，准备工作就算完成了。下一步就是在网页中怎么调用搜索，返回正确结果。</p>
+<p>按说应该很简单，因为其它网站都是统一的界面，所以调用就行了，翻了很多遍文档，都是在从零构建界面。得，就先这么来吧。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { useState } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { searchClient } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@algolia/client-search'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { InstantSearch, SearchBox, Hits, Highlight } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react-instantsearch'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// Include only the reset</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'instantsearch.css/themes/reset.css'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">// or include the full Satellite theme</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> 'instantsearch.css/themes/satellite.css'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> Client</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> searchClient</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">APPID</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">APPKEY</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 结果列表</span></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Hit</span><span style="color:#E1E4E8">({ </span><span style="color:#FFAB70">hit</span><span style="color:#E1E4E8"> }) {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">div</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'truncate'</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">a</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'text-black text-wrap'</span><span style="color:#B392F0"> href</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{hit.link}></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">h1</span><span style="color:#B392F0"> className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">'text-wrap'</span><span style="color:#E1E4E8">>{hit.title}&#x3C;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">Highlight</span><span style="color:#B392F0"> attribute</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"content"</span><span style="color:#B392F0"> hit</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{hit} </span><span style="color:#B392F0">className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">' truncate'</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;/</span><span style="color:#85E89D">a</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">query</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setQuery</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#B392F0"> handleSearchChange</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">query</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">search</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (query </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      setQuery</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">      search</span><span style="color:#E1E4E8">(query)</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      setQuery</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#79B8FF">InstantSearch</span><span style="color:#B392F0"> searchClient</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{Client} </span><span style="color:#B392F0">indexName</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"blog"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      // 搜索框</span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#79B8FF">SearchBox</span><span style="color:#B392F0"> queryHook</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{handleSearchChange} /></span></span>
+<span class="line"><span style="color:#E1E4E8">      {query </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#79B8FF">Hits</span></span>
+<span class="line"><span style="color:#B392F0">          hitComponent</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{Hit} /></span></span>
+<span class="line"><span style="color:#E1E4E8">      )}</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#79B8FF">InstantSearch</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>至此，博客就有了搜索。Algolia 的功能远不止如此，我只是用到了最基本的搜索。如果你对结果有更精细的要求，它也能满足。就当我还在琢磨如何设计界面的时候，突然找到了 <a href="https://docsearch.algolia.com/">DocSearch</a>，这个让静态博客、文档网站都能集成搜索的服务。</p>
+<h2 id="docsearch">DocSearch</h2>
+<p>使用 DocSearch 不像 Algolia 那样直接注册就能用，而是先申请再使用，提交<a href="https://docsearch.algolia.com/apply/">申请</a>后会收到邮件。按照邮件提示，添加相应的代码即可。</p>
+<p>绕了一圈，终于找见了我想要的，简单，快捷。看到网上关于 Astro 接入 Algolia 的内容很少，希望这篇踩坑文章能对你有些帮助。</p>  </div> <div class="flex items-center justify-center flex-col"> <p class="my-0.5">· · ·</p> <div class="tracking-wide text-base text-gray-600">
+本站内容可随意转载，不需要注明作者，就说是你写的！
+</div> </div> </article> </div> </div> </div> </div>  </main> <footer class="mt-8 p-8 text-base text-center text-md dark:text-slate-400"> <div> <a href="/changelog" data-astro-cid-eimmu3lg> 更新日志 </a>  </div>
+&copy;2018 - 2024 haxck.com
+</footer> </body></html>  <script defer src="https://cn.vercount.one/js"></script> 
