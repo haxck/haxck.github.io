@@ -29,7 +29,7 @@ const blogsByYear = {};
 							{blogsByYear[year].map((post) => (
 								<a
 									class="text-gray-900  dark:text-slate-100"
-									href={`/posts/${post.slug}/`}
+									href={`/posts/${post.id}/`}
 								>
 									<li class="p-4 dark:bg-slate-600 bg-white shadow-lg rounded-lg hover:shadow-xl hover:scale-105 transition ease-in-out ">
 										{post.data.title}

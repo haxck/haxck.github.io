@@ -4,7 +4,7 @@
 import { SITE_TITLE } from '../consts';
 import '../styles/global.css';
 import '../styles/heti.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 export interface Props {
 	title: string;
 	description: string;
@@ -58,4 +58,4 @@ const { title, description, image = '/og-bg.png' } = Astro.props;
 		s.parentNode.insertBefore(hm, s);
 	})();
 </script>
-<ViewTransitions />
+<ClientRouter />
