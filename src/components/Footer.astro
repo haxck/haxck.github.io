@@ -3,12 +3,27 @@ const today = new Date();
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<footer class="mt-8 p-8 text-base text-center text-md dark:text-slate-400">
-	<div>
-		<HeaderLink href="/changelog">更新日志</HeaderLink>
-	</div>
-	&copy;2018 - {today.getFullYear()} haxck.com
+<footer class="w-full py-8">
+  <div class="py-4 text-sm ">
+    <div class="container px-6 mx-auto">
+      <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+        <div class="col-span-2 md:col-span-4 lg:col-span-6">&copy;2018 - {today.getFullYear()} haxck.com</div>
+        <nav aria-labelledby="footer-social-links-light" class="col-span-2 text-right md:col-span-4 lg:col-span-6">
+          <h2 class="sr-only" id="footer-social-links-light">Social Media Links</h2>
+          <ul class="flex items-center justify-end gap-4">
+            <li>
+							<HeaderLink href="/changelog">更新日志</HeaderLink>
+            </li>
+            <li>
+							<HeaderLink href="/friends">友链</HeaderLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </footer>
+
 <script type="text/javascript">
 	docsearch({
 		appId: "HCTYF3QOV4",
