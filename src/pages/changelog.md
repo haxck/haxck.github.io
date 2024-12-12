@@ -7,6 +7,8 @@ layout: ../layouts/MdPage.astro
 
 
 # 更新日志
+### <time>2024-11-27</time>
+- 增加搜索
 ### <time>2024-05-16</time>
 - 文章目录
 ### <time>2024-05-12</time>
@@ -17,7 +19,6 @@ layout: ../layouts/MdPage.astro
 - 添加更新日志
 
 # 构想日志
-- 增加搜索框
 - 文章评论互动
 - AI 总结
 - 设计网站图标

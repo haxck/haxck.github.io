@@ -16,8 +16,10 @@ const isActive = href === pathname || href === pathname.replace(/^\/([^\/]+)\/.*
 	a {
 		display: inline-block;
 		text-decoration: none;
+		@apply px-2;
 	}
 	a.active {
 		@apply bg-slate-100 shadow-sm dark:bg-slate-800
 	}
+
 </style>

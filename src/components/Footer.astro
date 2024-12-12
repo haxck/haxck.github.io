@@ -4,18 +4,33 @@ import HeaderLink from "./HeaderLink.astro";
 ---
 
 <footer class="w-full py-8">
-  <div class="py-4 text-sm ">
+  <div class="py-4 text-sm">
     <div class="container px-6 mx-auto">
       <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
-        <div class="col-span-2 md:col-span-4 lg:col-span-6">&copy;2018 - {today.getFullYear()} haxck.com</div>
-        <nav aria-labelledby="footer-social-links-light" class="col-span-2 text-right md:col-span-4 lg:col-span-6">
-          <h2 class="sr-only" id="footer-social-links-light">Social Media Links</h2>
+        <div class="col-span-2 md:col-span-4 lg:col-span-6">
+          &copy;2018 - {today.getFullYear()} haxck.com
+        </div>
+        <nav
+          aria-labelledby="footer-social-links-light"
+          class="col-span-2 text-right md:col-span-4 lg:col-span-6"
+        >
+          <h2 class="sr-only" id="footer-social-links-light">
+            Social Media Links
+          </h2>
           <ul class="flex items-center justify-end gap-4">
             <li>
-							<HeaderLink href="/changelog">更新日志</HeaderLink>
+              <HeaderLink href="/friends" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>友链</HeaderLink>
             </li>
             <li>
-							<HeaderLink href="/friends">友链</HeaderLink>
+              <a href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"} target="_blank"
+                >状态</a
+              >
+            </li>
+            <li>
+              <HeaderLink href="/changelog" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>更新</HeaderLink>
+            </li>
+            <li>
+              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>RSS</HeaderLink>
             </li>
           </ul>
         </nav>
@@ -25,13 +40,13 @@ import HeaderLink from "./HeaderLink.astro";
 </footer>
 
 <script type="text/javascript">
-	docsearch({
-		appId: "HCTYF3QOV4",
-		apiKey: "99ed6486b902aa8a5473c672f84de39f",
-		indexName: "haxck",
-		container: "#docsearch",
-		placeholder: "搜索",
-		debug: false,
-	});
-	document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
+  docsearch({
+    appId: "HCTYF3QOV4",
+    apiKey: "99ed6486b902aa8a5473c672f84de39f",
+    indexName: "haxck",
+    container: "#docsearch",
+    placeholder: "搜索",
+    debug: false,
+  });
+  document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
 </script>
