@@ -13,11 +13,13 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 
 <IndexPage title={title}>
 	<About slot="left">
-		<aside class="relative max-lg:hidden text-right min-h-[100vh]">
-			<div class="sticky top-6">
-				<TableOfContents {...Astro.props} />
-				<MpCard></MpCard>
-			</div>
+		<aside class="max-lg:hidden text-right">
+			{toc.length > 1 && (
+				<div>
+					<TableOfContents toc={toc} />
+					<MpCard></MpCard>
+				</div>
+			)}
 		</aside>
 	</About>
 	<div slot="right">
