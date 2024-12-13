@@ -1,6 +1,3 @@
-<head>
-	<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" is:inline></script>
-</head>
 <div id="docsearch"></div>
 
 <style is:global>
@@ -8,7 +5,8 @@
 		width: max-content;
 	}
 </style>
-<script type="text/javascript">
+<script>
+document.addEventListener('astro:page-load',function(){
 	docsearch({
 		appId: "HCTYF3QOV4",
 		apiKey: "99ed6486b902aa8a5473c672f84de39f",
@@ -17,5 +15,6 @@
 		placeholder: "搜索",
 		debug: false,
 	});
-	document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
+
+})
 </script>
