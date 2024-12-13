@@ -6,6 +6,7 @@ import IndexPage from "./IndexPage.astro";
 import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
+import { Icon } from 'astro-icon/components'
 
 const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	Astro.props;
@@ -33,13 +34,16 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 				<p class="text-slate-600 title">
 
 					<span id="busuanzi_container_page_pv" style="display: none;">
-						<span id="busuanzi_value_page_pv"></span>次阅读 &nbsp;
+						<span id="busuanzi_value_page_pv"></span>
+						<Icon name="mdi:account-view" class:list={"inline-block"} />
+						
+						 &nbsp;
 					</span>
 
-					{tags && tags.map((items) => <span class="mr-1 p-1">#{items}</span>)}
+					{tags && tags.map((items) => <span class="mr-1 p-1">{items}</span>)}
 
 				<span>
-					· &nbsp; 文章发表于 <FormattedDate date={pubDate} />
+					· &nbsp; <Icon name="mdi:clipboard-text-date" class:list={"inline-block"} /> <FormattedDate date={pubDate} />
 					{
 						updatedDate && (
 							<span class="ml-2">
