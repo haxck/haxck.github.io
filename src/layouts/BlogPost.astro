@@ -7,6 +7,7 @@ import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
 import { Icon } from 'astro-icon/components'
+import AI from "../components/AI.astro";
 
 const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	Astro.props;
@@ -55,6 +56,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 				</span>
 			</p>
 			</div>
+			{ai && <AI ai={ai} />}
 			<div class="mt-8 min-w-full leading-7">
 				<slot />
 			</div>

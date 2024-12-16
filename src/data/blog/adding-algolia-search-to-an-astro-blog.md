@@ -1,7 +1,8 @@
 ---
 title: 给 Astro 博客添加 Algolia 搜索服务
-description: none
+description: 使用 Algolia 为 Astro 博客集成搜索的全过程
 pubDate: 2024-11-27 15:44:42
+ai: 这篇文章介绍了为 Astro 博客集成搜索的两种方法：手工使用 Algolia 实现和通过 DocSearch 快速集成。手工实现需要生成 JSON 索引、上传数据并设计界面，而 DocSearch 更简单快捷，适合文档或博客站点。最终推荐使用 DocSearch，减少开发维护工作量。
 tags: ["随笔"]
 ---
 
@@ -146,5 +147,6 @@ export default function() {
 使用 DocSearch 不像 Algolia 那样直接注册就能用，而是先申请再使用，提交[申请](https://docsearch.algolia.com/apply/)后会收到邮件。按照邮件提示，添加相应的代码即可。
 
 绕了一圈，终于找见了我想要的，简单，快捷。看到网上关于 Astro 接入 Algolia 的内容很少，希望这篇踩坑文章能对你有些帮助。
+
 
 

@@ -1,0 +1,17 @@
+---
+import { Icon } from 'astro-icon/components'
+const { ai } = Astro.props
+---
+
+<!-- Component: Outline accordion with icons -->
+<section class="w-full bg-white border divide-y rounded divide-slate-200 border-slate-200">
+  <details class="p-4 group">
+    <summary class="[&::-webkit-details-marker]:hidden relative flex gap-4 pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900 ">
+      <Icon name={"mdi:stars"} class:list={"w-6 h-6"}/>
+      AI Summary
+    </summary>
+    <p class=" text-slate-500">
+      {ai}
+    </p>
+  </details>
+</section>
