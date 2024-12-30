@@ -10,7 +10,7 @@ layout: ../layouts/MdPage.astro
 - ~~Write blog 写博客~~
 - ~~Driver's license 考取驾照~~
 - Have business 做生意
-- Go to a music festival 去一次音乐节
+- ~~Go to a music festival 去一次音乐节~~ 2024-12-29
 - Learn to ski 滑雪
 - Make a game 做游戏
 - Write a book 写书
