@@ -17,14 +17,13 @@ import HeaderLink from "./HeaderLink.astro";
           <h2 class="sr-only" id="footer-site-links">
             Site Links
           </h2>
-          <ul class="flex items-center justify-end gap-4">
+          <ul class="flex items-center justify-end gap-2">
             <li>
               <HeaderLink href="/friends" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>友链</HeaderLink>
             </li>
             <li>
-              <a href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"} target="_blank"
-                >状态</a
-              >
+              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"} target="_blank"
+                >状态</HeaderLink>
             </li>
             <li>
               <HeaderLink href="/changelog" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>更新</HeaderLink>
