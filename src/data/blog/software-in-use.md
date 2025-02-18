@@ -12,7 +12,7 @@ tags: ["随笔"]
 
 - SSH 工具
 	- [Tabby](https://tabby.sh/)
-      - 之前一直在用 Microsoft Terminal，但时间一长就容易掉线，换成了这个没遇到过遇到过 
+      - 之前一直在用 Microsoft Terminal，但时间一长就容易掉线，换成 Tabby 再也没断过线。
 - 笔记
   - Logseq
     - 没有任何心智负担，打开了直接写，基本上就是我后台常驻应用
