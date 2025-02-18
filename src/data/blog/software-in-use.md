@@ -2,6 +2,7 @@
 title: 我的电脑里装了啥
 description: 谈谈我在用的软件
 pubDate: 2024-11-21 15:22:16
+update: 2025-2-18 15:07:18
 tags: ["随笔"]
 ---
 
@@ -11,8 +12,10 @@ tags: ["随笔"]
 
 - SSH 工具
 	- [Tabby](https://tabby.sh/)
+      - 之前一直在用 Microsoft Terminal，但时间一长就容易掉线，换成了这个没遇到过遇到过 
 - 笔记
   - Logseq
+    - 没有任何心智负担，打开了直接写，基本上就是我后台常驻应用
   - Obsidian
 - 代码编辑器
   - VSCode	
@@ -29,6 +32,9 @@ tags: ["随笔"]
   - Koodo Reader
 - 文件搜索
   - Everything
+- 效率
+  - [PowerToys](https://github.com/microsoft/PowerToys)
+    - 微软出品的高阶玩家工具集，有快速启动器，还能开启 mac 上文件夹中预览文件的功能。
 # 浏览器插件
 - AdBlock（广告拦截）
 - 篡改猴 Tampermonkey
