@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-cn"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" sizes="180x180" href="/icon180.png"><meta name="generator" content="Astro v5.3.0"><!-- Canonical URL --><link rel="canonical" href="https://blog.haxck.com/posts/two-tools/"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"><!-- RSS Feed Discovery --><link rel="alternate" type="application/rss+xml" title="haxck's blog" href="https://blog.haxck.com/feed.xml"><!-- Primary Meta Tags --><title>两个工具 | Haxck&#39;s blog</title><meta name="title" content="两个工具"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.haxck.com/posts/two-tools/"><meta property="og:title" content="两个工具"><meta property="og:description"><meta property="og:image" content="https://blog.haxck.com/og-bg.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.haxck.com/posts/two-tools/"><meta property="twitter:title" content="两个工具"><meta property="twitter:description"><meta property="twitter:image" content="https://blog.haxck.com/og-bg.png"><script type="module">(function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f63c137963aa76c31b31b1e46b8aa1be";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script><script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.BScVxmeO.js"></script><link rel="stylesheet" href="/_astro/changelog.Ce8nn0TN.css">
+<link rel="stylesheet" href="/_astro/_id_.DrEumjnp.css">
+<style>ul[data-astro-cid-obewoz47]{font-size:1rem;padding:0;list-style:none}a[data-astro-cid-obewoz47]{--pad-inline: .5rem;display:block;border-radius:.25rem;padding-block:.25rem;padding-inline:calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);line-height:1.25}a[data-astro-cid-obewoz47][aria-current=true]{color:var(--sl-color-text-accent)}@font-face{font-family:得意黑;font-weight:400;src:url(/SmileySans-Oblique.otf.woff2) format("woff2");font-display:swap}.title[data-astro-cid-bvzihdzo]{font-family:得意黑}
+</style></head> <body class="bg-[url(/grid.svg)] inset-0 dark:bg-gray-600"> <header> <div class="nav-container flex items-center justify-center"> <div class="max-w-screen-lg w-full p-4"> <nav class="flex items-center flex-row-reverse justify-between"> <div class="flex items-center gap-2"> <div id="docsearch"></div>  <script type="module">document.addEventListener("astro:page-load",function(){docsearch({appId:"HCTYF3QOV4",apiKey:"99ed6486b902aa8a5473c672f84de39f",indexName:"haxck",container:"#docsearch",placeholder:"搜索",debug:!1})});</script> <div class="theme-switch-wrapper mt-1 sm:ml-0 lg:ml-2" data-astro-transition-persist="astro-7dcwydj3-1"> <label class="theme-switch" for="checkbox"> <input type="checkbox" id="checkbox"> <div class="slider"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#FCD53F" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </div> </label> </div> <script>
+  // Get the theme toggle input
+  const themeToggle = document.querySelector(
+    '.theme-switch input[type="checkbox"]',
+  );
+
+  // Get the current theme from local storage
+  const currentTheme = localStorage.getItem("theme");
+
+  // If the current local storage item can be found
+  if (currentTheme) {
+    // Set the body data-theme attribute to match the local storage item
+    document.documentElement.setAttribute("class", currentTheme);
+
+    // If the current theme is dark, check the theme toggle
+    if (currentTheme === "dark") {
+      themeToggle.checked = true;
+    }
+  }
+
+  function switchTheme() {
+    if (themeToggle.checked) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  // Add an event listener to the theme toggle, which will switch the theme
+  themeToggle.addEventListener("change", switchTheme, false);
+  document.addEventListener("astro:after-swap", switchTheme);
+</script>  </div> <ul class="flex"> <li> <a href="/posts" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 active" data-astro-cid-eimmu3lg> 博客 </a>  </li><li> <a href="/quote" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" data-astro-cid-eimmu3lg> 收集 </a>  </li><li> <a href="/list" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" data-astro-cid-eimmu3lg> 清单 </a>  </li> </ul> </nav> </div> </div> </header> <main class="lg:max-w-screen-lg m-auto">  <div class="grid grid-cols-4" data-astro-cid-rhfzindj> <div class="p-3 col-span-4 lg:col-span-1" data-astro-cid-rhfzindj> <div class="h-full" data-astro-cid-v2cbyr3p> <div class="text-center lg:text-right" data-astro-cid-v2cbyr3p> <h1 class="font-bold text-3xl title tracking-[3px] dark:text-gray-200" data-astro-cid-v2cbyr3p>
+Haxck
+</h1> <p class="text-gray-500 dark:text-gray-400" data-astro-cid-v2cbyr3p>Creater & Developer</p> </div> <div class="py-4 sticky top-6" data-astro-cid-v2cbyr3p>  <aside class="max-lg:hidden text-right" data-astro-cid-bvzihdzo>  </aside>  </div> </div>  </div> <div class="mx-3 col-span-4 lg:col-span-3" data-astro-cid-rhfzindj> <div class="max-sm:p-4 p-8 bg-white dark:bg-gray-100 shadow-xl rounded-md" data-astro-cid-rhfzindj> <div data-astro-cid-bvzihdzo> <article class="prose min-w-full" data-astro-cid-bvzihdzo>  <h1 class="mb-0 title" data-astro-cid-bvzihdzo> 两个工具 </h1> <div class="text-slate-500 text-sm title" data-astro-cid-bvzihdzo> <p class="text-slate-600 title" data-astro-cid-bvzihdzo> <span id="busuanzi_container_page_pv" style="display: none;" data-astro-cid-bvzihdzo> <span id="busuanzi_value_page_pv" data-astro-cid-bvzihdzo></span> <svg width="1em" height="1em" data-astro-cid-bvzihdzo="true" class="inline-block" data-icon="mdi:account-view">   <symbol id="ai:mdi:account-view" viewBox="0 0 24 24"><path fill="currentColor" d="M6 8c0-2.21 1.79-4 4-4s4 1.79 4 4s-1.79 4-4 4s-4-1.79-4-4m3.14 11.75L8.85 19l.29-.75c.7-1.75 1.94-3.11 3.47-4.03c-.82-.14-1.69-.22-2.61-.22c-4.42 0-8 1.79-8 4v2h7.27c-.04-.09-.09-.17-.13-.25M17 18c-.56 0-1 .44-1 1s.44 1 1 1s1-.44 1-1s-.44-1-1-1m6 1c-.94 2.34-3.27 4-6 4s-5.06-1.66-6-4c.94-2.34 3.27-4 6-4s5.06 1.66 6 4m-3.5 0a2.5 2.5 0 0 0-5 0a2.5 2.5 0 0 0 5 0"/></symbol><use href="#ai:mdi:account-view"></use>  </svg>
+&nbsp;
+</span> <span class="mr-1 p-1" data-astro-cid-bvzihdzo>随笔</span> <span data-astro-cid-bvzihdzo>
+· &nbsp; <svg width="1em" height="1em" data-astro-cid-bvzihdzo="true" class="inline-block" data-icon="mdi:clipboard-text-date">   <symbol id="ai:mdi:clipboard-text-date" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.11V5a2 2 0 0 0-2-2h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h6.11c1.26 1.24 2.98 2 4.89 2c3.87 0 7-3.13 7-7c0-1.91-.76-3.63-2-4.89M12 3c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1M6 7h12v2H6zm3.08 10H6v-2h3.08c-.05.33-.08.66-.08 1s.03.67.08 1M6 13v-2h5.11c-.61.57-1.07 1.25-1.43 2zm10 8c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m.5-4.75l2.86 1.69l-.75 1.22L15 17v-5h1.5z"/></symbol><use href="#ai:mdi:clipboard-text-date"></use>  </svg> <time datetime="2025-02-28T15:19:55.000Z"> 2025年2月28日 </time>  </span> </p> </div> <!-- Component: Outline accordion with icons --><section class="w-full bg-white border divide-y rounded divide-slate-200 border-slate-200"> <details class="p-4 group"> <summary class="[&::-webkit-details-marker]:hidden relative flex gap-4 pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900 "> <svg width="1em" height="1em" class="w-6 h-6" data-icon="mdi:stars">   <symbol id="ai:mdi:stars" viewBox="0 0 24 24"><path fill="currentColor" d="m19 1l-1.26 2.75L15 5l2.74 1.26L19 9l1.25-2.74L23 5l-2.75-1.25M9 4L6.5 9.5L1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5M19 15l-1.26 2.74L15 19l2.74 1.25L19 23l1.25-2.75L23 19l-2.75-1.26"/></symbol><use href="#ai:mdi:stars"></use>  </svg>
+AI Summary
+</summary> <p class=" text-slate-500"> 文章主要讲述了作者利用 GPT 协助开发了两个小工具：一个是帮助同事从图片文件中提取字符并重命名文件，另一个是定时获取特定用户微博。同时，作者也表达了对 AI 能力的看法以及对未来可能面临的“无用武之地”的思考。 </p> </details> </section> <div class="mt-8 min-w-full leading-7" data-astro-cid-bvzihdzo>  <p>看到同事在修改文件名，密密麻麻的文件在她熟练的操作下，很快就完成了一大半。我说这身手，改这点儿文件还真用不了几分钟。她说这只是一天的文件，现在攒了两月了，慢慢改着吧。她一边改我一边观察，经过一番了解下，我说能帮你自动化一部分内容，能省一步算一步呗。</p>
+<p>随后打开编辑器，AI 辅助我完成了 OCR 改名小工具。每个文件都是图片文件，从图片中读取字符，然后重命名这个文件。听起来很简单是吧？但是为了提升成功率，想了不少办法。比如把可能识别错的字符都包含在正则中，又比如说图片裁切只保留需要识别的区域等等。后续为了方便她使用，用 GUI 的方式操作软件，打包成 exe 文件。</p>
+<p>也许 AI 不能帮我们做所有事，但在我的眼中，几乎可以做所有事。前段时间还写了定时获取特定用户微博的小工具，也是在 AI 的帮助下实现的。那天，我在微博中写下，“老子现在就有很多枪，可是老子连个敌人都没有。”这是电影《山河故人》里的台词，也是往后需要思考的问题。</p>
+<p>哦，对了，<a href="https://github.com/haxck/weibo-monitor">微博工具</a>放 Github 了。这个改名的小工具就算了，太个人化，你应该也用不上。</p>  </div> <div class="flex items-center justify-center flex-col"> <p class="my-0.5">· · ·</p> <div class="tracking-wide text-base text-gray-600">
+本站内容可随意转载，不需要注明作者，就说是你写的！
+</div> </div> </article> </div> </div> </div> </div>  </main> <footer class="w-full py-8"> <div class="py-4 text-sm"> <div class="container px-6 mx-auto"> <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12 "> <div class="col-span-2 md:col-span-4 lg:col-span-6 text-slate-800 p-1 px-2 rounded-md dark:text-slate-200">
+&copy;2018 - 2025 haxck.com
+</div> <nav aria-labelledby="footer-site-links" class="col-span-2 text-right md:col-span-4 lg:col-span-6"> <h2 class="sr-only" id="footer-site-links">
+Site Links
+</h2> <ul class="flex items-center justify-end gap-2"> <li> <a href="/friends" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" data-astro-cid-eimmu3lg> 友链 </a>  </li> <li> <a href="https://status.haxck.com/status/haxck" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" target="_blank" data-astro-cid-eimmu3lg> 状态 </a>  </li> <li> <a href="/changelog" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" data-astro-cid-eimmu3lg> 更新 </a>  </li> <li> <a href="/feed.xml" class="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200" target="_blank" data-astro-cid-eimmu3lg> RSS </a>  </li> </ul> </nav> </div> </div> </div> </footer> <script type="text/javascript">
+  docsearch({
+    appId: "HCTYF3QOV4",
+    apiKey: "99ed6486b902aa8a5473c672f84de39f",
+    indexName: "haxck",
+    container: "#docsearch",
+    placeholder: "搜索",
+    debug: false,
+  });
+  document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
+</script> </body></html>  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> 
