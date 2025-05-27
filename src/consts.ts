@@ -5,7 +5,7 @@ export const SITE_TITLE = "Haxck's blog";
 export const SITE_DESCRIPTION = "Haxck's blog";
 
 export const NAVS = [
-    {"name":"博客","link":"/posts"},
+    {"name":"主页","link":"/"},
     {"name":"收集","link":"/quote"},
     {"name":"清单","link":"/list"},
 ]
