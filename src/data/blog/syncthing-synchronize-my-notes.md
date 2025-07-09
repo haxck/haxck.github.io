@@ -22,7 +22,11 @@ App Store 中先下载 Synctrain，我们先来把同步服务器添加进来，
 
 ## 其它
 ### Windows 下自动后台运行
-在运行中输入 `shell:startup` 新建一个快捷方式，把 Syncthing 地址后面加上`--no-console --no-browser`即可
+在运行中输入 `shell:startup` 打开启动文件夹，新建一个快捷方式，把 Syncthing 地址后面加上`--no-console --no-browser`即可。在 Win11 中由于默认使用的是终端程序，导致不能正常隐藏，解决办法是用计划任务运行一段 ps 脚本。
+```ps
+Start-Process -FilePath "D:\syncthing.exe" -ArgumentList "--no-console --no-browser" -WindowStyle Hidden
+```
+在计划任务中，用 PowerShell 打开这个脚本即可隐藏启动 Syncthing。
 
 ### 将服务器中的端口映射到本地
 VS Code 中的端口映射太方便开发了，同样的方法我们在不用改防火墙配置就能访问服务器管理网页，搜了一下，原来就是一条命令 `ssh -L (本地端口)8888:localhost:8384(服务器端口) server_user@server`
