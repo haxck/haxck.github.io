@@ -75,7 +75,9 @@ Haxck
 <p>现在服务器上有所有设备同步过来的文件，备份就不在本地做了，找 AI 写段自动提交 Github 的脚本，设个定时任务，一劳永逸。随着脚本越来越多，如何管理这些脚本成了问题，以后再琢磨这事。</p>
 <h2 id="其它">其它</h2>
 <h3 id="windows-下自动后台运行">Windows 下自动后台运行</h3>
-<p>在运行中输入 <code>shell:startup</code> 新建一个快捷方式，把 Syncthing 地址后面加上<code>--no-console --no-browser</code>即可</p>
+<p>在运行中输入 <code>shell:startup</code> 打开启动文件夹，新建一个快捷方式，把 Syncthing 地址后面加上<code>--no-console --no-browser</code>即可。在 Win11 中由于默认使用的是终端程序，导致不能正常隐藏，解决办法是用计划任务运行一段 ps 脚本。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ps"><code><span class="line"><span style="color:#79B8FF">Start-Process</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">FilePath </span><span style="color:#9ECBFF">"D:\syncthing.exe"</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">ArgumentList </span><span style="color:#9ECBFF">"--no-console --no-browser"</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">WindowStyle </span><span style="color:#F97583">Hidden</span></span></code></pre>
+<p>在计划任务中，用 PowerShell 打开这个脚本即可隐藏启动 Syncthing。</p>
 <h3 id="将服务器中的端口映射到本地">将服务器中的端口映射到本地</h3>
 <p>VS Code 中的端口映射太方便开发了，同样的方法我们在不用改防火墙配置就能访问服务器管理网页，搜了一下，原来就是一条命令 <code>ssh -L (本地端口)8888:localhost:8384(服务器端口) server_user@server</code></p>  </div> <div class="flex items-center justify-center flex-col"> <p class="my-0.5">· · ·</p> <div class="tracking-wide text-base text-gray-600">
 本站内容可随意转载，不需要注明作者，就说是你写的！
