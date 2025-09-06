@@ -2,6 +2,7 @@
 title: 自动部署 hexo 博客
 description: none
 pubDate: 2018-03-06 15:10:16
+tags: ['技术']
 ---
 
 去年将博客搬到了 Github，用的是 hexo 生成好的静态网页。此外还开了新分支来备份 hexo 源文件。每次写完文章后，hexo generate，hexo deploy 等一系列操作。

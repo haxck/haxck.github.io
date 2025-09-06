@@ -35,6 +35,8 @@ tags: ["随笔"]
 - 效率
   - [PowerToys](https://github.com/microsoft/PowerToys)
     - 微软出品的高阶玩家工具集，有快速启动器，还能开启 mac 上文件夹中预览文件的功能。
+  - PixPin
+  	- 功能强大的截图工具，能长截图，固定截图在桌面，甚至是录制屏幕。目前已替换微信截图。
 # 浏览器插件
 - AdBlock（广告拦截）
 - 篡改猴 Tampermonkey
