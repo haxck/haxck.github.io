@@ -1,0 +1,5 @@
+title: 文件登记
+tools: 
+  - coze
+  - 飞书表格
+description: 从 PDF 中提取标题, 并记录到飞书表格中

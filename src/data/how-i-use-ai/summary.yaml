@@ -1,0 +1,4 @@
+title: 总结博客文章以及生成 url slug
+tools:
+  - dify
+description: 在 Dify 中设置一个大模型工作流, 把文章传给 Dify API 返回文章总结和 slug.

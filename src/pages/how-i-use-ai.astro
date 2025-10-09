@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import IndexPage from "../layouts/IndexPage.astro";
+import About from "../components/About.astro";
+const entries = await getCollection("useai");
+console.log(entries);
+---
+
+<IndexPage title="How I use AI">
+    <About slot="left" />
+    <div slot="right">
+        <div class="flex flex-col gap-4">
+            <h1 class="text-3xl">我怎么使用AI</h1>
+
+            <ul class="flex flex-col gap-4">
+                {
+                    entries.map((entry) => (
+                        <li class="p-2 border rounded-md border-gray-300 py-4 border-dashed">
+                            <h2 class="text-xl py-2">{entry.data.title}</h2>
+                            <p>{entry.data.description}</p>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</IndexPage>

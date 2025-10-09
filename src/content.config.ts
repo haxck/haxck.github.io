@@ -23,4 +23,13 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const useai = defineCollection({
+	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/how-i-use-ai/" }),
+	// Type-check frontmatter using a schema
+	schema: z.object({
+		title: z.string(),
+		description: z.string()
+	}),
+});
+
+export const collections = { blog, useai };
