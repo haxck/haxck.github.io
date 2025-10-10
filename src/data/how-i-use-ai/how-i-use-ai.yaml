@@ -1,0 +1,11 @@
+tools:
+  - title: 总结博客文章以及生成 url slug
+    tools:
+      - Dify
+    description: 在 Dify 中设置一个大模型工作流，把文章传给 Dify API 返回文章总结和 slug.
+
+  - title: 文件登记
+    tools: 
+      - Coze扣子
+      - 飞书表格
+    description: 从 PDF 中提取标题，并记录到飞书表格中

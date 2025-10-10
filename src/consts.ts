@@ -8,4 +8,5 @@ export const NAVS = [
     {"name":"主页","link":"/"},
     {"name":"收集","link":"/quote"},
     {"name":"清单","link":"/list"},
+    {"name":"我如何用 AI","link":"/how-i-use-ai"},
 ]
