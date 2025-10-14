@@ -10,12 +10,12 @@ const entries = await getCollection("useai");
     <div slot="right">
         <div class="flex flex-col gap-2">
             <h1 class="text-3xl">我怎么使用AI</h1>
-            <p>记录一下在日常生活工作中，如何使用 AI 更好的</p>
+            <p>记录日常工作生活中，我如何使用 AI 来提高效率，希望能给你一些灵感。</p>
             <ul class="flex flex-row gap-2 flex-wrap">
                 {
                     entries[0].data.tools.map((entry) => (
                         <li class="lg:basis-[calc(50%-0.5rem)] basis-full p-4 border-2 border-white dark:border-gray-300 dark:hover:border-gray-200 rounded-md shadow-md hover:border-gray-300 hover:border-in-2">
-                            <h2 class="text-xl pb-2">{entry.title}</h2>
+                            <h2 class="text-lg pb-2">{entry.title}</h2>
                             <div class="flex gap-2 pb-2">
                             {entry.tools.map( (e) => (
                                 <span class="px-2.5 py-0.5 bg-green-50 text-xs rounded">{e}</span>
