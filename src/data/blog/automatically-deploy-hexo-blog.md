@@ -1,7 +1,8 @@
 ---
 title: 自动部署 hexo 博客
-description: none
+description: 通过 CircleCI 实现 Hexo 博客的自动部署
 pubDate: 2018-03-06 15:10:16
+ai: 文章讲述了如何通过 CircleCI 实现 Hexo 博客的自动部署。作者利用 CI 工具将传统的手动生成（hexo generate）和部署（hexo deploy）流程自动化，只需推送源码到 GitHub 仓库，即可触发持续集成流程，自动完成静态网页生成与部署，解决了重复操作效率低的问题。重点包括：1）使用 CircleCI 免费额度；2）配置自动化脚本；3）确保仓库写权限。
 tags: ['技术']
 ---
 

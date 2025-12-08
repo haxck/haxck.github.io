@@ -1,6 +1,6 @@
 ---
 title: "AI101: n8n 部署+MCP 日历工具"
-description: 简要描述一下
+description: n8n 部署并创建一个日历 MCP Server，最终通过 AI 工具调用全过程
 pubDate: 2025-11-07 16:40
 ai: 文章主要介绍了如何部署工作流平台 n8n，并利用 n8n 创建一个 MCP Server，最终与 AI 工具结合，实现通过自然语言调用工作流自动创建日程的案例。
 tags:
