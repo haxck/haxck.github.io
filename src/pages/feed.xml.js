@@ -14,9 +14,9 @@ export async function GET(context) {
 			"user_id": "41669588208292864"
 		}
 		,
-		items: posts.map((post) => ({
+		items: posts.sort((a,b) => b.data.pubDate - a.data.pubDate).map((post) => ({
 			...post.data,
-			link: `/posts/${post.slug}/`,
+			link: `/posts/${post.id}/`,
 		})),
 	},);
 }
