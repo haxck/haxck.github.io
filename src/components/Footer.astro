@@ -5,8 +5,8 @@ import HeaderLink from "./HeaderLink.astro";
 
 <footer class="w-full py-8">
   <div class="py-4 text-sm">
-    <div class="container px-6 mx-auto">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+    <div class="container px-4 mx-auto">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
         <nav
           aria-labelledby="footer-site-links"
           class="col-span-1"
@@ -14,19 +14,19 @@ import HeaderLink from "./HeaderLink.astro";
           <h2 class="sr-only" id="footer-site-links">
             Site Links
           </h2>
-          <ul class="flex items-center justify-center md:justify-start gap-4">
+          <ul class="flex flex-wrap items-center justify-center gap-2 md:justify-start">
             <li>
-              <HeaderLink href="/friends" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>友链</HeaderLink>
+              <HeaderLink href="/friends" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>友链</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"} target="_blank"
+              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"} target="_blank"
                 >状态</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="/changelog" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>更新</HeaderLink>
+              <HeaderLink href="/changelog" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>更新</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"}>RSS</HeaderLink>
+              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>RSS</HeaderLink>
             </li>
           </ul>
         </nav>
@@ -49,5 +49,6 @@ import HeaderLink from "./HeaderLink.astro";
   });
   document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
 </script>
+
 
 
