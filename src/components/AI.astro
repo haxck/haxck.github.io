@@ -7,7 +7,7 @@ const { ai } = Astro.props;
 <section
   class="w-full bg-white border divide-y rounded divide-slate-200 border-slate-200"
 >
-  <details class="p-4 group" transition:animate="slide">
+  <details class="p-4 group overflow-hidden">
     <summary
       class="[&::-webkit-details-marker]:hidden relative flex items-center gap-4 pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900"
     >
@@ -20,9 +20,51 @@ const { ai } = Astro.props;
       </span>
     </summary>
     <div class="overflow-hidden">
-      <p class="text-slate-500 mb-0">
-        {ai}
-      </p>
+      <div class="summary-content">
+        <p class="text-slate-500 mb-0">
+          {ai}
+        </p>
+      </div>
     </div>
   </details>
 </section>
+
+<style>
+  /* Custom animation for AI summary */
+  .summary-content {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+    overflow: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  details[open] .summary-content {
+    opacity: 1;
+    max-height: 300px; /* 增加最大高度以适应更多内容 */
+    transform: translateY(0);
+  }
+  
+  /* 确保动画在各种浏览器中都能正常工作 */
+  @-webkit-keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
