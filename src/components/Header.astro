@@ -5,11 +5,11 @@ import ThemeToggle from "./ThemeToggle.astro";
 import DocSearch from "./DocSearch.astro";
 ---
 
-<header>
-  <div class="nav-container flex items-center justify-center">
+<header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-primary-200 dark:border-primary-800 shadow-lg">
+  <div class="nav-container flex items-center justify-center animate-fade-in">
     <div class="max-w-screen-lg w-full p-4">
       <nav class="flex items-center flex-row-reverse justify-between">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3">
           <DocSearch />
           <ThemeToggle />
         </div>
@@ -19,7 +19,7 @@ import DocSearch from "./DocSearch.astro";
               <li>
                 <HeaderLink
                   href={el.link}
-                  class:list="text-slate-800 p-1 px-2 rounded-md dark:text-slate-200"
+                  class:list="text-slate-800 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105 font-medium"
                 >
                   {el.name}
                 </HeaderLink>

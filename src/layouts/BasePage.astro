@@ -11,9 +11,9 @@ const { title, description } = Astro.props;
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="bg-[url(/grid.svg)] inset-0 dark:bg-gray-600">
+  <body class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-800 dark:via-gray-900 dark:to-primary-900 min-h-screen">
     <Header />
-    <main class="lg:max-w-screen-lg m-auto">
+    <main class="lg:max-w-screen-lg m-auto animate-fade-in">
         <slot />
     </main>
 

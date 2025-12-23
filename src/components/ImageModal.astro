@@ -1,0 +1,111 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+---
+
+<div class="image-container group cursor-pointer" data-src={src} data-alt={alt} data-caption={caption}>
+  <figure class="my-6">
+    <img 
+      src={src} 
+      alt={alt} 
+      class="max-w-full h-auto rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-lg"
+      loading="lazy"
+    />
+    {caption && <figcaption class="text-center text-sm text-slate-500 mt-2">{caption}</figcaption>}
+  </figure>
+</div>
+
+<!-- Modal -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+  <div class="relative max-w-full max-h-full">
+    <button id="closeModal" class="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl font-bold">
+      ×
+    </button>
+    <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain" />
+    <div id="modalCaption" class="text-center text-white mt-4 text-sm"></div>
+  </div>
+</div>
+
+<style>
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image-container:hover img {
+    transform: scale(1.02);
+  }
+  
+  #imageModal {
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  #imageModal.hidden {
+    display: none;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .image-container img {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
+
+<script>
+  // 获取DOM元素
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
+  const closeModal = document.getElementById('closeModal');
+  
+  // 为每个图片容器添加点击事件
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageContainers = document.querySelectorAll('.image-container');
+    
+    imageContainers.forEach(container => {
+      container.addEventListener('click', function() {
+        const src = this.dataset.src;
+        const alt = this.dataset.alt;
+        const caption = this.dataset.caption;
+        
+        // 设置模态框内容
+        modalImage.src = src;
+        modalImage.alt = alt;
+        modalCaption.textContent = caption || alt;
+        
+        // 显示模态框
+        imageModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // 关闭模态框事件
+    closeModal.addEventListener('click', closeModalHandler);
+    imageModal.addEventListener('click', function(e) {
+      if (e.target === imageModal) {
+        closeModalHandler();
+      }
+    });
+    
+    // ESC键关闭
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+        closeModalHandler();
+      }
+    });
+  });
+  
+  function closeModalHandler() {
+    imageModal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+</script>

@@ -3,10 +3,10 @@ const today = new Date();
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<footer class="w-full py-8">
-  <div class="py-4 text-sm">
+<footer class="w-full py-12 mt-20">
+  <div class="py-6 text-sm">
     <div class="container px-4 mx-auto">
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
         <nav
           aria-labelledby="footer-site-links"
           class="col-span-1"
@@ -14,24 +14,28 @@ import HeaderLink from "./HeaderLink.astro";
           <h2 class="sr-only" id="footer-site-links">
             Site Links
           </h2>
-          <ul class="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+          <ul class="flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <li>
-              <HeaderLink href="/friends" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>友链</HeaderLink>
+              <HeaderLink href="/friends" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>友链</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"} target="_blank"
+              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"} target="_blank"
                 >状态</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="/changelog" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>更新</HeaderLink>
+              <HeaderLink href="/changelog" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>更新</HeaderLink>
             </li>
             <li>
-              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-800 p-1 px-2 rounded-md dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors duration-200"}>RSS</HeaderLink>
+              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>RSS</HeaderLink>
             </li>
           </ul>
         </nav>
-        <div class="col-span-1 text-center md:text-right text-slate-800 p-1 px-2 rounded-md dark:text-slate-200">
-          &copy;2018 - {today.getFullYear()} haxck.com
+        <div class="col-span-1 text-center md:text-right">
+          <div class="text-slate-600 dark:text-slate-400 font-medium">
+            <span class="text-primary-600 dark:text-primary-400 font-bold">&copy;2018 - {today.getFullYear()}</span>
+            <span class="mx-2">·</span>
+            <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent font-bold">haxck.com</span>
+          </div>
         </div>
       </div>
     </div>
@@ -49,6 +53,7 @@ import HeaderLink from "./HeaderLink.astro";
   });
   document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
 </script>
+
 
 
 

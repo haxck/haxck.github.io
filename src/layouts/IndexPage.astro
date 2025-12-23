@@ -4,14 +4,14 @@ const {title} = Astro.props;
 ---
 
 <BasePage title={title}>
-  <div class="grid grid-cols-4">
+  <div class="grid grid-cols-4 animate-fade-in">
     <div
       class="p-3 col-span-4 lg:col-span-1"
     >
     <slot name="left"></slot>
     </div>
     <div class="mx-3 col-span-4 lg:col-span-3">
-      <div class="max-sm:p-4 p-8 bg-white dark:bg-gray-100 shadow-xl rounded-md">
+      <div class="max-sm:p-4 p-8 bg-gradient-to-br from-white to-primary-50 dark:from-gray-100 dark:to-primary-100 shadow-2xl rounded-xl border border-primary-100 dark:border-primary-200 animate-slide-up transform hover:shadow-primary-200 hover:shadow-2xl transition-all duration-500">
         <slot name="right"></slot>
       </div>
     </div>

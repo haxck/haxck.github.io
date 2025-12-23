@@ -1,0 +1,13 @@
+---
+import ImageModal from "./ImageModal.astro";
+
+interface Props {
+  src: string;
+  alt: string;
+  title?: string;
+}
+
+const { src, alt, title } = Astro.props;
+---
+
+<ImageModal src={src} alt={alt} caption={title} />
