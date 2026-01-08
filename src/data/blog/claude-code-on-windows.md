@@ -1,12 +1,12 @@
 ---
-title: Windows下配置Claude
-description: Windows下配置Claude
+title: Windows 下配置 Claude
+description: Windows 下配置 Claude
 pubDate: 2025-12-30 09:28
-ai: Windows下配置Claude
+ai: Windows 下配置 Claude
 tags:
   - Claude
 ---
-看到好多人在教程中说 Claude 在 Windows 中需要安装 WSL，在WSL 中使用 Claude，实测在Windows下可直接使用，在终端中安装配置下模型即可。
+看到好多人在教程中说 Claude 在 Windows 中需要安装 WSL，在 WSL 中使用 Claude，实测在 Windows 下可直接使用，在终端中安装配置下模型即可。
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -38,4 +38,11 @@ $env:ANTHROPIC_SMALL_FAST_MODEL="KAT-Coder"
   }
 }
 
+```
+
+如果安装完成后显示地区问题，在`~/.claude/settings.json` 添加一条：
+```json
+{
+  "hasCompletedOnboarding":true
+}
 ```
