@@ -8,7 +8,6 @@ import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
 import { Icon } from 'astro-icon/components'
 import AI from "../components/AI.astro";
-import ImageModal from "../components/ImageModal.astro";
 
 const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	Astro.props;
@@ -27,9 +26,9 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	</About>
 	<div slot="right">
 		<article class="prose min-w-full">
-			{heroImage && <ImageModal src={heroImage} alt={title} />}
+			{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 
-			<h1 class="mb-0 title text-4xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent animate-slide-up">
+			<h1 class="mb-0 title">
 				{title}
 			</h1>
 			<div class="text-slate-500 text-sm title">
@@ -77,6 +76,3 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 		font-family: "得意黑";
 	}
 </style>
-
-
-
