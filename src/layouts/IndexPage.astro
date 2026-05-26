@@ -1,31 +1,25 @@
 ---
 import BasePage from "../layouts/BasePage.astro";
-const {title} = Astro.props;
+const {title, sidebar = true} = Astro.props;
 ---
 
 <BasePage title={title}>
-  <div class="grid grid-cols-4 animate-fade-in">
-    <div
-      class="p-3 col-span-4 lg:col-span-1"
-    >
-    <slot name="left"></slot>
+  {sidebar ? (
+    <div class="grid grid-cols-4 gap-6 animate-fade-in">
+      <div class="col-span-4 lg:col-span-1">
+        <slot name="left"></slot>
+      </div>
+      <div class="col-span-4 lg:col-span-3">
+        <div class="p-6 sm:p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200/60 dark:border-gray-800/60">
+          <slot name="right"></slot>
+        </div>
+      </div>
     </div>
-    <div class="mx-3 col-span-4 lg:col-span-3">
-      <div class="max-sm:p-4 p-8 bg-gradient-to-br from-white to-primary-50 dark:from-gray-100 dark:to-primary-100 shadow-2xl rounded-xl border border-primary-100 dark:border-primary-200 animate-slide-up transform hover:shadow-primary-200 hover:shadow-2xl transition-all duration-500">
+  ) : (
+    <div class="animate-fade-in">
+      <div class="p-6 sm:p-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200/60 dark:border-gray-800/60">
         <slot name="right"></slot>
       </div>
     </div>
-  </div>
+  )}
 </BasePage>
-
-<style>
-  @font-face {
-    font-family: "得意黑";
-    font-weight: 400;
-    src: url("/SmileySans-Oblique.otf.woff2") format("woff2");
-    font-display: swap;
-  }
-  .title {
-    font-family: "得意黑";
-  }
-</style>

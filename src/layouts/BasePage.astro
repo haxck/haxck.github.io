@@ -11,9 +11,12 @@ const { title, description } = Astro.props;
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-800 dark:via-gray-900 dark:to-primary-900 min-h-screen">
+  <body class="bg-gray-50/50 dark:bg-gray-950 min-h-screen transition-colors duration-500">
+    <!-- Subtle background dots pattern -->
+    <div class="fixed inset-0 z-[-1] bg-[radial-gradient(circle_at_1px_1px,_rgba(156,163,175,0.15)_1px,_transparent_0)] dark:bg-[radial-gradient(circle_at_1px_1px,_rgba(71,85,105,0.15)_1px,_transparent_0)] [background-size:24px_24px]" />
+
     <Header />
-    <main class="lg:max-w-screen-lg m-auto animate-fade-in mt-6">
+    <main class="lg:max-w-screen-lg mx-auto animate-fade-in pt-4 pb-8 px-4 sm:px-6">
         <slot />
     </main>
 

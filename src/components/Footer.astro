@@ -3,57 +3,53 @@ const today = new Date();
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<footer class="w-full py-12 mt-20">
-  <div class="py-6 text-sm">
-    <div class="container px-4 mx-auto">
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
-        <nav
-          aria-labelledby="footer-site-links"
-          class="col-span-1"
-        >
-          <h2 class="sr-only" id="footer-site-links">
-            Site Links
-          </h2>
-          <ul class="flex flex-wrap items-center justify-center gap-3 md:justify-start">
-            <li>
-              <HeaderLink href="/friends" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>友链</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink href="https://status.haxck.com/status/haxck" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"} target="_blank"
-                >状态</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink href="/changelog" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>更新</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink href="/feed.xml" target="_blank" class:list={"text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 p-2 px-4 rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-all duration-300 transform hover:scale-105"}>RSS</HeaderLink>
-            </li>
-          </ul>
-        </nav>
-        <div class="col-span-1 text-center md:text-right">
-          <div class="text-slate-600 dark:text-slate-400 font-medium">
-            <span class="text-primary-600 dark:text-primary-400 font-bold">&copy;2018 - {today.getFullYear()}</span>
-            <span class="mx-2">·</span>
-            <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent font-bold">haxck.com</span>
-          </div>
-        </div>
+<footer class="w-full mt-20 relative">
+  <!-- Gradient top border -->
+  <div class="h-px bg-gradient-to-r from-transparent via-primary-500/40 to-transparent" />
+
+  <div class="container px-4 mx-auto py-10">
+    <div class="max-w-screen-lg mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <nav aria-label="Footer links">
+        <ul class="flex flex-wrap items-center gap-1">
+          <li>
+            <a href="/friends" class="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300">友链</a>
+          </li>
+          <li>
+            <a href="https://status.haxck.com/status/haxck" target="_blank" class="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300">状态</a>
+          </li>
+          <li>
+            <a href="/changelog" class="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300">更新</a>
+          </li>
+          <li>
+            <a href="/feed.xml" target="_blank" class="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300">RSS</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+        <span>&copy; 2018 - {today.getFullYear()}</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+        <a href="/" class="font-semibold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent hover:from-secondary-500 hover:to-primary-500 transition-all duration-500">
+          haxck.com
+        </a>
       </div>
     </div>
   </div>
 </footer>
 
-<script type="text/javascript">
-  docsearch({
-    appId: "HCTYF3QOV4",
-    apiKey: "99ed6486b902aa8a5473c672f84de39f",
-    indexName: "haxck",
-    container: "#docsearch",
-    placeholder: "搜索",
-    debug: false,
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const container = document.getElementById("docsearch");
+    if (!container) return;
+    docsearch({
+      appId: "HCTYF3QOV4",
+      apiKey: "99ed6486b902aa8a5473c672f84de39f",
+      indexName: "haxck",
+      container: "#docsearch",
+      placeholder: "搜索",
+      debug: false,
+    });
+    const ph = document.querySelector(".DocSearch-Button-Placeholder");
+    if (ph) ph.innerHTML = "搜索";
   });
-  document.querySelector(".DocSearch-Button-Placeholder").innerHTML = "搜索";
 </script>
-
-
-
-

@@ -1,0 +1,91 @@
+---
+import IndexPage from "../layouts/IndexPage.astro";
+import About from "../components/About.astro";
+
+const friends = [
+  {
+    name: "Owen Young",
+    url: "https://www.owenyoung.com/",
+    description: "沉浸式翻译作者的博客",
+  },
+  {
+    name: "plantegg",
+    url: "https://plantegg.github.io/",
+    description: "TCP、Linux、MySQL 技术博客",
+  },
+  {
+    name: "曾哥",
+    url: "https://blog.zgsec.cn/",
+    description: "安全相关",
+  },
+  {
+    name: "Airing",
+    url: "https://blog.ursb.me/",
+    description: "前端、哲学",
+  },
+  {
+    name: "屈屈",
+    url: "https://imququ.com/",
+    description: "Web 开发，HTTP2 相关文章，也是打开网页最快的网站",
+  },
+  {
+    name: "水八口",
+    url: "https://shuiba.co/",
+    description: "水八口",
+  },
+  {
+    name: "三轮车",
+    url: "https://sanlun.bike/",
+    description: "三轮车",
+  },
+  {
+    name: "Lucida",
+    url: "https://blog.lucida.me/",
+    description: "《程序员必读书单》作者，文字简洁干练，直击核心",
+  },
+];
+---
+
+<IndexPage title="友链">
+  <About slot="left" />
+
+  <section class="px-2" slot="right">
+    <h1 class="text-3xl font-bold mb-2">友链</h1>
+    <p class="text-gray-500 dark:text-gray-400 mb-8">
+      很高兴 TA 们在写博客分享所思所想
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        friends.map((friend) => (
+          <a
+            href={friend.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block"
+          >
+            <div class="p-5 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-600 h-full">
+              <div class="flex items-center gap-3 mb-2">
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${new URL(friend.url).hostname}&sz=32`}
+                  alt=""
+                  class="w-5 h-5 rounded-sm"
+                  loading="lazy"
+                />
+                <h3 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  {friend.name}
+                </h3>
+              </div>
+              <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                {friend.description}
+              </p>
+              <p class="mt-3 text-xs text-gray-400 dark:text-gray-500 truncate">
+                {friend.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</IndexPage>

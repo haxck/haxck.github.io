@@ -1,9 +1,7 @@
 ---
-
+import { getCollection } from "astro:content";
+import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import About from "../components/About.astro";
-import IndexPage from "./IndexPage.astro";
-import MpCard from "../components/MpCard.astro";
 import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
 import { Icon } from 'astro-icon/components'
@@ -11,60 +9,108 @@ import AI from "../components/AI.astro";
 
 const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 	Astro.props;
+
+const allPosts = (await getCollection("blog"))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
 
-<IndexPage title={title}>
-	<About slot="left">
-		<aside class="max-lg:hidden text-right">
-			{toc.length > 1 && (
-				<div>
-					<TableOfContents toc={toc} />
-					<MpCard></MpCard>
+<BasePage title={title}>
+	<div class="relative">
+		{toc.length > 1 && (
+			<aside class="hidden xl:block fixed top-24 right-[calc(50%-640px+1rem)] w-56">
+				<h3 class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
+					目录
+				</h3>
+				<TableOfContents toc={toc} />
+			</aside>
+		)}
+
+		<article class="prose mx-auto py-4">
+			{heroImage && (
+				<div class="rounded-2xl overflow-hidden mb-6 -mt-2 shadow-md">
+					<img width={720} height={360} src={heroImage} alt="" class="w-full" />
 				</div>
 			)}
-		</aside>
-	</About>
-	<div slot="right">
-		<article class="prose min-w-full">
-			{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 
 			<h1 class="mb-0 title">
 				{title}
 			</h1>
-			<div class="text-slate-500 text-sm title">
-				<p class="text-slate-600 title">
 
-					<span id="busuanzi_container_page_pv" style="display: none;">
-						<span id="busuanzi_value_page_pv"></span>
-						<Icon name="mdi:account-view" class:list={"inline-block"} />
-						
-						 &nbsp;
-					</span>
+			<div class="not-prose mt-3 mb-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+				{tags && tags.length > 0 && tags.map((tag: string) => (
+					<a
+						href={`/tags/${tag}/`}
+						class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
+					>
+						{tag}
+					</a>
+				))}
 
-					{tags && tags.map((items) => <span class="mr-1 p-1">{items}</span>)}
+				{tags && tags.length > 0 && <span class="w-px h-3.5 bg-gray-200 dark:bg-gray-700" />}
 
-				<span>
-					· &nbsp; <Icon name="mdi:clipboard-text-date" class:list={"inline-block"} /> <FormattedDate date={pubDate} />
-					{
-						updatedDate && (
-							<span class="ml-2">
-								最后更新于
-								<FormattedDate date={updatedDate} />
-							</span>
-						)
-					}
+				<span class="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+					<Icon name="mdi:calendar-outline" class="w-3.5 h-3.5" />
+					<FormattedDate date={pubDate} />
 				</span>
-			</p>
+
+				{updatedDate && (
+					<span class="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+						<Icon name="mdi:update" class="w-3.5 h-3.5" />
+						<FormattedDate date={updatedDate} />
+					</span>
+				)}
+
+				<span id="busuanzi_container_page_pv" style="display:none" class="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+					<Icon name="mdi:eye-outline" class="w-3.5 h-3.5" />
+					<span id="busuanzi_value_page_pv"></span>
+				</span>
 			</div>
+
 			{ai && <AI ai={ai} />}
 			<div class="mt-8 min-w-full leading-7">
 				<slot />
 			</div>
 			<Divider />
+
+			<div class="mt-10 pt-8 border-t border-gray-200/60 dark:border-gray-700/40 not-prose">
+				<h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">最近文章</h2>
+				<ul class="flex flex-col gap-1.5">
+					{allPosts.map((post) => (
+						<li>
+							<a
+								href={`/posts/${post.id}/`}
+								class="group flex items-center justify-between gap-3 py-2 px-3 rounded-lg hover:bg-gray-100/60 dark:hover:bg-gray-800/40 transition-colors"
+							>
+								<span class="text-sm text-gray-700 dark:text-gray-300 line-clamp-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+									{post.data.title}
+								</span>
+								<time class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap tabular-nums shrink-0">
+									<FormattedDate date={post.data.pubDate} />
+								</time>
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
 		</article>
 	</div>
-</IndexPage>
-<script is:inline defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</BasePage>
+<script>
+	function loadBusuanzi() {
+		const existing = document.querySelector('script[src*="busuanzi"]');
+		if (existing) {
+			existing.remove();
+		}
+		const s = document.createElement("script");
+		s.src = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+		s.async = true;
+		document.head.appendChild(s);
+	}
+
+	loadBusuanzi();
+	document.addEventListener("astro:page-load", loadBusuanzi);
+</script>
 <style>
 	@font-face {
 		font-family: "得意黑";
