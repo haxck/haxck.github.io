@@ -6,20 +6,32 @@ import FormattedDate from "../../components/FormattedDate.astro";
 
 const posts = await getCollection("blog");
 
-const tagMap: Record<string, number> = {};
+// Merge case-variant tags: normalize to lowercase for grouping,
+// keep the most-used casing as the display name.
+const normalizedMap = new Map<string, { displayName: string; count: number; nameCounts: Record<string, number> }>();
 posts.forEach((post) => {
   post.data.tags?.forEach((tag) => {
-    tagMap[tag] = (tagMap[tag] || 0) + 1;
+    if (!tag || !tag.trim()) return;
+    const key = tag.toLowerCase();
+    const entry = normalizedMap.get(key) ?? { displayName: tag, count: 0, nameCounts: {} };
+    entry.count++;
+    entry.nameCounts[tag] = (entry.nameCounts[tag] || 0) + 1;
+    // Update display name to the most frequently used casing
+    const best = Object.entries(entry.nameCounts).sort((a, b) => b[1] - a[1])[0][0];
+    entry.displayName = best;
+    normalizedMap.set(key, entry);
   });
 });
-const tags = Object.entries(tagMap).sort((a, b) => b[1] - a[1]);
+const tags = Array.from(normalizedMap.values())
+  .map((e) => [e.displayName, e.count] as [string, number])
+  .sort((a, b) => b[1] - a[1]);
 const maxCount = tags.length > 0 ? tags[0][1] : 1;
 
-// Build posts grouped by tag for client-side rendering
+// Build posts grouped by tag (case-insensitive) for client-side rendering
 const postsByTag: Record<string, { title: string; href: string; date: string }[]> = {};
-tags.forEach(([tag]) => {
-  postsByTag[tag] = posts
-    .filter((p) => p.data.tags?.includes(tag))
+normalizedMap.forEach((entry, key) => {
+  postsByTag[entry.displayName] = posts
+    .filter((p) => p.data.tags?.some((t) => t.toLowerCase() === key))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map((p) => ({
       title: p.data.title,
