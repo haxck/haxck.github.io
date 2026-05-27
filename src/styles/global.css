@@ -78,6 +78,11 @@ pre > code {
   overflow: hidden;
 }
 
+/* Staggered animation support */
+.animate-slide-up {
+  animation-fill-mode: backwards;
+}
+
 /* Smooth page transitions */
 @view-transition {
   navigation: auto;

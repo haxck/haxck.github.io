@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
 import About from "../../components/About.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
 
 const posts = await getCollection("blog");
 
@@ -12,31 +13,117 @@ posts.forEach((post) => {
   });
 });
 const tags = Object.entries(tagMap).sort((a, b) => b[1] - a[1]);
+const maxCount = tags.length > 0 ? tags[0][1] : 1;
+
+// Build posts grouped by tag for client-side rendering
+const postsByTag: Record<string, { title: string; href: string; date: string }[]> = {};
+tags.forEach(([tag]) => {
+  postsByTag[tag] = posts
+    .filter((p) => p.data.tags?.includes(tag))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map((p) => ({
+      title: p.data.title,
+      href: `/posts/${p.id}/`,
+      date: p.data.pubDate.toLocaleDateString("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }),
+    }));
+});
 ---
 
 <IndexPage title="标签">
   <About slot="left" />
 
   <section class="px-2" slot="right">
-    <h1 class="text-3xl font-bold mb-2">标签</h1>
-    <p class="text-gray-500 dark:text-gray-400 mb-8">共 {tags.length} 个标签</p>
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-1">标签</h1>
+      <p class="text-sm text-gray-400 dark:text-gray-500">
+        {tags.length} 个标签 &middot; {posts.length} 篇文章
+      </p>
+    </div>
 
-    <div class="flex flex-wrap gap-3">
+    <div class="flex flex-wrap gap-2.5" id="tag-list">
       {
-        tags.map(([tag, count]) => (
-          <a
-            href={`/tags/${tag}/`}
-            class="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-600"
-          >
-            <span class="text-gray-800 dark:text-gray-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors font-medium">
-              {tag}
-            </span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-medium">
-              {count}
-            </span>
-          </a>
-        ))
+        tags.map(([tag, count]) => {
+          const size = Math.max(0.75, Math.min(1, 0.75 + (count / maxCount) * 0.25));
+          return (
+            <button
+              data-tag={tag}
+              style={`font-size: ${size}rem`}
+              class="tag-btn group inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 cursor-pointer"
+            >
+              <span class="font-medium">{tag}</span>
+              <span class="text-[0.7em] opacity-40 group-hover:opacity-70 transition-opacity">{count}</span>
+            </button>
+          );
+        })
       }
+    </div>
+
+    <div id="tag-posts" class="mt-8 hidden">
+      <div class="flex items-baseline justify-between mb-4">
+        <h2 id="tag-posts-title" class="text-lg font-semibold"></h2>
+        <button
+          id="close-tag"
+          class="text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
+        >
+          关闭
+        </button>
+      </div>
+      <ul id="tag-posts-list" class="space-y-1"></ul>
     </div>
   </section>
 </IndexPage>
+
+<script is:inline define:vars={{ postsByTag }}>
+  const tagBtns = document.querySelectorAll(".tag-btn");
+  const postsContainer = document.getElementById("tag-posts");
+  const postsTitle = document.getElementById("tag-posts-title");
+  const postsList = document.getElementById("tag-posts-list");
+  const closeBtn = document.getElementById("close-tag");
+  let activeTag = null;
+
+  function showTag(tag) {
+    if (activeTag === tag) {
+      hidePosts();
+      return;
+    }
+    activeTag = tag;
+    const articles = postsByTag[tag] || [];
+    postsTitle.textContent = tag;
+    postsList.innerHTML = articles
+      .map(
+        (a) => `
+        <li>
+          <a href="${a.href}" class="flex items-baseline justify-between gap-4 py-3 px-3 -mx-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+            <span class="font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white transition-colors">${a.title}</span>
+            <span class="text-sm text-gray-300 dark:text-gray-600 shrink-0 tabular-nums">${a.date}</span>
+          </a>
+        </li>`
+      )
+      .join("");
+    postsContainer.classList.remove("hidden");
+
+    tagBtns.forEach((btn) => {
+      if (btn.dataset.tag === tag) {
+        btn.classList.add("bg-gray-900", "text-white", "dark:bg-white", "dark:text-gray-900", "border-gray-200", "dark:border-gray-700");
+        btn.classList.remove("bg-gray-50", "dark:bg-gray-800", "text-gray-600", "dark:text-gray-300");
+      } else {
+        btn.classList.remove("bg-gray-900", "text-white", "dark:bg-white", "dark:text-gray-900", "border-gray-200", "dark:border-gray-700");
+        btn.classList.add("bg-gray-50", "dark:bg-gray-800", "text-gray-600", "dark:text-gray-300");
+      }
+    });
+  }
+
+  function hidePosts() {
+    activeTag = null;
+    postsContainer.classList.add("hidden");
+    tagBtns.forEach((btn) => {
+      btn.classList.remove("bg-gray-900", "text-white", "dark:bg-white", "dark:text-gray-900", "border-gray-200", "dark:border-gray-700");
+      btn.classList.add("bg-gray-50", "dark:bg-gray-800", "text-gray-600", "dark:text-gray-300");
+    });
+  }
+
+  tagBtns.forEach((btn) => {
+    btn.addEventListener("click", () => showTag(btn.dataset.tag));
+  });
+  closeBtn.addEventListener("click", hidePosts);
+</script>
