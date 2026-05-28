@@ -10,34 +10,31 @@ const currentPath = Astro.url.pathname;
 <header class="header-wrap sticky top-0 z-50 transition-all duration-500">
   <div class="nav-container flex items-center justify-center">
     <div class="max-w-screen-lg w-full px-5 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 group shrink-0">
-        <span class="text-xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent group-hover:from-secondary-500 group-hover:to-primary-500 transition-all duration-500">
+      <a href="/" class="shrink-0">
+        <span class="text-xl font-bold text-gray-900 dark:text-gray-100">
           {SITE_TITLE}
         </span>
       </a>
 
       <nav class="flex items-center gap-1">
-        <ul class="hidden sm:flex items-center gap-1">
+        <ul class="hidden sm:flex items-center gap-0.5">
           {
             NAVS.map((el) => {
               const isActive =
                 currentPath === el.link ||
                 (el.link !== "/" && currentPath.startsWith(el.link));
               return (
-                <li class="relative">
+                <li>
                   <HeaderLink
                     href={el.link}
                     class:list={[
-                      "relative px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-300",
+                      "px-3 py-1.5 text-sm rounded-md transition-colors duration-200",
                       isActive
-                        ? "text-primary-600 dark:text-primary-400"
-                        : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400",
+                        ? "text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 font-medium"
+                        : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50",
                     ]}
                   >
                     {el.name}
-                    {isActive && (
-                      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full" />
-                    )}
                   </HeaderLink>
                 </li>
               );
@@ -46,7 +43,7 @@ const currentPath = Astro.url.pathname;
         </ul>
 
         <!-- Mobile menu button -->
-        <button id="mobile-menu-btn" class="sm:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="菜单">
+        <button id="mobile-menu-btn" class="sm:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="菜单">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -62,7 +59,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile dropdown -->
-  <div id="mobile-menu" class="sm:hidden hidden absolute top-full left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-xl">
+  <div id="mobile-menu" class="sm:hidden hidden absolute top-full left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50">
     <ul class="max-w-screen-lg mx-auto py-3 px-5 flex flex-col gap-1">
       {
         NAVS.map((el) => {
@@ -74,10 +71,10 @@ const currentPath = Astro.url.pathname;
               <a
                 href={el.link}
                 class:list={[
-                  "block px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300",
+                  "block px-4 py-2.5 rounded-lg text-sm transition-colors duration-200",
                   isActive
-                    ? "text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30"
-                    : "text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-800",
+                    ? "text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 font-medium"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50",
                 ]}
               >
                 {el.name}

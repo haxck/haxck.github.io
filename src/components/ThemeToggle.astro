@@ -1,19 +1,7 @@
-<div class="theme-switch-wrapper mt-1 sm:ml-0 lg:ml-2" transition:persist>
-  <label class="theme-switch" for="checkbox">
-    <input type="checkbox" id="checkbox" />
-    <div class="slider">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="#FCD53F"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-sun"
-      >
+<button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="切换主题" transition:persist>
+  <span class="toggle-track">
+    <span class="toggle-thumb">
+      <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -24,143 +12,129 @@
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="#FCD53F"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-moon"
-      >
+      <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
-    </div>
-  </label>
-</div>
+    </span>
+  </span>
+</button>
 
 <script is:inline>
-  // Get the theme toggle input
-  const themeToggle = document.querySelector(
-    '.theme-switch input[type="checkbox"]',
-  );
+  function initThemeToggle() {
+    const btn = document.getElementById("theme-toggle-btn");
+    if (!btn) return;
 
-  // Get the current theme from local storage
-  const currentTheme = localStorage.getItem("theme");
-
-  // If the current local storage item can be found
-  if (currentTheme) {
-    // Set the body data-theme attribute to match the local storage item
-    document.documentElement.setAttribute("class", currentTheme);
-
-    // If the current theme is dark, check the theme toggle
-    if (currentTheme === "dark") {
-      themeToggle.checked = true;
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme) {
+      document.documentElement.setAttribute("class", currentTheme);
     }
+
+    function isDark() {
+      return document.documentElement.classList.contains("dark");
+    }
+
+    function updateToggle() {
+      btn.classList.toggle("dark", isDark());
+    }
+
+    updateToggle();
+
+    btn.addEventListener("click", () => {
+      if (isDark()) {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      }
+      updateToggle();
+    });
+
+    document.addEventListener("astro:after-swap", () => {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("class", t);
+      updateToggle();
+    });
   }
 
-  function switchTheme() {
-    if (themeToggle.checked) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }
-
-  // Add an event listener to the theme toggle, which will switch the theme
-  themeToggle.addEventListener("change", switchTheme, false);
-  document.addEventListener("astro:after-swap", switchTheme);
+  initThemeToggle();
 </script>
 
 <style is:global>
-  .theme-switch-wrapper {
-    display: inline-block;
-  }
-
-  .theme-switch {
-    display: inline-block;
-    height: 40px;
-    position: relative;
-    width: 70px;
-    margin-top: 2px;
-  }
-
-  .theme-switch input {
-    display: none;
-  }
-
-  .slider {
-    background: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
-    bottom: 0;
+  .theme-toggle-btn {
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 40px;
-    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
   }
 
-  .slider:before {
-    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-    bottom: 4px;
-    content: "";
-    height: 32px;
-    left: 4px;
-    position: absolute;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 32px;
+  .theme-toggle-btn:focus-visible .toggle-track {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+  }
+
+  .toggle-track {
+    display: flex;
+    align-items: center;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    padding: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #e2e8f0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .toggle-track {
+    background: #334155;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .toggle-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
   }
 
-  input:checked + .slider {
-    background: linear-gradient(135deg, #7c3aed 0%, #1e293b 100%);
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  .dark .toggle-thumb {
+    transform: translateX(20px);
+    background: #1e293b;
   }
 
-  input:checked + .slider:before {
-    transform: translateX(30px);
-  }
-
-  .slider svg {
-    color: #222;
+  .toggle-thumb .icon-sun,
+  .toggle-thumb .icon-moon {
     position: absolute;
-    transition:
-      opacity 0.2s ease 0s,
-      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-    pointer-events: none;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .feather-moon {
-    opacity: 0;
-    left: 12px;
-    bottom: 12px;
-    transform: translateX(4px) scale(0.9);
-  }
-
-  .feather-sun {
+  .icon-sun {
+    color: #f59e0b;
     opacity: 1;
-    right: 12px;
-    bottom: 12px;
-    transform: translateX(0px) scale(1);
+    transform: rotate(0deg) scale(1);
   }
 
-  input:checked + .slider .feather-moon {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    color: #fbbf24;
-  }
-
-  input:checked + .slider .feather-sun {
+  .icon-moon {
+    color: #94a3b8;
     opacity: 0;
-    transform: translateX(-4px) scale(0.9);
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  .dark .icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+
+  .dark .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
 </style>

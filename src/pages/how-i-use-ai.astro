@@ -5,40 +5,36 @@ import About from "../components/About.astro";
 const entries = await getCollection("useai");
 ---
 
-<IndexPage title="How I use AI">
-    <About slot="left" showSidebar={false} />
+<IndexPage title="我如何用 AI">
+    <About slot="left" />
     <div slot="right">
-        <div class="flex flex-col gap-6">
-            <div class="pb-2">
-                <h1 class="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                    我怎么使用 AI
-                </h1>
-                <p class="text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
-                    记录日常工作生活中，我如何使用 AI 来提高效率，希望能给你一些灵感。
-                </p>
-            </div>
-
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {
-                    entries[0].data.tools.map((entry) => (
-                        <li class="p-5 bg-white/60 dark:bg-gray-800/60 rounded-2xl border border-gray-200/60 dark:border-gray-700/60">
-                            <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-3">
-                                {entry.title}
-                            </h2>
-                            <div class="flex flex-wrap gap-1.5 mb-3">
-                                {entry.tools.map((e) => (
-                                    <span class="px-2.5 py-0.5 text-xs font-medium rounded-full bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-primary-900/30 dark:to-secondary-900/30 text-primary-600 dark:text-primary-400 border border-primary-100/50 dark:border-primary-800/30">
-                                        {e}
-                                    </span>
-                                ))}
-                            </div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                {entry.description}
-                            </p>
-                        </li>
-                    ))
-                }
-            </ul>
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold mb-1">我如何用 AI</h1>
+            <p class="text-sm text-gray-400 dark:text-gray-500">
+                记录日常工作生活中使用 AI 提高效率的方式
+            </p>
         </div>
+
+        <ul class="space-y-3">
+            {
+                entries[0].data.tools.map((entry) => (
+                    <li class="p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700/50">
+                        <h2 class="font-semibold text-gray-800 dark:text-gray-100 mb-2">
+                            {entry.title}
+                        </h2>
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            {entry.tools.map((e) => (
+                                <span class="px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 rounded">
+                                    {e}
+                                </span>
+                            ))}
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            {entry.description}
+                        </p>
+                    </li>
+                ))
+            }
+        </ul>
     </div>
 </IndexPage>
