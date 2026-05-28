@@ -1,6 +1,5 @@
 ---
 const today = new Date();
-import HeaderLink from "./HeaderLink.astro";
 ---
 
 <footer class="w-full mt-20 relative">
@@ -36,20 +35,3 @@ import HeaderLink from "./HeaderLink.astro";
     </div>
   </div>
 </footer>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const container = document.getElementById("docsearch");
-    if (!container) return;
-    docsearch({
-      appId: "HCTYF3QOV4",
-      apiKey: "99ed6486b902aa8a5473c672f84de39f",
-      indexName: "haxck",
-      container: "#docsearch",
-      placeholder: "搜索",
-      debug: false,
-    });
-    const ph = document.querySelector(".DocSearch-Button-Placeholder");
-    if (ph) ph.innerHTML = "搜索";
-  });
-</script>
