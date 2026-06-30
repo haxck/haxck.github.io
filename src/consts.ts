@@ -8,7 +8,7 @@ export const NAVS = [
     {"name":"主页","link":"/"},
     {"name":"博客","link":"/blog/"},
     {"name":"标签","link":"/blog/tags/"},
-    {"name":"收集","link":"/quote"},
-    {"name":"清单","link":"/list"},
-    {"name":"我如何用 AI","link":"/how-i-use-ai"},
+    {"name":"收集","link":"/blog/quote"},
+    {"name":"清单","link":"/blog/list"},
+    {"name":"我如何用 AI","link":"/blog/how-i-use-ai"},
 ]
