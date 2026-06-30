@@ -40,7 +40,7 @@ const allPosts = (await getCollection("blog"))
 			<div class="not-prose mt-3 mb-6 flex flex-wrap items-center gap-x-3 gap-y-2">
 				{tags && tags.length > 0 && tags.map((tag: string) => (
 					<a
-						href={`/tags/${tag}/`}
+						href={`/blog/tags/${tag}/`}
 						class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
 					>
 						{tag}
@@ -81,7 +81,7 @@ const allPosts = (await getCollection("blog"))
 					{allPosts.map((post) => (
 						<li>
 							<a
-								href={`/posts/${post.id}/`}
+								href={`/blog/${post.id}/`}
 								class="group flex items-center justify-between gap-3 py-2 px-3 rounded-lg hover:bg-gray-100/60 dark:hover:bg-gray-800/40 transition-colors"
 							>
 								<span class="text-sm text-gray-700 dark:text-gray-300 line-clamp-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
@@ -160,12 +160,6 @@ const allPosts = (await getCollection("blog"))
 	document.addEventListener("astro:page-load", loadBusuanzi);
 </script>
 <style>
-	@font-face {
-		font-family: "得意黑";
-		font-weight: 400;
-		src: url("/SmileySans-Oblique.otf.woff2") format("woff2");
-		font-display: swap;
-	}
 	.title {
 		font-family: "得意黑";
 	}

@@ -6,7 +6,7 @@ export async function GET({ params, request }) {
   return Response.json(
     posts.map((post) => ({
       ...post.data,
-      link: `/posts/${post.slug}/`,
+      link: `/blog/${post.id}/`,
     })),
   );
 }

@@ -7,7 +7,7 @@ export async function GET(context) {
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
-		site: context.site,
+		site: context.site + '/blog/',
 
 		"follow_challenge": {
 			"feed_id": "57618470631123968",
@@ -16,7 +16,7 @@ export async function GET(context) {
 		,
 		items: posts.sort((a,b) => b.data.pubDate - a.data.pubDate).map((post) => ({
 			...post.data,
-			link: `/posts/${post.id}/`,
+			link: `/blog/${post.id}/`,
 		})),
 	},);
 }

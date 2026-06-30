@@ -6,7 +6,8 @@ export const SITE_DESCRIPTION = "Haxck's blog";
 
 export const NAVS = [
     {"name":"主页","link":"/"},
-    {"name":"标签","link":"/tags/"},
+    {"name":"博客","link":"/blog/"},
+    {"name":"标签","link":"/blog/tags/"},
     {"name":"收集","link":"/quote"},
     {"name":"清单","link":"/list"},
     {"name":"我如何用 AI","link":"/how-i-use-ai"},

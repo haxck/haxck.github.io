@@ -1,7 +1,12 @@
 @import url("https://fontsapi.zeoseven.com/3/main/result.css");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@font-face {
+  font-family: "得意黑";
+  font-weight: 400;
+  src: url("/SmileySans-Oblique.otf.woff2") format("woff2");
+  font-display: swap;
+}
 
 @layer base {
   *::selection {
@@ -16,7 +21,6 @@
       "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei",
       "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC",
       "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
-    @apply text-gray-800 dark:text-gray-200 antialiased;
   }
 
   h1, h2, h3, h4, h5, h6, strong, b {

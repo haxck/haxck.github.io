@@ -1,0 +1,38 @@
+---
+import { icons } from './icons'
+
+const socials = [
+  { name: '微博', handle: '@haxck', url: 'https://weibo.com/haxck', color: '#E6162D', icon: icons.weibo },
+  { name: 'GitHub', handle: 'haxck', url: 'https://github.com/haxck', color: '#333333', icon: icons.github },
+  { name: 'Read.cv', handle: 'haxck', url: 'https://read.cv/haxck', color: '#FF8C00', icon: icons.readcv },
+  { name: 'Bilibili', handle: '老三制造', url: 'https://space.bilibili.com/14586647', color: '#00A1D6', icon: icons.bilibili },
+  { name: '微信公众号', handle: 'X工厂', url: 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5NTc2NjQ2MA', color: '#07C160', icon: icons.wechat },
+  { name: '小红书', handle: '进击的强宝', url: 'https://www.xiaohongshu.com/user/profile/5c397cba00000000050062b1', color: '#FE2C55', icon: icons.xiaohongshu },
+]
+---
+
+<ul class="flex justify-center gap-2">
+  {socials.map((social) => (
+    <li key={social.name}>
+      <a
+        href={social.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative flex items-center h-12 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60 overflow-hidden [transition:all_0.35s_cubic-bezier(0.4,0,0.2,1)] hover:shadow-md hover:bg-(--hover-color) hover:border-(--hover-color) [&:hover_span_svg]:text-white"
+        style={`--hover-color:${social.color}`}
+      >
+        <!-- Icon (fixed position) -->
+        <span
+          class="flex items-center justify-center w-12 h-12 shrink-0 [&>svg]:w-6 [&>svg]:h-6"
+          style={`color:${social.color}`}
+          set:html={social.icon}
+        />
+
+        <!-- Text (slides out to the right) -->
+        <span class="overflow-hidden whitespace-nowrap [transition:all_0.35s_cubic-bezier(0.4,0,0.2,1)] max-w-0 opacity-0 group-hover:max-w-24 group-hover:opacity-100 group-hover:pr-4">
+          <span class="text-sm font-medium text-white pl-0.5">{social.handle}</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

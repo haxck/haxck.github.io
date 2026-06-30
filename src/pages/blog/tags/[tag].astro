@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import IndexPage from "../../layouts/IndexPage.astro";
-import About from "../../components/About.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import IndexPage from "../../../layouts/IndexPage.astro";
+import About from "../../../components/About.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -40,7 +40,7 @@ const { tag, posts } = Astro.props;
   <section class="px-2" slot="right">
     <div class="mb-8">
       <a
-        href="/tags/"
+        href="/blog/tags/"
         class="text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
       >
         &larr; 所有标签
@@ -55,7 +55,7 @@ const { tag, posts } = Astro.props;
       {
         posts.map((post) => (
           <a
-            href={`/posts/${post.id}/`}
+            href={`/blog/${post.id}/`}
             class="group flex items-baseline justify-between gap-4 py-3 px-3 -mx-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <h3 class="font-medium truncate group-hover:text-gray-900 dark:group-hover:text-white transition-colors">

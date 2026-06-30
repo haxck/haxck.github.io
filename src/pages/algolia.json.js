@@ -7,7 +7,7 @@ export async function GET({ params, request }) {
     posts.map((post) => ({
       ...post.data,
       content: post.body,
-      link: `/posts/${post.slug}/`,
+      link: `/blog/${post.id}/`,
     })),
   );
 }

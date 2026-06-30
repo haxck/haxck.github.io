@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import IndexPage from "../../layouts/IndexPage.astro";
-import About from "../../components/About.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import IndexPage from "../../../layouts/IndexPage.astro";
+import About from "../../../components/About.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
 
 const posts = await getCollection("blog");
 
@@ -35,7 +35,7 @@ normalizedMap.forEach((entry, key) => {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
     .map((p) => ({
       title: p.data.title,
-      href: `/posts/${p.id}/`,
+      href: `/blog/${p.id}/`,
       date: p.data.pubDate.toLocaleDateString("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }),
     }));
 });
