@@ -1,20 +1,188 @@
-<div id="docsearch"></div>
+---
+import { getCollection } from 'astro:content';
 
-<style is:global>
-	.DocSearch-Button-Placeholder{
-		width: max-content;
-	}
-</style>
-<script>
-document.addEventListener('astro:page-load',function(){
-	docsearch({
-		appId: "HCTYF3QOV4",
-		apiKey: "99ed6486b902aa8a5473c672f84de39f",
-		indexName: "haxck",
-		container: "#docsearch",
-		placeholder: "搜索",
-		debug: false,
-	});
+const posts = await getCollection('blog');
+const searchIndex = posts.map(post => ({
+  title: post.data.title,
+  description: post.data.description,
+  link: `/blog/${post.id}/`,
+  content: post.body?.slice(0, 500) || '',
+}));
+---
 
-})
+<button id="search-trigger" class="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="搜索">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+</button>
+
+<!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm" id="search-backdrop"></div>
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transform transition-all">
+      <!-- Search Input -->
+      <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+        <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input 
+          type="text" 
+          id="search-input"
+          placeholder="搜索文章..." 
+          class="flex-1 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 outline-none text-base"
+          autocomplete="off"
+        />
+        <kbd class="hidden sm:inline-flex items-center px-2 py-0.5 text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">ESC</kbd>
+      </div>
+      
+      <!-- Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500">
+          <p class="text-sm">输入关键词搜索文章</p>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex items-center justify-between">
+        <span class="text-xs text-gray-400">共 {posts.length} 篇文章</span>
+        <div class="flex items-center gap-2">
+          <kbd class="inline-flex items-center px-1.5 py-0.5 text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">↑</kbd>
+          <kbd class="inline-flex items-center px-1.5 py-0.5 text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">↓</kbd>
+          <span class="text-xs text-gray-400">导航</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ searchIndex }}>
+document.addEventListener('astro:page-load', function() {
+  const trigger = document.getElementById('search-trigger');
+  const modal = document.getElementById('search-modal');
+  const backdrop = document.getElementById('search-backdrop');
+  const input = document.getElementById('search-input');
+  const results = document.getElementById('search-results');
+  
+  if (!trigger || !modal) return;
+  
+  let searchTimeout = null;
+  let selectedIndex = -1;
+  
+  const openModal = () => {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input?.focus(), 100);
+  };
+  
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+    if (results) {
+      results.innerHTML = '<div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500"><p class="text-sm">输入关键词搜索文章</p></div>';
+    }
+    selectedIndex = -1;
+  };
+  
+  const renderResults = (hits) => {
+    if (hits.length === 0) {
+      results.innerHTML = '<div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500"><p class="text-sm">没有找到相关文章</p></div>';
+      return;
+    }
+    
+    results.innerHTML = '<div class="py-2">' + hits.map((hit, i) => `
+      <a href="${hit.link}" class="search-result-item block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors ${i === 0 ? 'bg-gray-50 dark:bg-gray-800/30' : ''}" data-index="${i}">
+        <div class="flex items-start gap-3">
+          <svg class="w-4 h-4 text-gray-300 dark:text-gray-600 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 line-clamp-1">${hit.title}</h4>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">${hit.description}</p>
+          </div>
+        </div>
+      </a>
+    `).join('') + '</div>';
+  };
+  
+  const performSearch = (query) => {
+    if (!query) {
+      results.innerHTML = '<div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500"><p class="text-sm">输入关键词搜索文章</p></div>';
+      return;
+    }
+    
+    const lowerQuery = query.toLowerCase();
+    const hits = searchIndex
+      .filter(post => 
+        post.title.toLowerCase().includes(lowerQuery) || 
+        post.description.toLowerCase().includes(lowerQuery) ||
+        post.content.toLowerCase().includes(lowerQuery)
+      )
+      .slice(0, 8);
+    
+    renderResults(hits);
+  };
+  
+  trigger.addEventListener('click', openModal);
+  backdrop?.addEventListener('click', closeModal);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+    // Cmd/Ctrl + K to open
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+  
+  // Search functionality
+  input?.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    
+    clearTimeout(searchTimeout);
+    selectedIndex = -1;
+    
+    if (!query) {
+      results.innerHTML = '<div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500"><p class="text-sm">输入关键词搜索文章</p></div>';
+      return;
+    }
+    
+    results.innerHTML = '<div class="px-4 py-8 text-center text-gray-400 dark:text-gray-500"><p class="text-sm">搜索中...</p></div>';
+    
+    searchTimeout = setTimeout(() => {
+      performSearch(query);
+    }, 200);
+  });
+  
+  // Keyboard navigation
+  input?.addEventListener('keydown', (e) => {
+    const items = results.querySelectorAll('.search-result-item');
+    if (!items.length) return;
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+      items.forEach((item, i) => {
+        item.classList.toggle('bg-gray-50', i === selectedIndex);
+        item.classList.toggle('dark:bg-gray-800/30', i === selectedIndex);
+      });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      items.forEach((item, i) => {
+        item.classList.toggle('bg-gray-50', i === selectedIndex);
+        item.classList.toggle('dark:bg-gray-800/30', i === selectedIndex);
+      });
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      const selectedItem = items[selectedIndex];
+      if (selectedItem) {
+        window.location.href = selectedItem.getAttribute('href');
+      }
+    }
+  });
+});
 </script>

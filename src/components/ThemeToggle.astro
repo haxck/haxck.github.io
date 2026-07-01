@@ -1,28 +1,18 @@
-<button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="切换主题" transition:persist>
-  <span class="toggle-track">
-    <span class="toggle-thumb">
-      <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-      <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </span>
-  </span>
+<button id="theme-toggle-btn" class="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="切换主题">
+  <svg id="icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+  <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
 </button>
 
 <script is:inline>
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle-btn");
-    if (!btn) return;
+    const sunIcon = document.getElementById("icon-sun");
+    const moonIcon = document.getElementById("icon-moon");
+    if (!btn || !sunIcon || !moonIcon) return;
 
     const currentTheme = localStorage.getItem("theme");
     if (currentTheme) {
@@ -33,11 +23,13 @@
       return document.documentElement.classList.contains("dark");
     }
 
-    function updateToggle() {
-      btn.classList.toggle("dark", isDark());
+    function updateIcons() {
+      const dark = isDark();
+      sunIcon.classList.toggle("hidden", dark);
+      moonIcon.classList.toggle("hidden", !dark);
     }
 
-    updateToggle();
+    updateIcons();
 
     btn.addEventListener("click", () => {
       if (isDark()) {
@@ -47,94 +39,15 @@
         document.documentElement.classList.add("dark");
         localStorage.setItem("theme", "dark");
       }
-      updateToggle();
+      updateIcons();
     });
 
     document.addEventListener("astro:after-swap", () => {
       const t = localStorage.getItem("theme");
       if (t) document.documentElement.setAttribute("class", t);
-      updateToggle();
+      updateIcons();
     });
   }
 
   initThemeToggle();
 </script>
-
-<style is:global>
-  .theme-toggle-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
-  }
-
-  .theme-toggle-btn:focus-visible .toggle-track {
-    outline: 2px solid #6366f1;
-    outline-offset: 2px;
-  }
-
-  .toggle-track {
-    display: flex;
-    align-items: center;
-    width: 48px;
-    height: 28px;
-    border-radius: 14px;
-    padding: 3px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: #e2e8f0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
-  .dark .toggle-track {
-    background: #334155;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
-
-  .toggle-thumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-  }
-
-  .dark .toggle-thumb {
-    transform: translateX(20px);
-    background: #1e293b;
-  }
-
-  .toggle-thumb .icon-sun,
-  .toggle-thumb .icon-moon {
-    position: absolute;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .icon-sun {
-    color: #f59e0b;
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  .icon-moon {
-    color: #94a3b8;
-    opacity: 0;
-    transform: rotate(-90deg) scale(0.5);
-  }
-
-  .dark .icon-sun {
-    opacity: 0;
-    transform: rotate(90deg) scale(0.5);
-  }
-
-  .dark .icon-moon {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-</style>
