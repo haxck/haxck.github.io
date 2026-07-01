@@ -1,6 +1,8 @@
 @import url("https://fontsapi.zeoseven.com/3/main/result.css");
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "得意黑";
   font-weight: 400;
