@@ -5,13 +5,22 @@ import ThemeToggle from "./ThemeToggle.astro";
 import DocSearch from "./DocSearch.astro";
 
 const currentPath = Astro.url.pathname;
+
+// Find the most specific matching nav item (longest link first)
+const sortedNavs = [...NAVS].sort((a, b) => b.link.length - a.link.length);
+const activeNavLink = sortedNavs.find(el => 
+    currentPath === el.link || 
+    (el.link !== "/" && currentPath.startsWith(el.link))
+)?.link;
+
+const getIsActive = (link: string) => link === activeNavLink;
 ---
 
 <header class="header-wrap sticky top-0 z-50 transition-all duration-500">
   <div class="nav-container flex items-center justify-center">
     <div class="max-w-screen-lg w-full px-5 py-3 flex items-center justify-between">
-      <a href="/" class="shrink-0">
-        <span class="text-xl font-bold text-gray-900 dark:text-gray-100">
+      <a href="/" class="shrink-0 group">
+        <span class="text-xl font-bold bg-linear-to-r from-primary-600 to-secondary-500 bg-clip-text group-hover:from-primary-500 group-hover:to-secondary-400 transition-all duration-300">
           {SITE_TITLE}
         </span>
       </a>
@@ -20,21 +29,22 @@ const currentPath = Astro.url.pathname;
         <ul class="hidden sm:flex items-center gap-0.5">
           {
             NAVS.map((el) => {
-              const isActive =
-                currentPath === el.link ||
-                (el.link !== "/" && currentPath.startsWith(el.link));
+              const isActive = getIsActive(el.link);
               return (
                 <li>
                   <HeaderLink
                     href={el.link}
                     class:list={[
-                      "px-3 py-1.5 text-sm rounded-md transition-colors duration-200",
+                      "relative px-3 py-1.5 text-sm rounded-md transition-all duration-200",
                       isActive
-                        ? "text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 font-medium"
-                        : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50",
+                        ? "text-primary-600 dark:text-primary-400 font-medium"
+                        : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100",
                     ]}
                   >
                     {el.name}
+                    {isActive && (
+                      <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full" />
+                    )}
                   </HeaderLink>
                 </li>
               );
@@ -63,21 +73,22 @@ const currentPath = Astro.url.pathname;
     <ul class="max-w-screen-lg mx-auto py-3 px-5 flex flex-col gap-1">
       {
         NAVS.map((el) => {
-          const isActive =
-            currentPath === el.link ||
-            (el.link !== "/" && currentPath.startsWith(el.link));
+          const isActive = getIsActive(el.link);
           return (
             <li>
               <a
                 href={el.link}
                 class:list={[
-                  "block px-4 py-2.5 rounded-lg text-sm transition-colors duration-200",
+                  "relative block px-4 py-2.5 rounded-lg text-sm transition-all duration-200",
                   isActive
-                    ? "text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800 font-medium"
+                    ? "text-primary-600 dark:text-primary-400 font-medium"
                     : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50",
                 ]}
               >
                 {el.name}
+                {isActive && (
+                  <span class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-4 bg-primary-500 dark:bg-primary-400 rounded-full" />
+                )}
               </a>
             </li>
           );
