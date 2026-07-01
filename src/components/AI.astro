@@ -5,11 +5,11 @@ const { ai } = Astro.props;
 
 <!-- Component: Outline accordion with icons -->
 <section
-  class="w-full bg-white border divide-y rounded divide-slate-200 border-slate-200"
+  class="w-full bg-white dark:bg-gray-900 border divide-y rounded divide-slate-200 dark:divide-gray-700 border-slate-200 dark:border-gray-700"
 >
   <details class="p-4 group overflow-hidden">
     <summary
-      class="[&::-webkit-details-marker]:hidden relative flex items-center gap-4 pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900"
+      class="[&::-webkit-details-marker]:hidden relative flex items-center gap-4 pr-8 font-medium list-none cursor-pointer text-slate-700 dark:text-gray-200 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900 dark:group-hover:text-white"
     >
       <Icon name={"mdi:stars"} class:list={"w-6 h-6 flex-shrink-0"} />
       <span>AI Summary</span>
@@ -21,7 +21,7 @@ const { ai } = Astro.props;
     </summary>
     <div class="overflow-hidden">
       <div class="summary-content">
-        <p class="text-slate-500 mb-0">
+        <p class="text-slate-500 dark:text-gray-400 mb-0">
           {ai}
         </p>
       </div>

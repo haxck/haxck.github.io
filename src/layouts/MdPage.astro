@@ -9,7 +9,7 @@ const {title, description} = Astro.props.frontmatter;
   keywords={['更新日志', 'changelog', '博客']}
 >
   <About slot="left"></About>
-  <div class="prose max-w-full" slot="right">
+  <div class="prose dark:prose-invert max-w-full" slot="right">
     <slot></slot>
   </div>
 </IndexPage>

@@ -8,46 +8,45 @@
 </button>
 
 <script is:inline>
-  function initThemeToggle() {
-    const btn = document.getElementById("theme-toggle-btn");
-    const sunIcon = document.getElementById("icon-sun");
-    const moonIcon = document.getElementById("icon-moon");
-    if (!btn || !sunIcon || !moonIcon) return;
-
-    const currentTheme = localStorage.getItem("theme");
-    if (currentTheme) {
-      document.documentElement.setAttribute("class", currentTheme);
-    }
-
-    function isDark() {
-      return document.documentElement.classList.contains("dark");
-    }
-
-    function updateIcons() {
-      const dark = isDark();
-      sunIcon.classList.toggle("hidden", dark);
-      moonIcon.classList.toggle("hidden", !dark);
-    }
-
-    updateIcons();
-
-    btn.addEventListener("click", () => {
-      if (isDark()) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      }
-      updateIcons();
-    });
-
-    document.addEventListener("astro:after-swap", () => {
-      const t = localStorage.getItem("theme");
-      if (t) document.documentElement.setAttribute("class", t);
-      updateIcons();
-    });
+  function isDark() {
+    return document.documentElement.classList.contains("dark");
   }
 
-  initThemeToggle();
+  function updateThemeIcons() {
+    const sunIcon = document.getElementById("icon-sun");
+    const moonIcon = document.getElementById("icon-moon");
+    if (!sunIcon || !moonIcon) return;
+    const dark = isDark();
+    sunIcon.classList.toggle("hidden", dark);
+    moonIcon.classList.toggle("hidden", !dark);
+  }
+
+  function toggleTheme() {
+    if (isDark()) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    updateThemeIcons();
+  }
+
+  // Use event delegation so it works after Astro page swaps
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("#theme-toggle-btn");
+    if (btn) {
+      toggleTheme();
+    }
+  });
+
+  // Restore theme on page load and after navigation
+  function restoreTheme() {
+    const t = localStorage.getItem("theme");
+    if (t) document.documentElement.setAttribute("class", t);
+    updateThemeIcons();
+  }
+
+  restoreTheme();
+  document.addEventListener("astro:after-swap", restoreTheme);
 </script>
