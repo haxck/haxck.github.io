@@ -1,9 +1,14 @@
 ---
 import BasePage from "../layouts/BasePage.astro";
-const {title, sidebar = true} = Astro.props;
+const {
+  title, 
+  sidebar = true,
+  description,
+  keywords,
+} = Astro.props;
 ---
 
-<BasePage title={title}>
+<BasePage title={title} description={description} keywords={keywords}>
   {sidebar ? (
     <div class="grid grid-cols-4 gap-6 animate-fade-in">
       <div class="col-span-4 lg:col-span-1">

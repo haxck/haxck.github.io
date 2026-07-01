@@ -1,0 +1,97 @@
+---
+export interface Props {
+	type?: 'website' | 'article' | 'breadcrumb';
+	title?: string;
+	description?: string;
+	url?: string;
+	image?: string;
+	publishedTime?: string;
+	modifiedTime?: string;
+	author?: string;
+	tags?: string[];
+	breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const {
+	type = 'website',
+	title,
+	description,
+	url,
+	image,
+	publishedTime,
+	modifiedTime,
+	author = 'Haxck',
+	tags = [],
+	breadcrumbs = [],
+} = Astro.props;
+
+const siteUrl = 'https://haxck.com';
+
+// WebSite Schema with SearchAction
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: "haxck's blog",
+	url: siteUrl,
+	description: description || 'Haxck 的个人主页 — 做产品 / 写代码 / 喜设计',
+	potentialAction: {
+		'@type': 'SearchAction',
+		target: {
+			'@type': 'EntryPoint',
+			urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+		},
+		'query-input': 'required name=search_term_string',
+	},
+};
+
+// Article Schema
+const articleSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: title,
+	description: description,
+	image: image ? new URL(image, siteUrl).toString() : undefined,
+	datePublished: publishedTime,
+	dateModified: modifiedTime || publishedTime,
+	author: {
+		'@type': 'Person',
+		name: author,
+		url: siteUrl,
+	},
+	publisher: {
+		'@type': 'Person',
+		name: author,
+		url: siteUrl,
+	},
+	mainEntityOfPage: {
+		'@type': 'WebPage',
+		'@id': url,
+	},
+	keywords: tags.join(', '),
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: breadcrumbs.map((item, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		name: item.name,
+		item: item.url,
+	})),
+};
+
+const getSchema = () => {
+	switch (type) {
+		case 'article':
+			return articleSchema;
+		case 'breadcrumb':
+			return breadcrumbSchema;
+		default:
+			return websiteSchema;
+	}
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(getSchema())} />

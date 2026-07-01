@@ -34,7 +34,11 @@ export async function getStaticPaths() {
 const { tag, posts } = Astro.props;
 ---
 
-<IndexPage title={`标签: ${tag}`}>
+<IndexPage 
+  title={`标签: ${tag}`}
+  description={`浏览标签为 "${tag}" 的所有文章`}
+  keywords={[tag, '标签', '博客']}
+>
   <About slot="left" />
 
   <section class="px-2" slot="right">

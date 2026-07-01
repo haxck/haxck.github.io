@@ -1,5 +1,6 @@
 ---
 title: 更新日志
+description: "博客的更新日志，记录功能迭代和改进"
 date: 2023-12-05 14:10:16
 update: 2023-12-05 14:10:16
 layout: ../layouts/MdPage.astro

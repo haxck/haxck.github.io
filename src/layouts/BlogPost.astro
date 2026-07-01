@@ -4,6 +4,7 @@ import BasePage from "./BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import TableOfContents from "../components/TOC.astro";
 import Divider from "../components/Divider.astro";
+import JsonLd from "../components/JsonLd.astro";
 import { Icon } from 'astro-icon/components'
 import AI from "../components/AI.astro";
 
@@ -13,9 +14,31 @@ const { title, description, pubDate, updatedDate, heroImage, tags, toc, ai } =
 const allPosts = (await getCollection("blog"))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 5);
+
+const articleUrl = Astro.url.toString();
+const publishedISO = pubDate instanceof Date ? pubDate.toISOString() : new Date(pubDate).toISOString();
+const modifiedISO = updatedDate instanceof Date ? updatedDate.toISOString() : updatedDate ? new Date(updatedDate).toISOString() : undefined;
 ---
 
-<BasePage title={title} description={description}>
+<BasePage 
+	title={title} 
+	description={description}
+	type="article"
+	image={heroImage}
+	publishedTime={publishedISO}
+	modifiedTime={modifiedISO}
+	tags={tags}
+>
+	<JsonLd 
+		type="article"
+		title={title}
+		description={description}
+		url={articleUrl}
+		image={heroImage}
+		publishedTime={publishedISO}
+		modifiedTime={modifiedISO}
+		tags={tags}
+	/>
 	<div class="relative">
 		{toc.length > 1 && (
 			<aside class="hidden xl:block fixed top-24 right-[calc(50%-640px+1rem)] w-56">
@@ -26,14 +49,14 @@ const allPosts = (await getCollection("blog"))
 			</aside>
 		)}
 
-		<article class="prose mx-auto py-4">
+		<article class="prose mx-auto py-4" itemscope itemtype="https://schema.org/Article">
 			{heroImage && (
 				<div class="rounded-2xl overflow-hidden mb-6 -mt-2 shadow-md">
-					<img width={720} height={360} src={heroImage} alt="" class="w-full" />
+					<img width={720} height={360} src={heroImage} alt={title} class="w-full" itemprop="image" />
 				</div>
 			)}
 
-			<h1 class="mb-0 title">
+			<h1 class="mb-0 title" itemprop="headline">
 				{title}
 			</h1>
 
@@ -42,6 +65,7 @@ const allPosts = (await getCollection("blog"))
 					<a
 						href={`/blog/tags/${tag}/`}
 						class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
+						rel="tag"
 					>
 						{tag}
 					</a>
@@ -51,13 +75,17 @@ const allPosts = (await getCollection("blog"))
 
 				<span class="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
 					<Icon name="mdi:calendar-outline" class="w-3.5 h-3.5" />
-					<FormattedDate date={pubDate} />
+					<time datetime={publishedISO} itemprop="datePublished">
+						<FormattedDate date={pubDate} />
+					</time>
 				</span>
 
 				{updatedDate && (
 					<span class="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
 						<Icon name="mdi:update" class="w-3.5 h-3.5" />
-						<FormattedDate date={updatedDate} />
+						<time datetime={modifiedISO} itemprop="dateModified">
+							<FormattedDate date={updatedDate} />
+						</time>
 					</span>
 				)}
 
@@ -70,7 +98,7 @@ const allPosts = (await getCollection("blog"))
 			</div>
 
 			{ai && <AI ai={ai} />}
-			<div class="mt-8 min-w-full leading-7">
+			<div class="mt-8 min-w-full leading-7" itemprop="articleBody">
 				<slot />
 			</div>
 			<Divider />

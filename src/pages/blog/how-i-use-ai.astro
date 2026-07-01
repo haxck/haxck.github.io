@@ -5,7 +5,11 @@ import About from "../../components/About.astro";
 const entries = await getCollection("useai");
 ---
 
-<IndexPage title="我如何用 AI">
+<IndexPage 
+  title="我如何用 AI"
+  description="记录日常工作生活中使用 AI 提高效率的方式"
+  keywords={['AI', '人工智能', '效率', '工具', '工作流']}
+>
     <About slot="left" />
     <div slot="right">
         <div class="mb-8">

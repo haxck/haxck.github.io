@@ -3,27 +3,36 @@ import { getCollection } from "astro:content";
 import BasePage from "../layouts/BasePage.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import SocialCards from "../components/index/SocialCards.astro";
+import JsonLd from "../components/JsonLd.astro";
 
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
 ---
 
-<BasePage title="记录我的一切" description="Haxck 的个人主页 — 做产品 / 写代码 / 喜设计">
+<BasePage 
+  title="记录我的一切" 
+  description="Haxck 的个人主页 — 做产品 / 写代码 / 喜设计"
+  keywords={['Haxck', '博客', '开发者', '产品设计', '技术分享']}
+>
+  <JsonLd type="website" />
   <div class="py-12 px-4">
     <!-- Hero -->
-    <section class="text-center mb-12">
+    <section class="text-center mb-12" itemscope itemtype="https://schema.org/Person">
       <div class="mb-6">
         <img
           src="/images/icon180.png"
-          alt="avatar"
+          alt="Haxck 的头像"
           class="w-24 h-24 rounded-full mx-auto shadow-lg ring-4 ring-white dark:ring-gray-800"
+          itemprop="image"
+          width="96"
+          height="96"
         />
       </div>
-      <h1 class="text-4xl font-bold mb-2 ">
+      <h1 class="text-4xl font-bold mb-2" itemprop="name">
         Hi, I'm Haxck
       </h1>
-      <p class="text-lg text-gray-500 dark:text-gray-400 mb-4">
+      <p class="text-lg text-gray-500 dark:text-gray-400 mb-4" itemprop="jobTitle">
         Creator & Developer
       </p>
       <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -33,6 +42,7 @@ const posts = (await getCollection("blog"))
         如果失眠在深夜，<a href="#" class="text-primary-500 hover:underline">NightMate</a> 伴你入睡；
         如果心念某人，不如写一封 <a href="http://echo.haxck.com" class="text-primary-500 hover:underline">Echo</a> 给 TA。
       </p>
+      <link itemprop="url" href="https://haxck.com" />
     </section>
 
     <!-- Social Links with animation -->

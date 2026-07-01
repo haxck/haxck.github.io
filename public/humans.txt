@@ -1,0 +1,12 @@
+/* TEAM */
+	Author: Haxck
+	Contact: haxck[at]haxck.com
+	From: China
+
+/* SITE */
+	Last update: 2026/07/01
+	Language: Chinese
+	Doctype: HTML5
+	IDE: VS Code
+	Framework: Astro
+	Hosting: GitHub Pages
