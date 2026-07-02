@@ -1,45 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
 import About from "../../components/About.astro";
 
-interface Quote {
-  text: string;
-  source?: string;
-  author?: string;
-  url?: string;
-}
-
-const quotes: Quote[] = [
-  {
-    text: "当你停止创造，你的才能就不再重要，你所拥有的只剩下你的品位。而品位会裹挟你，让你排斥他人，变得狭隘。所以，要创造。",
-    source: "《我说的不一定对》",
-    author: "梁欢",
-    url: "https://book.douban.com/subject/26662051/",
-  },
-  {
-    text: '如果电影有所谓“戏剧张力”，那也并不是来自于“讲什么”，而是“怎么讲”。',
-    source: "Martin",
-    url: "https://daily.zhihu.com/story/3877358",
-  },
-  {
-    text: "高明的决策者追求的不是每一次都赌赢，而是一个让赢的概率大于输的概率的科学决策系统。",
-    author: "万维钢",
-  },
-  {
-    text: "勇敢不是冲动，理智不足的人，容易混淆两者。勇敢的成功概率高，冲动的成功概率底。我很赞成在改变之前做足功课。",
-    source: "勇敢者必然更幸运",
-    author: "连岳",
-    url: "https://mp.weixin.qq.com/s/Zsy5cUSRO-nBG62joykj6w",
-  },
-  {
-    text: "能否在占据绝对优势的时候仍像逆境中一样坚持努力，是职业选手与普通玩家的根本区别。",
-  },
-  {
-    text: "美妙人生的关键在于你能迷上什么东西。",
-    source: "《球状闪电》",
-    author: "刘慈欣",
-  },
-];
+const quotes = (await getCollection("quotes"))[0];
 ---
 
 <IndexPage 
@@ -58,7 +22,7 @@ const quotes: Quote[] = [
     </div>
 
     <div class="space-y-6">
-      {quotes.map((quote) => (
+      {quotes.data.map((quote) => (
         <blockquote class="relative pl-5 border-l-2 border-gray-200 dark:border-gray-700">
           <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
             {quote.text}

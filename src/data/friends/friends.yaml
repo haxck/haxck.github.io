@@ -1,0 +1,31 @@
+- name: Owen Young
+  url: https://www.owenyoung.com/
+  description: 沉浸式翻译作者的博客
+
+- name: plantegg
+  url: https://plantegg.github.io/
+  description: TCP、Linux、MySQL 技术博客
+
+- name: 曾哥
+  url: https://blog.zgsec.cn/
+  description: 安全相关
+
+- name: Airing
+  url: https://blog.ursb.me/
+  description: 前端、哲学
+
+- name: 屈屈
+  url: https://imququ.com/
+  description: Web 开发，HTTP2 相关文章，也是打开网页最快的网站
+
+- name: 水八口
+  url: https://shuiba.co/
+  description: 水八口
+
+- name: 三轮车
+  url: https://sanlun.bike/
+  description: 三轮车
+
+- name: Lucida
+  url: https://blog.lucida.me/
+  description: 《程序员必读书单》作者，文字简洁干练，直击核心

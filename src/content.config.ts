@@ -35,4 +35,34 @@ const useai = defineCollection({
 	}),
 });
 
-export const collections = { blog, useai };
+const goals = defineCollection({
+	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/list/" }),
+	schema: z.array(z.object({
+		text: z.string(),
+		sub: z.string(),
+		done: z.boolean(),
+		date: z.string().optional(),
+		note: z.string().optional(),
+	})),
+});
+
+const quotes = defineCollection({
+	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/quotes/" }),
+	schema: z.array(z.object({
+		text: z.string(),
+		source: z.string().optional(),
+		author: z.string().optional(),
+		url: z.string().optional(),
+	})),
+});
+
+const friends = defineCollection({
+	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/friends/" }),
+	schema: z.array(z.object({
+		name: z.string(),
+		url: z.string(),
+		description: z.string(),
+	})),
+});
+
+export const collections = { blog, useai, goals, quotes, friends };

@@ -1,24 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
 import About from "../../components/About.astro";
 
-interface Goal {
-  text: string;
-  sub: string;
-  done: boolean;
-  note?: string;
-}
-
-const goals: Goal[] = [
-  { text: "Write blog", sub: "写博客", done: true },
-  { text: "Driver's license", sub: "考取驾照", done: true },
-  { text: "Have business", sub: "做生意", done: false },
-  { text: "Go to a music festival", sub: "去一次音乐节", done: true, note: "2024-12-29" },
-  { text: "Learn to ski", sub: "滑雪", done: false },
-  { text: "Make a game", sub: "做游戏", done: false },
-  { text: "Write a book", sub: "写书", done: false },
-  { text: "Make a Wechat Sticker", sub: "做微信表情包", done: false },
-];
+const goalsCollection = await getCollection("goals");
+const goalsData = goalsCollection[0]?.data || [];
 ---
 
 <IndexPage title="清单">
@@ -32,53 +18,143 @@ const goals: Goal[] = [
       </p>
     </div>
 
-    <ul class="space-y-2">
-      {goals.map((goal) => (
-        <li class:list={[
-          "flex items-center gap-4 px-4 py-3.5 rounded-xl transition-colors duration-200",
-          goal.done
-            ? "bg-gray-50 dark:bg-gray-800/50"
-            : "bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700",
-        ]}>
-          <span class:list={[
-            "flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center",
-            goal.done
-              ? "border-gray-300 dark:border-gray-600 bg-gray-300 dark:bg-gray-600"
-              : "border-gray-300 dark:border-gray-600",
-          ]}>
-            {goal.done && (
-              <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
+    <div class="flex flex-wrap gap-2.5 mb-6">
+      <button
+        id="btn-shuffle"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h4l3 9 3-9h4M4 20h4l3-9 3 9h4M18 4l2 2-2 2M18 18l2 2-2 2"/></svg>
+        <span class="font-medium text-sm">打乱</span>
+      </button>
+      <button
+        id="btn-sort"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M6 12h12M10 18h4"/></svg>
+        <span class="font-medium text-sm">整理</span>
+      </button>
+    </div>
+
+    <ul class="space-y-2 relative" id="goals-list">
+      {
+        goalsData.map((goal, index) => (
+          <li
+            data-done={String(goal.done)}
+            data-index={index}
+            class:list={[
+              "flex items-center gap-4 px-4 py-3.5 rounded-xl",
+              goal.done
+                ? "bg-gray-50 dark:bg-gray-800/50"
+                : "bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700",
+            ]}
+          >
+            <span
+              class:list={[
+                "flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors",
+                goal.done
+                  ? "border-gray-300 dark:border-gray-600 bg-gray-300 dark:bg-gray-600"
+                  : "border-gray-300 dark:border-gray-600",
+              ]}
+            >
+              {goal.done && (
+                <svg
+                  class="w-3 h-3 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </span>
+
+            <div class="flex-1 min-w-0">
+              <span
+                class:list={[
+                  "block font-medium",
+                  goal.done
+                    ? "text-gray-400 dark:text-gray-500 line-through"
+                    : "text-gray-800 dark:text-gray-100",
+                ]}
+              >
+                {goal.text}
+              </span>
+              <span
+                class:list={[
+                  "block text-sm mt-0.5",
+                  goal.done
+                    ? "text-gray-300 dark:text-gray-600 line-through"
+                    : "text-gray-400 dark:text-gray-500",
+                ]}
+              >
+                {goal.sub}
+              </span>
+              {goal.note && (
+                <span class="block text-xs text-gray-400 dark:text-gray-500 mt-1">
+                  {goal.note}
+                </span>
+              )}
+            </div>
+
+            {goal.date && (
+              <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">
+                {goal.date}
+              </span>
             )}
-          </span>
-
-          <div class="flex-1 min-w-0">
-            <span class:list={[
-              "block font-medium",
-              goal.done
-                ? "text-gray-400 dark:text-gray-500 line-through"
-                : "text-gray-800 dark:text-gray-100",
-            ]}>
-              {goal.text}
-            </span>
-            <span class:list={[
-              "block text-sm mt-0.5",
-              goal.done
-                ? "text-gray-300 dark:text-gray-600 line-through"
-                : "text-gray-400 dark:text-gray-500",
-            ]}>
-              {goal.sub}
-            </span>
-          </div>
-
-          {goal.note && (
-            <span class="text-xs text-gray-300 dark:text-gray-600 shrink-0 tabular-nums">
-              {goal.note}
-            </span>
-          )}
-        </li>
-      ))}
+          </li>
+        ))
+      }
     </ul>
+
+<script type="module">
+import { createLayout, utils } from "animejs";
+
+let layout;
+let doneFirst=false;
+
+function list(){return document.getElementById("goals-list");}
+function items(){return [...list().querySelectorAll("li")];}
+
+function ensureLayout(){
+  if(!layout){
+    layout=createLayout(list(),{duration:550,ease:"out-quad"});
+  }
+}
+
+function move(arr){
+  ensureLayout();
+  layout.update(()=>{
+    arr.forEach(i=>list().appendChild(i));
+  });
+}
+
+function bind(){
+  const shuffle=document.getElementById("btn-shuffle");
+  const sort=document.getElementById("btn-sort");
+
+  shuffle.onclick=()=>{
+    move(utils.shuffle([...items()]));
+  };
+
+  sort.onclick=()=>{
+    doneFirst=!doneFirst;
+    const all=items();
+    const done=all.filter(i=>i.dataset.done==="true")
+      .sort((a,b)=>Number(a.dataset.index)-Number(b.dataset.index));
+    const todo=all.filter(i=>i.dataset.done==="false")
+      .sort((a,b)=>Number(a.dataset.index)-Number(b.dataset.index));
+
+    move(doneFirst?[...done,...todo]:[...todo,...done]);
+  };
+}
+
+document.addEventListener("astro:page-load",()=>{
+  layout=undefined;
+  bind();
+});
+
+bind();
+</script>
   </section>
 </IndexPage>
