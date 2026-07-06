@@ -6,6 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import vue from '@astrojs/vue';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // import algolia from "./src/utils/algolia.ts"
 // import react from '@astrojs/react';
 
@@ -24,4 +26,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare(),
 });
