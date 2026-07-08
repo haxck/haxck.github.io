@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import IndexPage from "../../layouts/IndexPage.astro";
 import About from "../../components/About.astro";
 
-const quotes = (await getCollection("quotes"))[0];
+const quotes = await getCollection("quotes");
 ---
 
 <IndexPage 
@@ -22,7 +22,9 @@ const quotes = (await getCollection("quotes"))[0];
     </div>
 
     <div class="space-y-6">
-      {quotes.data.map((quote) => (
+      {quotes.map((entry) => {
+        const quote = entry.data;
+        return (
         <blockquote class="relative pl-5 border-l-2 border-gray-200 dark:border-gray-700">
           <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
             {quote.text}
@@ -50,7 +52,8 @@ const quotes = (await getCollection("quotes"))[0];
             </footer>
           )}
         </blockquote>
-      ))}
+        );
+      })}
     </div>
   </section>
 </IndexPage>

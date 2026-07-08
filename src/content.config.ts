@@ -37,23 +37,23 @@ const useai = defineCollection({
 
 const goals = defineCollection({
 	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/list/" }),
-	schema: z.array(z.object({
+	schema: z.object({
 		text: z.string(),
 		sub: z.string(),
 		done: z.boolean(),
 		date: z.string().optional(),
 		note: z.string().optional(),
-	})),
+	}),
 });
 
 const quotes = defineCollection({
 	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/quotes/" }),
-	schema: z.array(z.object({
+	schema: z.object({
 		text: z.string(),
 		source: z.string().optional(),
 		author: z.string().optional(),
 		url: z.string().optional(),
-	})),
+	}),
 });
 
 const friends = defineCollection({
