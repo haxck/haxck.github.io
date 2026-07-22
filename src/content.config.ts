@@ -65,4 +65,14 @@ const friends = defineCollection({
 	})),
 });
 
-export const collections = { blog, useai, goals, quotes, friends };
+const photos = defineCollection({
+	loader: glob({ pattern: '**\/[^_]*.yaml*', base: "./src/data/photos/" }),
+	schema: z.object({
+		alt: z.string().optional(),
+		date: z.string().optional(),
+		location: z.string().optional(),
+		tags: z.array(z.string()).optional(),
+	}),
+});
+
+export const collections = { blog, useai, goals, quotes, friends, photos };

@@ -1,0 +1,295 @@
+---
+interface Props {
+  photos: {
+    src: string;
+    alt: string;
+    location?: string;
+    date?: string;
+    tags?: string[];
+    width?: number;
+    height?: number;
+  }[];
+}
+
+// Build a serializable copy for the client (ImageMetadata objects don't survive prerender)
+const photoData = Astro.props.photos.map((p) => ({
+  src: p.src,
+  alt: p.alt,
+  location: p.location,
+  date: p.date,
+  tags: p.tags,
+  width: p.width,
+  height: p.height,
+}));
+---
+
+<!-- Safe JSON injection: parse from typed script, never innerHTML -->
+<script id="photo-data" type="application/json" set:html={JSON.stringify(photoData)} />
+
+<!-- Lightbox Modal -->
+<div
+  id="photoModal"
+  class="fixed inset-0 z-50 hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="照片预览"
+>
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" data-modal-close></div>
+
+  <!-- Close -->
+  <button
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+    data-modal-close
+    aria-label="关闭"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+  </button>
+
+  <!-- Nav arrows -->
+  <button
+    id="modalPrev"
+    class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+    aria-label="上一张"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+  </button>
+  <button
+    id="modalNext"
+    class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+    aria-label="下一张"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+  </button>
+
+  <!-- Content: grid with image row + info row -->
+  <div class="relative w-full h-full grid grid-rows-[minmax(0,1fr)_auto] gap-4 p-6 pt-14 pb-6 overflow-hidden" data-modal-close>
+    <!-- Image row -->
+    <div class="flex items-center justify-center overflow-hidden" data-modal-close>
+      <div id="modalFrame" class="photo-frame-modal max-w-full max-h-full">
+        <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain" />
+      </div>
+    </div>
+
+    <!-- Info row -->
+    <div id="modalCaption" class="text-center px-4 shrink-0">
+      <p id="modalAlt" class="text-lg font-medium text-white/90"></p>
+      <div id="modalMeta" class="flex items-center justify-center gap-3 mt-2 text-sm text-white/50"></div>
+      <div id="modalTags" class="flex items-center justify-center gap-2 mt-3"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .photo-frame-modal img {
+    display: block;
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<script>
+  /// <reference lib="dom" />
+
+  // Read data once from safe JSON script (fixes #7, #9)
+  const photoDataEl = document.getElementById("photo-data");
+  const photos = JSON.parse(photoDataEl?.textContent ?? "[]");
+
+  let currentIndex = 0;
+
+  // Cache DOM queries (fixes #13)
+  const modal = document.getElementById("photoModal")!;
+  const modalImage = document.getElementById("modalImage") as HTMLImageElement;
+  const modalFrame = document.getElementById("modalFrame")!;
+  const modalAlt = document.getElementById("modalAlt")!;
+  const modalMeta = document.getElementById("modalMeta")!;
+  const modalTags = document.getElementById("modalTags")!;
+
+  function fitFrame(index: number) {
+    const photo = photos[index];
+    const cw = window.innerWidth - 48;
+    const ch = window.innerHeight - 160;
+
+    function applySize(w: number, h: number) {
+      const ratio = w / h;
+      let fw = cw;
+      let fh = cw / ratio;
+      if (fh > ch) { fh = ch; fw = ch * ratio; }
+      modalFrame.style.width = Math.round(fw) + "px";
+      modalFrame.style.height = Math.round(fh) + "px";
+    }
+
+    if (photo.width && photo.height) {
+      applySize(photo.width, photo.height);
+    } else if (modalImage.complete && modalImage.naturalWidth) {
+      applySize(modalImage.naturalWidth, modalImage.naturalHeight);
+    } else {
+      modalImage.onload = function () {
+        applySize(modalImage.naturalWidth, modalImage.naturalHeight);
+      };
+      modalFrame.style.width = "";
+      modalFrame.style.height = "";
+    }
+  }
+
+  function updateModal() {
+    const photo = photos[currentIndex];
+    modalImage.src = photo.src;
+    modalImage.alt = photo.alt;
+    modalAlt.textContent = photo.alt;  // fixes #4, #6
+
+    // Meta with icons — DOM API, no innerHTML for user content (fixes #4)
+    modalMeta.replaceChildren();
+    if (photo.location || photo.date) {
+      const locIcon = '<svg class="w-4 h-4 shrink-0 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>';
+      const dateIcon = '<svg class="w-4 h-4 shrink-0 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>';
+      if (photo.location) {
+        const div = document.createElement("div");
+        div.className = "flex items-center gap-2";
+        div.innerHTML = locIcon;
+        const span = document.createElement("span");
+        span.textContent = photo.location;  // safe
+        div.appendChild(span);
+        modalMeta.appendChild(div);
+      }
+      if (photo.date) {
+        const div = document.createElement("div");
+        div.className = "flex items-center gap-2";
+        div.innerHTML = dateIcon;
+        const span = document.createElement("span");
+        span.textContent = photo.date;  // safe
+        div.appendChild(span);
+        modalMeta.appendChild(div);
+      }
+      modalMeta.style.display = "flex";
+    } else {
+      modalMeta.style.display = "none";
+    }
+
+    // Tags — DOM API (fixes #4)
+    modalTags.replaceChildren();
+    if (photo.tags && photo.tags.length) {
+      photo.tags.forEach((tag: string) => {
+        const span = document.createElement("span");
+        span.className = "px-3 py-1 text-xs font-medium rounded-full bg-white/15 text-white/80 border border-white/10";
+        span.textContent = tag;  // safe
+        modalTags.appendChild(span);
+      });
+      modalTags.style.display = "flex";
+    } else {
+      modalTags.style.display = "none";
+    }
+  }
+
+  function openPhotoModal(index: number, thumbEl: HTMLImageElement | null) {
+    currentIndex = index;
+    updateModal();
+    fitFrame(index);
+    modal.classList.remove("hidden");
+    // Reset opacity (in case close fade was interrupted)
+    modal.style.opacity = "1";
+    document.body.style.overflow = "hidden";
+
+    // FLIP animation
+    if (thumbEl) {
+      const thumbRect = thumbEl.getBoundingClientRect();
+      const frameRect = modalFrame.getBoundingClientRect();
+      const scale = thumbRect.width / frameRect.width;
+      const dx = thumbRect.left + thumbRect.width / 2 - (frameRect.left + frameRect.width / 2);
+      const dy = thumbRect.top + thumbRect.height / 2 - (frameRect.top + frameRect.height / 2);
+      modalFrame.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+      modalFrame.style.opacity = "0";
+    }
+
+    void modalFrame.offsetWidth;
+    modalFrame.style.transition = "transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease-out";
+    modalFrame.style.transform = "translate(0, 0) scale(1)";
+    modalFrame.style.opacity = "1";
+
+    // Focus trap: move focus into modal (fixes #12)
+    const closeBtn = modal.querySelector("button");
+    if (closeBtn instanceof HTMLElement) closeBtn.focus();
+  }
+
+  function closePhotoModal() {
+    const thumbEl = document.querySelector(`img[data-index="${currentIndex}"]`);
+
+    // Immediate visual feedback: fade out the whole modal (fixes "close doesn't respond")
+    modal.style.transition = "opacity 0.2s ease-out";
+    modal.style.opacity = "0";
+
+    // FLIP animation: shrink image toward thumbnail (best-effort, non-blocking)
+    if (thumbEl) {
+      const thumbRect = thumbEl.getBoundingClientRect();
+      const frameRect = modalFrame.getBoundingClientRect();
+      if (frameRect.width > 0) {
+        const scale = thumbRect.width / frameRect.width;
+        const dx = thumbRect.left + thumbRect.width / 2 - (frameRect.left + frameRect.width / 2);
+        const dy = thumbRect.top + thumbRect.height / 2 - (frameRect.top + frameRect.height / 2);
+        modalFrame.style.transition = "transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease-out";
+        void modalFrame.offsetWidth;
+        modalFrame.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+        modalFrame.style.opacity = "0";
+      }
+    }
+
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      modal.style.transition = "";
+      modal.style.opacity = "";
+      document.body.style.overflow = "";
+      modalFrame.style.transition = "";
+      modalFrame.style.transform = "";
+      modalFrame.style.opacity = "";
+      modalFrame.style.width = "";
+      modalFrame.style.height = "";
+      // Restore focus to triggering element (fixes #12)
+      if (thumbEl instanceof HTMLElement) thumbEl.focus();
+    }, 250);
+  }
+
+  function navigatePhoto(direction: number) {
+    currentIndex = (currentIndex + direction + photos.length) % photos.length;
+    updateModal();
+    fitFrame(currentIndex);
+  }
+
+  // Keyboard nav + focus trap (fixes #12)
+  document.addEventListener("keydown", (e) => {
+    if (modal.classList.contains("hidden")) return;
+
+    if (e.key === "Escape") closePhotoModal();
+    if (e.key === "ArrowLeft") navigatePhoto(-1);
+    if (e.key === "ArrowRight") navigatePhoto(1);
+
+    // Focus trap
+    if (e.key === "Tab") {
+      const focusable = modal.querySelectorAll<HTMLElement>('button, [href], input, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Close handlers (fixes #5 — no inline onclick, use event delegation)
+  // Use closest() because clicks on SVG children of the close button won't match the button itself
+  modal.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("[data-modal-close]")) {
+      closePhotoModal();
+    }
+  });
+  document.getElementById("modalPrev")?.addEventListener("click", () => navigatePhoto(-1));
+  document.getElementById("modalNext")?.addEventListener("click", () => navigatePhoto(1));
+
+  // Expose openPhotoModal globally so the page-level click handler can call it
+  (window as any).openPhotoModal = openPhotoModal;
+</script>

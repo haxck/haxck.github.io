@@ -14,5 +14,6 @@ export const NAVS = [
     {"name":"标签","link":"/blog/tags/"},
     {"name":"收集","link":"/blog/quote"},
     {"name":"清单","link":"/blog/list"},
+    {"name":"照片","link":"/blog/photos"},
     {"name":"我如何用 AI","link":"/blog/how-i-use-ai"},
 ]

@@ -1,0 +1,209 @@
+---
+import { getCollection } from "astro:content";
+import { basename, extname } from "node:path";
+import type { ImageMetadata } from "astro";
+import BasePage from "../../layouts/BasePage.astro";
+import PhotoCard from "../../components/PhotoCard.astro";
+import PhotoModal from "../../components/PhotoModal.astro";
+
+// Scan all images in the photos directory (fixes #1: specific named imports)
+const photoModules = import.meta.glob("/src/assets/photos/**/*.{png,jpg,jpeg,webp,avif}", {
+  eager: true,
+  import: "default",
+});
+
+const scannedPhotos = Object.entries(photoModules)
+  .map(([filePath, mod]) => {
+    const name = basename(filePath, extname(filePath));
+    // The imported image object from import.meta.glob — passed directly to <Image src={img} />
+    const img = mod as ImageMetadata;
+    return {
+      filePath,
+      // imported image object (for <Image>) — string fallback for safety
+      img,
+      name: name.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+    };
+  });
+
+// Optional: merge YAML metadata matched by filename (moon.yaml → moon.jpg)
+const metaEntries = await getCollection("photos");
+const metaByName = new Map(
+  metaEntries.map((e) => {
+    const name = e.id.replace(/\.yaml$/, "").replace(/\.yml$/, "");
+    return [name, e.data];
+  })
+);
+
+const resolvedPhotos = scannedPhotos.map((photo) => {
+  const name = basename(photo.filePath, extname(photo.filePath));
+  const meta = metaByName.get(name);
+  // Extract src string from imported image for modal & JSON-LD
+  const srcStr = photo.img.src || photo.filePath;
+  return {
+    // imported image object passed directly to <Image src={img} />
+    img: photo.img,
+    src: srcStr,
+    alt: meta?.alt || photo.name,
+    location: meta?.location,
+    date: meta?.date,
+    tags: meta?.tags,
+    width: photo.img.width,
+    height: photo.img.height,
+  };
+});
+
+// fixes #14: sort by date descending, then by name
+resolvedPhotos.sort((a, b) => {
+  if (a.date && b.date) {
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateDiff !== 0) return dateDiff;
+  } else if (a.date) {
+    return -1;
+  } else if (b.date) {
+    return 1;
+  }
+  return a.alt.localeCompare(b.alt);
+});
+
+const allTags = [...new Set(resolvedPhotos.flatMap((p) => p.tags || []))];
+
+// fixes #11: JSON-LD ImageObject for SEO
+const imageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  name: "照片",
+  description: "在工作、生活和旅途中留下的一些瞬间",
+  image: resolvedPhotos.map((p) => ({
+    "@type": "ImageObject",
+    contentUrl: p.src,
+    caption: p.alt,
+    ...(p.location ? { locationCreated: p.location } : {}),
+    ...(p.date ? { datePublished: p.date } : {}),
+  })),
+};
+---
+
+<BasePage
+  title="照片"
+  description="在工作、生活和旅途中留下的一些瞬间"
+  keywords={["照片", "摄影", "生活", "旅行"]}
+>
+  <!-- fixes #11: structured data for Google Images -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(imageJsonLd)} />
+
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-1">照片</h1>
+      <p class="text-sm text-gray-400 dark:text-gray-500">在工作、生活和旅途中留下的一些瞬间</p>
+    </div>
+
+    {allTags.length > 0 && (
+      <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="标签筛选">
+        <button
+          class="tag-filter active px-3 py-1 text-xs rounded-full transition-colors bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300"
+          data-tag="all"
+        >
+          全部
+        </button>
+        {allTags.map((tag) => (
+          <button
+            class="tag-filter px-3 py-1 text-xs rounded-full transition-colors bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
+            data-tag={tag}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <div class="photo-masonry" id="photoGrid">
+      {resolvedPhotos.map((photo, index) => (
+        <PhotoCard
+          img={photo.img}
+          alt={photo.alt}
+          location={photo.location}
+          date={photo.date}
+          tags={photo.tags}
+          index={index}
+        />
+      ))}
+    </div>
+
+    {resolvedPhotos.length === 0 && (
+      <div class="text-center py-20 text-gray-400 dark:text-gray-500">
+        <p class="text-lg">还没有照片</p>
+        <p class="text-sm mt-2">可能只顾着享受生活</p>
+      </div>
+    )}
+  </div>
+
+  <!-- fixes #8: modal logic extracted to dedicated component -->
+  <PhotoModal photos={resolvedPhotos} />
+</BasePage>
+
+<style>
+  /* fixes #10: masonry with proper row-gap */
+  .photo-masonry {
+    column-count: 2;
+    column-gap: 1rem;
+    row-gap: 0;
+  }
+  @media (min-width: 768px) { .photo-masonry { column-count: 3; } }
+  @media (min-width: 1280px) { .photo-masonry { column-count: 4; } }
+  .photo-item {
+    break-inside: avoid;
+    animation: photoFadeIn 0.5s ease-out both;
+  }
+  @keyframes photoFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .photo-item.hidden-by-filter { display: none; }
+</style>
+
+<script>
+  // fixes #5: no inline onclick — use event delegation
+  // fixes #6: use const/let instead of var
+  // fixes #13: cache querySelectorAll results
+
+  const photoItems = [...document.querySelectorAll<HTMLDivElement>(".photo-item")];
+  const tagFilters = [...document.querySelectorAll<HTMLButtonElement>(".tag-filter")];
+
+  // Image click — open modal via event delegation on the grid container
+  document.getElementById("photoGrid")?.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const img = target.closest("img[data-index]") as HTMLImageElement | null;
+    if (img && (window as any).openPhotoModal) {
+      const index = Number(img.dataset.index);
+      (window as any).openPhotoModal(index, img);
+    }
+  });
+
+  tagFilters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.dataset.tag;
+
+      // Update active state
+      tagFilters.forEach((b) => {
+        b.classList.remove("bg-primary-100", "dark:bg-primary-900/40", "text-primary-700", "dark:text-primary-300");
+        b.classList.add("bg-gray-100", "dark:bg-gray-800", "text-gray-600", "dark:text-gray-400");
+      });
+      btn.classList.remove("bg-gray-100", "dark:bg-gray-800", "text-gray-600", "dark:text-gray-400");
+      btn.classList.add("bg-primary-100", "dark:bg-primary-900/40", "text-primary-700", "dark:text-primary-300");
+
+      // Filter using cached list
+      photoItems.forEach((item) => {
+        if (tag === "all") {
+          item.classList.remove("hidden-by-filter");
+        } else {
+          const itemTags = (item.dataset.tags || "").split(",");
+          if (itemTags.includes(tag!)) {
+            item.classList.remove("hidden-by-filter");
+          } else {
+            item.classList.add("hidden-by-filter");
+          }
+        }
+      });
+    });
+  });
+</script>
