@@ -16,7 +16,7 @@ const posts = (await getCollection("blog"))
   keywords={['Haxck', '博客', '开发者', '产品设计', '技术分享']}
 >
   <JsonLd type="website" />
-  <div class="py-12 px-4 max-w-screen-lg mx-auto">
+  <div class="py-12 px-4 max-w-5xl mx-auto">
     <!-- Hero -->
     <section class="text-center mb-12" itemscope itemtype="https://schema.org/Person">
       <div class="mb-6">
@@ -39,8 +39,9 @@ const posts = (await getCollection("blog"))
         做产品 / 写代码 / 喜设计
       </p>
       <p class="text-sm text-gray-400 dark:text-gray-500 mt-3">
-        如果失眠在深夜，<a href="#" class="text-primary-500 hover:underline">NightMate</a> 伴你入睡；
-        如果心念某人，不如写一封 <a href="http://echo.haxck.com" class="text-primary-500 hover:underline">Echo</a> 给 TA。
+        失眠在深夜，<a href="#" class="text-primary-500 hover:underline">NightMate</a> 伴你入睡；
+        心念某人，写一封 <a href="http://echo.haxck.com" class="text-primary-500 hover:underline">Echo</a> 给 TA;
+        美好的事情，记录在 <a href="http://2l.haxck.com" class="text-primary-500 hover:underline">2lover</a> 。
       </p>
       <link itemprop="url" href="https://haxck.com" />
     </section>
