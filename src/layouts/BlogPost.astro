@@ -82,7 +82,7 @@ const modifiedISO = updatedDate instanceof Date ? updatedDate.toISOString() : up
 							</span>
 						)}
 
-						<span id="busuanzi_container_page_pv" style="display:none">					
+						<span id="busuanzi_container_page_pv" style="display:none">
 							<div class="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
 								<Icon name="mdi:eye-outline" class="w-3.5 h-3.5" />
 								<span id="busuanzi_value_page_pv"></span>
@@ -321,11 +321,22 @@ const modifiedISO = updatedDate instanceof Date ? updatedDate.toISOString() : up
 	</script>
 </BasePage>
 <script>
+
 	function loadBusuanzi() {
+		// 清空 busuanzi 内部的 URL→计数缓存
+		if (window.bzCount) {
+			window.bzCount = undefined;
+		}
+
+		// 清空已显示的计数，防止旧值残留
+		const pvEl = document.getElementById("busuanzi_value_page_pv");
+		if (pvEl) pvEl.innerHTML = "";
+
 		const existing = document.querySelector('script[src*="busuanzi"]');
 		if (existing) {
 			existing.remove();
 		}
+
 		const s = document.createElement("script");
 		s.src = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
 		s.async = true;
