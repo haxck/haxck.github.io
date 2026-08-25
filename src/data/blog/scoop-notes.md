@@ -2,7 +2,7 @@
 ---
 title: Scoop 笔记
 description: Windows 上使用 Scoop 软件包管理器的安装、配置和使用笔记
-pubDate: 2025-06-06
+pubDate: 2026-08-25
 ai: 这篇文章记录了在 Windows 上使用 Scoop 软件包管理器的全过程，包括安装方法、配置国内镜像加速、常用命令、备份与恢复，以及作者已安装的软件列表。
 tags: ["工具", "Windows"]
 ---
@@ -20,7 +20,7 @@ scoop bucket rm main
 
 # 添加国内镜像源
 scoop bucket add main https://mirror.nju.edu.cn/git/scoop-main.git
-scppp bucket add extras https://mirror.nju.edu.cn/git/scoop-extras.git
+scoop bucket add extras https://mirror.nju.edu.cn/git/scoop-extras.git
 
 # 更新
 scoop update 
