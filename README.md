@@ -3,7 +3,7 @@
 好像不记录，我就会忘了过去。
 
 # 地址
-[https://blog.haxck.com/](https://blog.haxck.com/)
+[https://www.haxck.com/](https://www.haxck.com/)
 
 [https://haxck.github.io/](https://haxck.github.io/)
 
