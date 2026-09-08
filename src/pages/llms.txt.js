@@ -40,7 +40,7 @@ export const GET = async () => {
   // 4. 动态生成文章列表
   const postsList = sortedPosts
     .map((post) => {
-      const url = `https://www.haxck.com/blog/${post.slug}/`;
+      const url = `https://www.haxck.com/blog/${post.id}/`;
       const dateStr = post.data.pubDate
         ? ` (${new Date(post.data.pubDate).toISOString().split('T')[0]})`
         : '';
