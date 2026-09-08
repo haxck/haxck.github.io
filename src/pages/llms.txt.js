@@ -1,18 +1,31 @@
-export async function GET(context) {
-  const content = `# haxck.com
+// src/pages/llms.txt.ts
+import { getCollection } from 'astro:content';
+
+export const GET = async () => {
+  const posts = await getCollection('blog');
+
+  // 2. 按日期降序排序
+  const sortedPosts = posts.sort(
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  );
+
+  // 3. 静态的个人简介及核心入口部分
+  const siteHeader = `# haxck.com
 > Zhiqiang Du（haxck）的个人网站，一个喜欢折腾技术的开发者，记录学习与思考。
+
 ## 关于作者
 杜志强，开发者。主要关注 AI 工具、Web 开发、效率工具和技术折腾。
+
 ## 关键入口
 - [主页](https://www.haxck.com/): 个人介绍、项目入口、社交媒体
-- [博客](https://www.haxck.com/blog/): 博客（45 篇，2017-2026）
+- [博客](https://www.haxck.com/blog/): 博客
 - [收集](https://www.haxck.com/blog/quote): 语录与收集
 - [清单](https://www.haxck.com/blog/list): 工具与资源清单
 - [我如何用 AI](https://www.haxck.com/blog/how-i-use-ai): AI 使用方式与实践
 - [RSS 订阅](https://www.haxck.com/blog/feed.xml): 全文 RSS Feed
-- [博客](https://www.haxck.com/blog): 博客（45 篇，2017-2026）
 - [Echo](http://echo.haxck.com/): 在线写信服务
 - [NightMate](https://www.haxck.com/blog/lite-program/): 助眠微信小程序
+
 ## 社交与作品
 - GitHub: https://github.com/haxck
 - 微博：https://weibo.com/haxck
@@ -20,50 +33,32 @@ export async function GET(context) {
 - Bilibili: https://space.bilibili.com/14586647 (老三制造)
 - 微信公众号：X工厂
 - 小红书：进击的强宝
-## 内容分类
-### AI 与效率工具
-- [零成本使用大模型的平台](https://www.haxck.com/blog/zero-cost-llm-platforms/) (2025 年 12 月 30 日): 盘点免费使用大模型的平台，降低 AI 使用门槛。
-- [Windows 下配置 Claude](https://www.haxck.com/blog/claude-code-on-windows/) (2025 年 12 月 30 日): Windows 系统下配置 Claude Code 开发环境的完整指南。
-- [rss+n8n 我的定制早报](https://www.haxck.com/blog/rss-n8n-my-custom-morning-news/) (2025 年 12 月 5 日): 自建个性化 RSS 早报系统：通过 Miniflux 抓取订阅源，n8n 自动化流程进行 AI 分类总结，再由企业微信机器人推送定制化资讯。
-- [我的表情包：Nano Banana 帮我实现了两年前设计表情包的想法](https://www.haxck.com/blog/nano-banana-helped-me-realize-my-two-year-old-meme-design-idea/) (2025 年 11 月 27 日): 使用 AI 工具（Nano Banana Pro + ChatGPT）快速制作微信表情包的完整流程，包括角色设计、表情生成、图片处理和平台审核。
-- [AI101: n8n 部署+MCP 日历工具](https://www.haxck.com/blog/ai101-n8n-and-mcp-tool/) (2025 年 11 月 7 日): 部署 n8n 并创建一个日历 MCP Server，通过 AI 工具调用完成自动化。
-- [AI101: 会说话就会用 AI](https://www.haxck.com/blog/ai101-prompt/) (2025 年 9 月 6 日): 如何清晰地表达需求与 AI 沟通，让 AI 高效辅助工作。
-- [两个工具](https://www.haxck.com/blog/two-tools/) (2025 年 2 月 28 日): 利用 GPT 协助开发两个小工具：从图片提取字符重命名文件、定时获取特定用户微博，同时反思 AI 时代开发者的定位。
-- [限制你的只有想象力](https://www.haxck.com/blog/limited-only-by-your-imagination/) (2025 年 1 月 3 日): 想象力 + 表达能力 = 未来。
-### 笔记与知识管理
-- [在 Obsidian 中写博客](https://www.haxck.com/blog/writing-blogs-in-obsidian/) (2025 年 7 月 8 日): 从 VS Code 迁移到 Obsidian 写博客的实践总结。
-- [用 syncthing 同步我的笔记](https://www.haxck.com/blog/syncthing-synchronize-my-notes/) (2025 年 7 月 8 日): 使用 Syncthing 在多设备间同步 Obsidian 笔记并备份到 Github，含 Windows 后台运行和端口映射技巧。
-### 技术与运维
-- [解锁小米路由器 SSH](https://www.haxck.com/blog/mirouter-ssh/) (2025 年 3 月 3 日): 解锁小米路由器 SSH 获取更多控制权。
-- [给 Astro 博客添加 Algolia 搜索服务](https://www.haxck.com/blog/adding-algolia-search-to-an-astro-blog/) (2024 年 11 月 27 日): 使用 Algolia 为 Astro 博客集成全文搜索。
-- [解锁 Apple News](https://www.haxck.com/blog/unlock-apple-news/) (2024 年 11 月 6 日): 解锁 Apple News 访问，实时查看新闻动态。
-- [使用 Certbot 自动更新 SSL 证书](https://www.haxck.com/blog/using-certbot-automatic-ssl/) (2024 年 6 月 6 日): Certbot 自动申请和续签 SSL 证书。
-- [nginx.service 不能重启也不能停止服务](https://www.haxck.com/blog/nginx-service-failed/) (2023 年 10 月 20 日): nginx.service 故障排查与修复。
-- [修复 UWP 应用不能联网](https://www.haxck.com/blog/uwp-proxy/) (2023 年 9 月 1 日): Windows UWP 应用网络代理问题修复。
-- [在 Cisco 路由上使用 PPPoE 拨号](https://www.haxck.com/blog/pppoe/) (2017 年 7 月 13 日): Cisco 路由器 PPPoE 拨号配置。
-### 编程学习
-- [《左耳听风》中个人成长及程序员入门书摘](https://www.haxck.com/blog/book-zuoertingfeng/) (2025 年 8 月 28 日): 关注长期收益、个人成长标准、程序员技能与技术选择。
-- [用 JS 学数据结构和算法之队列](https://www.haxck.com/blog/queue/) (2018 年 4 月 7 日): JavaScript 实现队列数据结构。
-- [用 JS 学数据结构和算法之栈](https://www.haxck.com/blog/stack/) (2018 年 4 月 2 日): JavaScript 实现栈数据结构。
-- [《程序员修炼之道》书摘](https://www.haxck.com/blog/the-pragmatic-programmer-clip/) (2018 年 3 月 31 日): 经典编程书籍精华摘录。
-- [自动部署 hexo 博客](https://www.haxck.com/blog/automatically-deploy-hexo-blog/) (2018 年 3 月 6 日): 通过 CircleCI 实现 Hexo 博客自动部署。
-- [代码编辑利器 VS Code](https://www.haxck.com/blog/using-vscode/) (2018 年 1 月 28 日): VS Code 使用技巧与推荐。
-### 生活与随笔
-- [2025 年度总结](https://www.haxck.com/blog/summary-2025/) (2025 年 12 月 29 日): 对 2025 年的回顾与感悟。
-- [我的电脑里装了啥](https://www.haxck.com/blog/software-in-use/) (2024 年 11 月 21 日): 分享日常使用的软件工具清单。
-- [我听播客](https://www.haxck.com/blog/fm/) (2024 年 8 月 1 日): 通勤路上收听的播客列表。
-- [天天开心的方法](https://www.haxck.com/blog/happy-every-day/) (2024 年 5 月 15 日): 来自老高视频的快乐方法论。
-- [新技能：驾照](https://www.haxck.com/blog/car-license/) (2023 年 12 月 1 日): 考驾照记录，没能等上自动驾驶。
-- [你希望面向失眠人群的 App 是什么样的](https://www.haxck.com/blog/what-was-the-thought-process-behind-developing-nightmate/) (2019 年 1 月 27 日): NightMate 微信小程序的开发思路来源。
-- [学习能力超群/聪明人在学习/面对一个问题时思维过程是怎样的？](https://www.haxck.com/blog/the-thought-process-of-genius/) (2018 年 11 月 12 日): 探讨深度思考的方法论。
-- [做一份长远计划](https://www.haxck.com/blog/lone-term-plan/) (2018 年 8 月 2 日): 关于人生长期规划的思考。
-- [让你少打字母的输入方案：双拼](https://www.haxck.com/blog/uurufa/) (2017 年 12 月 10 日): 双拼输入法使用体验。
-- [NightMate 从想法到实现](https://www.haxck.com/blog/lite-program/) (2017 年 11 月 22 日): 助眠微信小程序从构思到上线的完整过程。
-- [你要一直酷下去](https://www.haxck.com/blog/always-cool/) (2017 年 7 月 1 日): 关于坚持与酷的态度。
-⧉
 
-  `
-  return new Response(content,{
-    headers: { 'Content-Type': 'text/plain;charset=utf-8'}
-  })
-}
+## 博客文章
+`;
+
+  // 4. 动态生成文章列表
+  const postsList = sortedPosts
+    .map((post) => {
+      const url = `https://www.haxck.com/blog/${post.slug}/`;
+      const dateStr = post.data.pubDate
+        ? ` (${new Date(post.data.pubDate).toISOString().split('T')[0]})`
+        : '';
+      const description = post.data.description ? `: ${post.data.description}` : '';
+
+      return `- [${post.data.title}](${url})${dateStr}${description}`;
+    })
+    .join('\n');
+
+  // 5. 拼接完整内容
+  const content = `${siteHeader}\n${postsList}`;
+
+  // 6. 返回 Response 对象，声明 Content-Type
+  return new Response(content, {
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      // 如果启用了 SSR，可以加上缓存控制 header
+      'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+    },
+  });
+};
