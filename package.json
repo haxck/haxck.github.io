@@ -17,6 +17,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vue": "^7.0.1",
     "@tailwindcss/vite": "^4.3.1",
+    "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-vue": "^6.0.7",
     "animejs": "^4.5.0",
     "astro": "^7.1.3",

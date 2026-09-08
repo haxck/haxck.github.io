@@ -5,6 +5,7 @@ import { SITE_TITLE } from '../consts';
 import '../styles/global.css';
 import '../styles/heti.css';
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro'
 export interface Props {
 	title: string;
 	description: string;
@@ -102,6 +103,7 @@ const ogImage = new URL(image, Astro.url);
 <meta property="twitter:creator" content="@haxck" />
 <meta property="twitter:site" content="@haxck" />
 
+<Analytics />
 <script>
 	var _hmt = _hmt || [];
 	(function() {
