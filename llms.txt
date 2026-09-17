@@ -24,6 +24,7 @@
 
 ## 博客文章
 
+- [Post by MCP](https://www.haxck.com/blog/post-by-mcp/) (2026-09-17): 通过 MCP 发博客，并对比 Skill 与 MCP 区别
 - [Scoop 笔记](https://www.haxck.com/blog/scoop-notes/) (2026-08-25): Windows 上使用 Scoop 软件包管理器的安装、配置和使用笔记
 - [AI 通过 MCP 帮我发文章](https://www.haxck.com/blog/ai-mcp-blog-post/) (2026-07-06): 探索 AI 如何利用 MCP 协议帮助我们自动化内容发布流程
 - [快速统计 AI Token 使用情况](https://www.haxck.com/blog/quick-ai-token-statistics/) (2026-06-10): 快速统计 AI Token 使用情况
